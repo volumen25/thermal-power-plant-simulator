@@ -1,0 +1,16 @@
+---
+title: "Lecture 1: Introduction to Thermal Power Plants"
+date: "2026-09-08"
+type: "lecture"
+---
+
+## Topics Covered
+
+- Overview of thermal power generation
+- Basic Rankine cycle
+- Main components of a thermal power plant
+- Introduction to simulation software
+
+## Learning Outcomes
+
+By the end of this lecture, students will understand the fundamental operating principles of thermal power plants.

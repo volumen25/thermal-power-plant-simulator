@@ -1,0 +1,22 @@
+---
+title: "Thermal Power Plant Simulator"
+subtitle: "Fall 2026"
+---
+
+## Welcome
+
+This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.
+
+**Instructor:** [Your Name]  
+**Schedule:** 4 periods per week (September – December 2026)  
+**Format:** Lectures + Laboratory Simulations
+
+### Course Highlights
+- Dynamic simulation of Rankine and combined cycles
+- Plant performance analysis and optimization
+- Fault detection and troubleshooting scenarios
+- Efficiency and environmental impact assessment
+
+::: {.callout-important}
+**First Class:** September 8, 2026
+:::

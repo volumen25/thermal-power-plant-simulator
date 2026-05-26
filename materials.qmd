@@ -1,0 +1,11 @@
+---
+title: "Course Materials"
+---
+
+## Lecture Slides & Notes
+
+- [Lecture 1 – Introduction](lectures/lecture-01.qmd)
+
+## Laboratory Manuals
+
+- [Lab 1 – Rankine Cycle](labs/lab-01.qmd)

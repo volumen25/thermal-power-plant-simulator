@@ -1,0 +1,10 @@
+---
+title: "Additional Resources"
+---
+
+- Thermodynamic property tables
+- Simulation software user manuals
+- Recommended textbooks:
+  - "Power Plant Engineering" by P.K. Nag
+  - "Thermal Power Plants: Simulation and Control" references
+- Online resources and standards (ASME, IEEE)

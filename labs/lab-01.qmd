@@ -1,0 +1,17 @@
+---
+title: "Lab 1: Building a Simple Rankine Cycle Model"
+date: "2026-09-10"
+type: "lab"
+---
+
+## Objectives
+
+- Create a basic Rankine cycle simulation
+- Calculate thermal efficiency
+- Perform sensitivity analysis on key parameters
+
+## Tasks
+
+1. Build the model using the simulator
+2. Run steady-state simulation
+3. Generate performance curves
