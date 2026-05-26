@@ -11,5 +11,12 @@ dependencies = [
     "seaborn",
 ]
 
-[tool.uv]
-dev-dependencies = []
+# New recommended format for development dependencies
+[dependency-groups]
+dev = [
+    "jupyter",
+    "ipykernel",
+    "pyyaml",
+    "black",
+    "pytest",
+]
