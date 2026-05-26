@@ -1,25 +1,31 @@
 # Quarto
 /.quarto/
-*.html
-_site/
 
-# Python
+# Python + uv
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 .Python
-env/
-venv/
-ENV/
 .venv/
-uv.lock
+**/.uv/
 
 # Jupyter
 .ipynb_checkpoints/
+*.quarto_ipynb
 
 # OS
 .DS_Store
 Thumbs.db
+Desktop.ini
 
+# IDE
+.vscode/*
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
 **/*.quarto_ipynb

@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: docs
 
 website:
   title: "Thermal Power Plant Simulator"
@@ -34,6 +35,7 @@ format:
     css: styles.css
     toc: true
     number-sections: true
+    smooth-scroll: true
 
 execute:
   freeze: auto

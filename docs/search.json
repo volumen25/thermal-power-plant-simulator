@@ -1,0 +1,156 @@
+[
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Course Title: Thermal Power Plant Simulator\nTerm: Fall 2026\nSchedule: 4 periods per week, September to December\nCredits: [Insert credits]\nPrerequisites: Thermodynamics, Fluid Mechanics"
+  },
+  {
+    "objectID": "syllabus.html#course-information",
+    "href": "syllabus.html#course-information",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Course Title: Thermal Power Plant Simulator\nTerm: Fall 2026\nSchedule: 4 periods per week, September to December\nCredits: [Insert credits]\nPrerequisites: Thermodynamics, Fluid Mechanics"
+  },
+  {
+    "objectID": "syllabus.html#learning-objectives",
+    "href": "syllabus.html#learning-objectives",
+    "title": "Syllabus",
+    "section": "2 Learning Objectives",
+    "text": "2 Learning Objectives\nStudents will be able to: 1. Simulate steady-state and transient operation of thermal power plants. 2. Analyze the performance of boilers, turbines, condensers, and feedwater systems. 3. Optimize plant efficiency and evaluate environmental performance. 4. Diagnose and troubleshoot common operational issues."
+  },
+  {
+    "objectID": "syllabus.html#assessment",
+    "href": "syllabus.html#assessment",
+    "title": "Syllabus",
+    "section": "3 Assessment",
+    "text": "3 Assessment\n\n\n\nComponent\nWeight\n\n\n\n\nLaboratory Simulations\n40%\n\n\nAssignments\n25%\n\n\nMidterm Examination\n15%\n\n\nFinal Project\n20%"
+  },
+  {
+    "objectID": "syllabus.html#policies",
+    "href": "syllabus.html#policies",
+    "title": "Syllabus",
+    "section": "4 Policies",
+    "text": "4 Policies\n\nAll simulation reports must be submitted through the course platform.\nLate submissions will be penalized by 10% per day.\nAcademic integrity is strictly enforced."
+  },
+  {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Additional Resources",
+    "section": "",
+    "text": "Thermodynamic property tables\nSimulation software user manuals\nRecommended textbooks:\n\n“Power Plant Engineering” by P.K. Nag\n“Thermal Power Plants: Simulation and Control” references\n\nOnline resources and standards (ASME, IEEE)"
+  },
+  {
+    "objectID": "lectures/lecture-01.html",
+    "href": "lectures/lecture-01.html",
+    "title": "Lecture 1: Introduction to Thermal Power Plants",
+    "section": "",
+    "text": "Overview of thermal power generation\nBasic Rankine cycle\nMain components of a thermal power plant\nIntroduction to simulation software"
+  },
+  {
+    "objectID": "lectures/lecture-01.html#topics-covered",
+    "href": "lectures/lecture-01.html#topics-covered",
+    "title": "Lecture 1: Introduction to Thermal Power Plants",
+    "section": "",
+    "text": "Overview of thermal power generation\nBasic Rankine cycle\nMain components of a thermal power plant\nIntroduction to simulation software"
+  },
+  {
+    "objectID": "lectures/lecture-01.html#learning-outcomes",
+    "href": "lectures/lecture-01.html#learning-outcomes",
+    "title": "Lecture 1: Introduction to Thermal Power Plants",
+    "section": "2 Learning Outcomes",
+    "text": "2 Learning Outcomes\nBy the end of this lecture, students will understand the fundamental operating principles of thermal power plants."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Thermal Power Plant Simulator",
+    "section": "",
+    "text": "This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.\nInstructor: [Your Name]\nSchedule: 4 periods per week (September – December 2026)\nFormat: Lectures + Laboratory Simulations\n\n\n\nDynamic simulation of Rankine and combined cycles\nPlant performance analysis and optimization\nFault detection and troubleshooting scenarios\nEfficiency and environmental impact assessment\n\n\n\n\n\n\n\nImportant\n\n\n\nFirst Class: September 8, 2026"
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "Thermal Power Plant Simulator",
+    "section": "",
+    "text": "This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.\nInstructor: [Your Name]\nSchedule: 4 periods per week (September – December 2026)\nFormat: Lectures + Laboratory Simulations\n\n\n\nDynamic simulation of Rankine and combined cycles\nPlant performance analysis and optimization\nFault detection and troubleshooting scenarios\nEfficiency and environmental impact assessment\n\n\n\n\n\n\n\nImportant\n\n\n\nFirst Class: September 8, 2026"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About the Instructor",
+    "section": "",
+    "text": "[Insert your professional background, contact information, and office hours here.]"
+  },
+  {
+    "objectID": "assignments/assignment-01.html",
+    "href": "assignments/assignment-01.html",
+    "title": "Assignment 1: Rankine Cycle Analysis",
+    "section": "",
+    "text": "Complete the following simulation exercises and submit a detailed report."
+  },
+  {
+    "objectID": "labs/lab-01.html",
+    "href": "labs/lab-01.html",
+    "title": "Lab 1: Building a Simple Rankine Cycle Model",
+    "section": "",
+    "text": "Create a basic Rankine cycle simulation\nCalculate thermal efficiency\nPerform sensitivity analysis on key parameters"
+  },
+  {
+    "objectID": "labs/lab-01.html#objectives",
+    "href": "labs/lab-01.html#objectives",
+    "title": "Lab 1: Building a Simple Rankine Cycle Model",
+    "section": "",
+    "text": "Create a basic Rankine cycle simulation\nCalculate thermal efficiency\nPerform sensitivity analysis on key parameters"
+  },
+  {
+    "objectID": "labs/lab-01.html#tasks",
+    "href": "labs/lab-01.html#tasks",
+    "title": "Lab 1: Building a Simple Rankine Cycle Model",
+    "section": "2 Tasks",
+    "text": "2 Tasks\n\nBuild the model using the simulator\nRun steady-state simulation\nGenerate performance curves"
+  },
+  {
+    "objectID": "materials.html",
+    "href": "materials.html",
+    "title": "Course Materials",
+    "section": "",
+    "text": "Lecture 1 – Introduction"
+  },
+  {
+    "objectID": "materials.html#lecture-slides-notes",
+    "href": "materials.html#lecture-slides-notes",
+    "title": "Course Materials",
+    "section": "",
+    "text": "Lecture 1 – Introduction"
+  },
+  {
+    "objectID": "materials.html#laboratory-manuals",
+    "href": "materials.html#laboratory-manuals",
+    "title": "Course Materials",
+    "section": "2 Laboratory Manuals",
+    "text": "2 Laboratory Manuals\n\nLab 1 – Rankine Cycle"
+  },
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Course Schedule",
+    "section": "",
+    "text": "Course Start: September 8, 2026\nMidterm Exam: October 20–24, 2026\nFinal Project Due: December 10, 2026\nLast Class: December 15, 2026"
+  },
+  {
+    "objectID": "schedule.html#important-dates",
+    "href": "schedule.html#important-dates",
+    "title": "Course Schedule",
+    "section": "",
+    "text": "Course Start: September 8, 2026\nMidterm Exam: October 20–24, 2026\nFinal Project Due: December 10, 2026\nLast Class: December 15, 2026"
+  },
+  {
+    "objectID": "schedule.html#weekly-schedule",
+    "href": "schedule.html#weekly-schedule",
+    "title": "Course Schedule",
+    "section": "2 Weekly Schedule",
+    "text": "2 Weekly Schedule\nlisting:\n  contents: \n    - lectures/*.qmd\n    - labs/*.qmd\n  type: table\n  fields: [title, date, type]\n  sort: date"
+  }
+]

@@ -1,20 +1,48 @@
-# Thermal Power Plant Simulator - Course Website
+# Thermal Power Plant Simulator
 
-Fall 2026
+**Fall 2026**  
+Official course website for the *Thermal Power Plant Simulator* course.
 
-## Setup Instructions
+This website was built using [Quarto](https://quarto.org) with Python support managed through [`uv`](https://github.com/astral-sh/uv).
 
-1. Install Quarto: https://quarto.org
-2. Install uv: https://docs.astral.sh/uv/
-3. Run:
-   ```bash
-   uv sync
-   quarto preview
-   ```
+## Features
 
-## Python Scripts
+- Clean, professional course website
+- Lecture and laboratory materials
+- Executable Python code for thermal power plant simulations
+- Rankine cycle calculations and performance analysis examples
+- Responsive design with smooth scrolling
 
-Located in `python_scripts/`. Run with:
+## Development Workflow
+
+### Prerequisites
+
+- [Quarto](https://quarto.org) installed
+- [uv](https://github.com/astral-sh/uv) installed (for Python environment management)
+
+### Initial Setup
+
 ```bash
-uv run python python_scripts/rankine_cycle_basic.py
+# Clone the repository
+git clone https://github.com/volumen25/thermal-power-plant-simulator.git
+cd thermal-power-plant-simulator
+```
+
+### Install Python dependencies
+
+```bash
+uv sync
+uv sync --group dev
+```
+
+## Preview the Website
+
+```bash
+uv run quarto preview
+```
+
+## Render Static Site
+
+```bash
+uv run quarto render
 ```
