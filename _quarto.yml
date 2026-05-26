@@ -21,12 +21,12 @@ website:
         text: About
     right:
       - icon: github
-        href: https://github.com/yourusername/thermal-power-plant-simulator
+        href: https://github.com/volumen25/thermal-power-plant-simulator
 
   page-footer:
-    left: "© Instructor Name, 2026"
-    center: "Built with [Quarto](https://quarto.org)"
-    right: "Fall 2026"
+    left: © 2026 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+    right: |
+      Built with <a href="https://quarto.org">Quarto {{< version >}}</a>
 
 format:
   html:

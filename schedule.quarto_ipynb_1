@@ -1,0 +1,43 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Course Schedule\"\n",
+        "---\n",
+        "\n",
+        "## Important Dates\n",
+        "\n",
+        "- **Course Start:** September 8, 2026\n",
+        "- **Midterm Exam:** October 20–24, 2026\n",
+        "- **Final Project Due:** December 10, 2026\n",
+        "- **Last Class:** December 15, 2026\n",
+        "\n",
+        "## Weekly Schedule\n",
+        "\n",
+        "```{yaml}\n",
+        "listing:\n",
+        "  contents: \n",
+        "    - lectures/*.qmd\n",
+        "    - labs/*.qmd\n",
+        "  type: table\n",
+        "  fields: [title, date, type]\n",
+        "  sort: date\n",
+        "```"
+      ],
+      "id": "9ddf7ace"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Users/serhatbeyenir/tpp-sim/.venv/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
