@@ -1,5 +1,5 @@
 ---
-title: "References"
+title: "Bibliography"
 ---
 
-Students are expected to be comfortable with college-level mathematics and science and are strongly encouraged to consult reliable reference texts. For example, foundational and practical texts in mathematics, applied thermodynamics and computational tools, including @bird2021, @hannah1995, @russell2021, @bolton2021, @shaw2017, @sweigart2021, and @sweigart2020.
+Students are expected to be comfortable with college-level mathematics and science and are strongly encouraged to consult reliable reference texts. For example, foundational and practical texts in mathematics, applied thermodynamics and computational tools, including @bird2021, @bolton2021, @wylen1986, @solberg, @eastop1993a, @joel1996a, @granet2015, @shaw2017, @sweigart2021, and @sweigart2020.

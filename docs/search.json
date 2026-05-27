@@ -39,28 +39,28 @@
     "href": "resources.html",
     "title": "Additional Resources",
     "section": "",
-    "text": "For the full bibliography, see the References page."
+    "text": "“Thermal Power Plant Simulator Course Manual” (BCIT Bookstore)"
+  },
+  {
+    "objectID": "resources.html#required-texts",
+    "href": "resources.html#required-texts",
+    "title": "Additional Resources",
+    "section": "",
+    "text": "“Thermal Power Plant Simulator Course Manual” (BCIT Bookstore)"
   },
   {
     "objectID": "resources.html#key-references-cited-in-this-course",
     "href": "resources.html#key-references-cited-in-this-course",
     "title": "Additional Resources",
-    "section": "",
-    "text": "For the full bibliography, see the References page."
+    "section": "Key References Cited in This Course",
+    "text": "Key References Cited in This Course\nFor the full bibliography, see the References page."
   },
   {
     "objectID": "resources.html#additional-study-materials",
     "href": "resources.html#additional-study-materials",
     "title": "Additional Resources",
     "section": "Additional Study Materials",
-    "text": "Additional Study Materials\n\nThermodynamic property tables\nSimulation software user manuals\nOnline resources and standards (ASME, IEEE)"
-  },
-  {
-    "objectID": "resources.html#recommended-textbooks",
-    "href": "resources.html#recommended-textbooks",
-    "title": "Additional Resources",
-    "section": "Recommended Textbooks",
-    "text": "Recommended Textbooks\n\n“Thermal Power Plants Simulator Course Manual” (BCIT Bookstore)"
+    "text": "Additional Study Materials\n\nThermodynamic property tables\nOnline resources:\n\nIAPWS The International Association for the Properties of Water and Steam.\nEngineering calculator Over 50 calculations for steam, water, air and gas systems."
   },
   {
     "objectID": "materials.html",
@@ -261,9 +261,9 @@
   {
     "objectID": "references.html",
     "href": "references.html",
-    "title": "References",
+    "title": "Bibliography",
     "section": "",
-    "text": "Students are expected to be comfortable with college-level mathematics and science and are strongly encouraged to consult reliable reference texts. For example, foundational and practical texts in mathematics, applied thermodynamics and computational tools, including Bird (2021), Hannah & Hillier (1995), Russell et al. (2021), Bolton (2021), Shaw (2017), Sweigart (2021), and Sweigart (2020).\n\n\n\n\nReferences\n\nBird, J. O. (2021). Bird’s engineering mathematics (9th ed.). Routledge.\n\n\nBolton, W. (2021). Engineering science (7th ed.). Routledge.\n\n\nHannah, J., & Hillier, M. J. (1995). Applied mechanics (3rd ed.). Longman.\n\n\nRussell, P. A., Jackson, L., & Embleton, W. (2021). Applied mechanics for marine engineers (7th ed.). Reeds.\n\n\nShaw, Z. (2017). Learn python 3 the hard way (4th ed.). Addison-Wesley Professional.\n\n\nSweigart, A. (2020). Automate the boring stuff with python (2nd ed.). No Starch Press.\n\n\nSweigart, A. (2021). Beyond the basic stuff with python. No Starch Press."
+    "text": "Students are expected to be comfortable with college-level mathematics and science and are strongly encouraged to consult reliable reference texts. For example, foundational and practical texts in mathematics, applied thermodynamics and computational tools, including Bird (2021), Bolton (2021), Wylen & Sonntag (1986), Solberg (n.d.), Eastop & McConkey (1993), Joel (1996), Granet & Bluestein (2015), Shaw (2017), Sweigart (2021), and Sweigart (2020).\n\n\n\n\nReferences\n\nBird, J. O. (2021). Bird’s engineering mathematics (9th ed.). Routledge.\n\n\nBolton, W. (2021). Engineering science (7th ed.). Routledge.\n\n\nEastop, T. D., & McConkey, A. (1993). Applied thermodynamics for engineering technologists (5th ed). Longman.\n\n\nGranet, I., & Bluestein, M. (2015). Thermodynamics and heat power. CRC Press.\n\n\nJoel, R. (1996). Basic engineering thermodynamics (5th ed). Pearson/Prenctice Hall.\n\n\nShaw, Z. (2017). Learn python 3 the hard way (4th ed.). Addison-Wesley Professional.\n\n\nSolberg, H. L. (n.d.). Thermal engineering. John Wiley & Sons Inc.\n\n\nSweigart, A. (2020). Automate the boring stuff with python (2nd ed.). No Starch Press.\n\n\nSweigart, A. (2021). Beyond the basic stuff with python. No Starch Press.\n\n\nWylen, G. J. V., & Sonntag, R. E. (1986). Fundamentals of classical thermodynamics. Wiley."
   },
   {
     "objectID": "schedule.html",

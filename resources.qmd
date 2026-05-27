@@ -2,6 +2,10 @@
 title: "Additional Resources"
 ---
 
+## Required Texts
+
+- "Thermal Power Plant Simulator Course Manual" (BCIT Bookstore)
+
 ## Key References Cited in This Course
 
 For the full bibliography, see the [References](references.qmd) page.
@@ -9,9 +13,6 @@ For the full bibliography, see the [References](references.qmd) page.
 ## Additional Study Materials
 
 - Thermodynamic property tables
-- Simulation software user manuals
-- Online resources and standards (ASME, IEEE)
-
-## Recommended Textbooks
-
-- "Thermal Power Plants Simulator Course Manual" (BCIT Bookstore)
+- Online resources:
+  - [IAPWS](https://iapws.org/) The International Association for the Properties of Water and Steam.
+  - [Engineering calculator](https://toolbox.tlv.com/global/TI/calculator/superheated-steam-table.html) Over 50 calculations for steam, water, air and gas systems.
