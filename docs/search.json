@@ -84,6 +84,104 @@
     "text": "Laboratory Manuals\n\nLab 1 – Rankine Cycle"
   },
   {
+    "objectID": "labs/lab-02.html",
+    "href": "labs/lab-02.html",
+    "title": "Lab 2: Boiler Efficiency Calculation",
+    "section": "",
+    "text": "By the end of this lab you will be able to:\n\nApply the direct method to calculate boiler efficiency from plant data\nCalculate LHV from HFO elemental composition using the Dulong formula\nApply the indirect method using flue gas stack loss\nInterpret the difference between direct and indirect efficiency results"
+  },
+  {
+    "objectID": "labs/lab-02.html#objectives",
+    "href": "labs/lab-02.html#objectives",
+    "title": "Lab 2: Boiler Efficiency Calculation",
+    "section": "",
+    "text": "By the end of this lab you will be able to:\n\nApply the direct method to calculate boiler efficiency from plant data\nCalculate LHV from HFO elemental composition using the Dulong formula\nApply the indirect method using flue gas stack loss\nInterpret the difference between direct and indirect efficiency results"
+  },
+  {
+    "objectID": "labs/lab-02.html#background",
+    "href": "labs/lab-02.html#background",
+    "title": "Lab 2: Boiler Efficiency Calculation",
+    "section": "Background",
+    "text": "Background\nBoiler efficiency measures how effectively the boiler converts fuel energy into useful steam energy. Two methods are used in practice:\nDirect method (input/output):\n\\[\\eta = \\frac{Q_{steam}}{Q_{fuel}} = \\frac{\\dot{m}_{steam} \\times (h_{steam} - h_{fw})}{\\dot{m}_{fuel} \\times LHV}\\]\nIndirect method (loss method):\n\\[\\eta = 1 - \\frac{Q_{losses}}{Q_{fuel}}\\]\nThe indirect method accounts for individual losses — the dominant one being stack (flue gas) heat loss. A complete indirect analysis also includes radiation, convection, and unburnt carbon losses.\n\nMeasurement Boundary\nFeedwater (T02447, 254°C) → [BOILER SYSTEM] → HP Steam (T02602, 536°C)\n                                    ↑\n                          Fuel (G01038, 52.42 ton/h)\nThe economizer is inside the boiler boundary — its heat recovery is credited to the boiler in both methods."
+  },
+  {
+    "objectID": "labs/lab-02.html#setup",
+    "href": "labs/lab-02.html#setup",
+    "title": "Lab 2: Boiler Efficiency Calculation",
+    "section": "Setup",
+    "text": "Setup\n\nfrom iapws import IAPWS97\nimport numpy as np\nimport matplotlib.pyplot as plt"
+  },
+  {
+    "objectID": "labs/lab-02.html#part-1-hfo-heating-value",
+    "href": "labs/lab-02.html#part-1-hfo-heating-value",
+    "title": "Lab 2: Boiler Efficiency Calculation",
+    "section": "Part 1: HFO Heating Value",
+    "text": "Part 1: HFO Heating Value\nHeavy fuel oil heating value depends on its elemental composition. The Dulong formula relates LHV to HHV:\n\\[LHV = HHV - 2442 \\times (9H + W)\\]\nWhere \\(H\\) is hydrogen mass fraction and \\(W\\) is moisture mass fraction. The factor \\(9H\\) accounts for water formed by hydrogen combustion; \\(2442\\) kJ/kg is the latent heat of water vapour at 25°C.\n\n# HFO elemental composition (mass fractions) — X008xx tags\nC = 84.0 / 100  # X00800 carbon\nH = 13.4 / 100  # X00801 hydrogen\nS = 0.6  / 100  # X00802 sulfur\nO = 1.5  / 100  # X00803 oxygen\nN = 0.5  / 100  # X00804 nitrogen\nW = 1.0  / 100  # X00807 moisture\n\nHHV = 41303.16  # kJ/kg  H00810\n\nLHV = HHV - 2442 * (9 * H + W)\n\nprint(f\"HHV              : {HHV:.2f} kJ/kg\")\nprint(f\"LHV (Dulong)     : {LHV:.2f} kJ/kg\")\nprint(f\"HHV - LHV        : {HHV - LHV:.2f} kJ/kg\")\n\nHHV              : 41303.16 kJ/kg\nLHV (Dulong)     : 38333.69 kJ/kg\nHHV - LHV        : 2969.47 kJ/kg\n\n\nQ1. Why is LHV lower than HHV? Which basis is used for boiler efficiency in marine and power engineering practice, and why?\n\n# Your answer here"
+  },
+  {
+    "objectID": "labs/lab-02.html#part-2-direct-method",
+    "href": "labs/lab-02.html#part-2-direct-method",
+    "title": "Lab 2: Boiler Efficiency Calculation",
+    "section": "Part 2: Direct Method",
+    "text": "Part 2: Direct Method\nUsing measured steam and feedwater enthalpies with actual fuel flow.\n\n# Steam side measurements\nh_steam = 3400.8    # kJ/kg  H02603  HP line steam enthalpy\nh_fw    = 1097.1    # kJ/kg  H02448  economizer water inlet enthalpy\nG_steam = 716.17 / 3.6  # kg/s  G02600  (ton/h → kg/s)\n\n# Fuel side\nG_fuel = 52.42 / 3.6    # kg/s  G01038  HFO supply flow (ton/h → kg/s)\n\n# Heat flows\nQ_steam = G_steam * (h_steam - h_fw)\nQ_fuel  = G_fuel  * LHV\n\neta_direct = Q_steam / Q_fuel\n\nprint(f\"Enthalpy rise    : {h_steam - h_fw:.2f} kJ/kg\")\nprint(f\"Heat to steam    : {Q_steam:.1f} kW\")\nprint(f\"Fuel heat input  : {Q_fuel:.1f} kW\")\nprint(f\"Boiler efficiency (direct): {eta_direct:.1%}\")\n\nEnthalpy rise    : 2303.70 kJ/kg\nHeat to steam    : 458289.1 kW\nFuel heat input  : 558181.1 kW\nBoiler efficiency (direct): 82.1%\n\n\nQ2. The boiler nameplate efficiency is 90%. What does the difference between your result and nameplate suggest about current operating conditions?\n\n# Your answer here"
+  },
+  {
+    "objectID": "labs/lab-02.html#part-3-indirect-method-stack-loss",
+    "href": "labs/lab-02.html#part-3-indirect-method-stack-loss",
+    "title": "Lab 2: Boiler Efficiency Calculation",
+    "section": "Part 3: Indirect Method — Stack Loss",
+    "text": "Part 3: Indirect Method — Stack Loss\nThe largest single boiler loss is heat carried away by flue gas. We calculate flue gas flow from fuel composition and excess air, then quantify the stack loss.\n\nStep 1: Excess Air from O₂ Measurement\n\\[\\lambda = \\frac{21}{21 - O_{2}\\%}\\]\n\nO2_fg  = 0.75   # vol%  X02419  O2 in flue gas (dry)\nT_stack = 141.57  # °C  T02114  rotary air preheater gas outlet\nT_ref   = 25.0    # °C  reference\n\nlambda_excess = 21 / (21 - O2_fg)\nexcess_air_pct = (lambda_excess - 1) * 100\n\nprint(f\"O2 in flue gas        : {O2_fg:.2f} vol%\")\nprint(f\"Excess air factor (λ) : {lambda_excess:.4f}\")\nprint(f\"Excess air            : {excess_air_pct:.1f}%\")\n\nO2 in flue gas        : 0.75 vol%\nExcess air factor (λ) : 1.0370\nExcess air            : 3.7%\n\n\n\n\nStep 2: Flue Gas Flow\n\n# Stoichiometric air requirement (Dulong)\nair_stoich = (2.667 * C + 8 * (H - O / 8) + S) / 0.232\nair_actual = air_stoich * lambda_excess\n\n# Flue gas composition (kg/kg fuel)\nfg_CO2     = 3.667 * C\nfg_SO2     = 2.0 * S\nfg_H2O     = 9.0 * H + W\nfg_N2      = N + air_actual * 0.768\nfg_O2_exc  = air_actual * 0.232 - (2.667 * C + 8 * (H - O / 8) + S)\n\nG_fg_per_kg = fg_CO2 + fg_SO2 + fg_H2O + fg_N2 + fg_O2_exc\nG_fluegas   = G_fuel * G_fg_per_kg\n\nprint(f\"Stoichiometric air    : {air_stoich:.3f} kg/kg fuel\")\nprint(f\"Actual air            : {air_actual:.3f} kg/kg fuel\")\nprint(f\"Flue gas yield        : {G_fg_per_kg:.3f} kg/kg fuel\")\nprint(f\"Flue gas flow         : {G_fluegas:.2f} kg/s\")\n\nStoichiometric air    : 14.238 kg/kg fuel\nActual air            : 14.766 kg/kg fuel\nFlue gas yield        : 15.776 kg/kg fuel\nFlue gas flow         : 229.71 kg/s\n\n\n\n\nStep 3: Stack Heat Loss\n\nCp_fg = 1.10  # kJ/kg·K — approximate mean Cp for combustion products\n\nQ_stack    = G_fluegas * Cp_fg * (T_stack - T_ref)\neta_indirect = (Q_fuel - Q_stack) / Q_fuel\n\nprint(f\"Stack temperature     : {T_stack:.2f} °C\")\nprint(f\"Stack heat loss       : {Q_stack:.1f} kW\")\nprint(f\"Stack loss (% of LHV) : {Q_stack / Q_fuel * 100:.1f}%\")\nprint(f\"Boiler efficiency (indirect): {eta_indirect:.1%}\")\n\nStack temperature     : 141.57 °C\nStack heat loss       : 29455.1 kW\nStack loss (% of LHV) : 5.3%\nBoiler efficiency (indirect): 94.7%"
+  },
+  {
+    "objectID": "labs/lab-02.html#part-4-comparison-and-sensitivity",
+    "href": "labs/lab-02.html#part-4-comparison-and-sensitivity",
+    "title": "Lab 2: Boiler Efficiency Calculation",
+    "section": "Part 4: Comparison and Sensitivity",
+    "text": "Part 4: Comparison and Sensitivity\n\nprint(f\"Direct method   : {eta_direct:.1%}\")\nprint(f\"Indirect method : {eta_indirect:.1%}\")\nprint(f\"Difference      : {abs(eta_indirect - eta_direct) * 100:.1f} percentage points\")\n\nDirect method   : 82.1%\nIndirect method : 94.7%\nDifference      : 12.6 percentage points\n\n\nThe indirect method accounts only for stack loss. Observe how efficiency changes with stack temperature — a key operational parameter.\n\nstack_temps = np.arange(100, 400, 10)\neta_stack = [(Q_fuel - G_fluegas * Cp_fg * (T - T_ref)) / Q_fuel * 100\n             for T in stack_temps]\n\nfig, ax = plt.subplots(figsize=(9, 5))\nax.plot(stack_temps, eta_stack, \"ro-\", linewidth=2, markersize=4)\nax.axvline(x=T_stack, color=\"gray\", linestyle=\"--\", alpha=0.7,\n           label=f\"Current stack temp ({T_stack}°C)\")\nax.axhline(y=90, color=\"blue\", linestyle=\"--\", alpha=0.7,\n           label=\"Typical nameplate (90%)\")\nax.set_title(\"Effect of Stack Temperature on Boiler Efficiency\")\nax.set_xlabel(\"Stack Temperature (°C)\")\nax.set_ylabel(\"Boiler Efficiency (%)\")\nax.grid(True, alpha=0.3)\nax.legend()\nfig.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nQ3. At what stack temperature does efficiency reach 90%? What equipment is responsible for reducing stack temperature, and what limits how low it can go?\n\n# Your calculation here\n\nQ4. The direct and indirect methods give different results. List at least three reasons that explain the difference.\n\n# Your answer here"
+  },
+  {
+    "objectID": "labs/lab-02.html#summary",
+    "href": "labs/lab-02.html#summary",
+    "title": "Lab 2: Boiler Efficiency Calculation",
+    "section": "Summary",
+    "text": "Summary\nComplete the table below with your results:\n\n\n\nParameter\nValue\nUnit\n\n\n\n\nHFO LHV\n\nkJ/kg\n\n\nSteam flow\n\nkg/s\n\n\nFuel flow\n\nkg/s\n\n\nHeat to steam\n\nkW\n\n\nFuel heat input\n\nkW\n\n\nStack loss\n\nkW\n\n\nBoiler efficiency (direct)\n\n%\n\n\nBoiler efficiency (indirect)\n\n%"
+  },
+  {
+    "objectID": "labs/lab-02.html#submission",
+    "href": "labs/lab-02.html#submission",
+    "title": "Lab 2: Boiler Efficiency Calculation",
+    "section": "Submission",
+    "text": "Submission\nSave as lab-02-firstname-lastname.qmd and submit the completed .qmd file."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Thermal Power Plant Simulator",
+    "section": "",
+    "text": "This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.\nInstructor: Serhat Beyenir\nSchedule: 4 periods per week (September – December 2026)\nFormat: Lectures + Simulations\n\n\n\nDynamic simulation of Rankine and combined cycles\nPlant performance analysis and optimization\nFault detection and troubleshooting scenarios\nEfficiency and environmental impact assessment\n\n\n\n\n\n\n\nImportant\n\n\n\nFirst Class: September 8, 2026"
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "Thermal Power Plant Simulator",
+    "section": "",
+    "text": "This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.\nInstructor: Serhat Beyenir\nSchedule: 4 periods per week (September – December 2026)\nFormat: Lectures + Simulations\n\n\n\nDynamic simulation of Rankine and combined cycles\nPlant performance analysis and optimization\nFault detection and troubleshooting scenarios\nEfficiency and environmental impact assessment\n\n\n\n\n\n\n\nImportant\n\n\n\nFirst Class: September 8, 2026"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About the Instructor",
+    "section": "",
+    "text": "Serhat Beyenir is an instructor in Power Engineering at BCIT, where he teaches Thermal Power Plant Simulator courses and previously taught Thermodynamics, Applied Mechanics, Propulsion Engines, and Propulsion Plant Simulator courses at BCIT Marine Engineering.\nHis interest in computing dates back to high school, when he taught himself BASIC to plot trigonometric functions on an Amstrad 64K microcomputer. He completed programming coursework at the university level but is largely self-taught in the use of Unix and Linux systems, later adopting macOS for personal projects in 2007. While teaching Power Engineering, he employed MATLAB for engineering computations and compiled his instructional materials into an open textbook, A Brief Introduction to Engineering Computation with MATLAB, published in 2011.\nIn February 2025, he attended a Python course at the West Vancouver Memorial Library and subsequently began using Python in his Marine and Power Engineering lecture materials, gradually incorporating computational examples into his teaching.\nSerhat holds a Class 1 Marine Engineer certification, a Master of Education in Distance Education, and a Bachelor of Science in Marine Engineering."
+  },
+  {
+    "objectID": "assignments/assignment-01.html",
+    "href": "assignments/assignment-01.html",
+    "title": "Assignment 1: Rankine Cycle Analysis",
+    "section": "",
+    "text": "Complete the following simulation exercises and submit a detailed report."
+  },
+  {
     "objectID": "labs/lab-01.html",
     "href": "labs/lab-01.html",
     "title": "Lab 1: Basic Rankine Cycle Simulation",
@@ -145,34 +243,6 @@
     "title": "Lab 1: Basic Rankine Cycle Simulation",
     "section": "Submission",
     "text": "Submission\nSave this file with your name added to the filename: lab-01-firstname-lastname.qmd and submit the completed .qmd file."
-  },
-  {
-    "objectID": "assignments/assignment-01.html",
-    "href": "assignments/assignment-01.html",
-    "title": "Assignment 1: Rankine Cycle Analysis",
-    "section": "",
-    "text": "Complete the following simulation exercises and submit a detailed report."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About the Instructor",
-    "section": "",
-    "text": "Serhat Beyenir is an instructor in Power Engineering at BCIT, where he teaches Thermal Power Plant Simulator courses and previously taught Thermodynamics, Applied Mechanics, Propulsion Engines, and Propulsion Plant Simulator courses at BCIT Marine Engineering.\nHis interest in computing dates back to high school, when he taught himself BASIC to plot trigonometric functions on an Amstrad 64K microcomputer. He completed programming coursework at the university level but is largely self-taught in the use of Unix and Linux systems, later adopting macOS for personal projects in 2007. While teaching Power Engineering, he employed MATLAB for engineering computations and compiled his instructional materials into an open textbook, A Brief Introduction to Engineering Computation with MATLAB, published in 2011.\nIn February 2025, he attended a Python course at the West Vancouver Memorial Library and subsequently began using Python in his Marine and Power Engineering lecture materials, gradually incorporating computational examples into his teaching.\nSerhat holds a Class 1 Marine Engineer certification, a Master of Education in Distance Education, and a Bachelor of Science in Marine Engineering."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Thermal Power Plant Simulator",
-    "section": "",
-    "text": "This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.\nInstructor: Serhat Beyenir\nSchedule: 4 periods per week (September – December 2026)\nFormat: Lectures + Simulations\n\n\n\nDynamic simulation of Rankine and combined cycles\nPlant performance analysis and optimization\nFault detection and troubleshooting scenarios\nEfficiency and environmental impact assessment\n\n\n\n\n\n\n\nImportant\n\n\n\nFirst Class: September 8, 2026"
-  },
-  {
-    "objectID": "index.html#welcome",
-    "href": "index.html#welcome",
-    "title": "Thermal Power Plant Simulator",
-    "section": "",
-    "text": "This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.\nInstructor: Serhat Beyenir\nSchedule: 4 periods per week (September – December 2026)\nFormat: Lectures + Simulations\n\n\n\nDynamic simulation of Rankine and combined cycles\nPlant performance analysis and optimization\nFault detection and troubleshooting scenarios\nEfficiency and environmental impact assessment\n\n\n\n\n\n\n\nImportant\n\n\n\nFirst Class: September 8, 2026"
   },
   {
     "objectID": "lectures/lecture-01.html",

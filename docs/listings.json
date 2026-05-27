@@ -3,7 +3,8 @@
     "listing": "/schedule.html",
     "items": [
       "/lectures/lecture-01.html",
-      "/labs/lab-01.html"
+      "/labs/lab-01.html",
+      "/labs/lab-02.html"
     ]
   }
 ]
