@@ -9,3 +9,4 @@ title: "Course Materials"
 ## Laboratory Manuals
 
 - [Lab 1 – Rankine Cycle](labs/lab-01.qmd)
+- [Lab 2 – Rankine Cycle](labs/lab-02.qmd)
