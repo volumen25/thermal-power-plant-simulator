@@ -2,4 +2,10 @@
 title: "About the Instructor"
 ---
 
-[Insert your professional background, contact information, and office hours here.]
+Serhat Beyenir is an instructor in Power Engineering at BCIT, where he teaches Thermal Power Plant Simulator courses and previously taught Thermodynamics, Applied Mechanics, Propulsion Engines, and Propulsion Plant Simulator courses at BCIT Marine Engineering.
+
+His interest in computing dates back to high school, when he taught himself BASIC to plot trigonometric functions on an Amstrad 64K microcomputer. He completed programming coursework at the university level but is largely self-taught in the use of Unix and Linux systems, later adopting macOS for personal projects in 2007. While teaching Power Engineering, he employed MATLAB for engineering computations and compiled his instructional materials into an open textbook, *A Brief Introduction to Engineering Computation with MATLAB*, published in 2011.
+
+In February 2025, he attended a Python course at the West Vancouver Memorial Library and subsequently began using Python in his Marine and Power Engineering lecture materials, gradually incorporating computational examples into his teaching.
+
+Serhat holds a Class 1 Marine Engineer certification, a Master of Education in Distance Education, and a Bachelor of Science in Marine Engineering.

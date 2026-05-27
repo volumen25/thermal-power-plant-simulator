@@ -24,6 +24,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -73,6 +108,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -145,8 +209,29 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#topics-covered" id="toc-topics-covered" class="nav-link active" data-scroll-target="#topics-covered">Topics Covered</a></li>
-  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes">Learning Outcomes</a></li>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link active" data-scroll-target="#learning-outcomes">Learning Outcomes</a></li>
+  <li><a href="#what-is-a-thermal-power-plant" id="toc-what-is-a-thermal-power-plant" class="nav-link" data-scroll-target="#what-is-a-thermal-power-plant">1. What Is a Thermal Power Plant?</a>
+  <ul class="collapse">
+  <li><a href="#main-components" id="toc-main-components" class="nav-link" data-scroll-target="#main-components">Main Components</a></li>
+  </ul></li>
+  <li><a href="#the-ideal-rankine-cycle" id="toc-the-ideal-rankine-cycle" class="nav-link" data-scroll-target="#the-ideal-rankine-cycle">2. The Ideal Rankine Cycle</a>
+  <ul class="collapse">
+  <li><a href="#the-four-processes" id="toc-the-four-processes" class="nav-link" data-scroll-target="#the-four-processes">The Four Processes</a></li>
+  <li><a href="#state-point-summary" id="toc-state-point-summary" class="nav-link" data-scroll-target="#state-point-summary">State Point Summary</a></li>
+  </ul></li>
+  <li><a href="#energy-analysis" id="toc-energy-analysis" class="nav-link" data-scroll-target="#energy-analysis">3. Energy Analysis</a>
+  <ul class="collapse">
+  <li><a href="#work-and-heat-per-unit-mass-kjkg" id="toc-work-and-heat-per-unit-mass-kjkg" class="nav-link" data-scroll-target="#work-and-heat-per-unit-mass-kjkg">Work and Heat per Unit Mass (kJ/kg)</a></li>
+  <li><a href="#net-work-output" id="toc-net-work-output" class="nav-link" data-scroll-target="#net-work-output">Net Work Output</a></li>
+  <li><a href="#thermal-efficiency" id="toc-thermal-efficiency" class="nav-link" data-scroll-target="#thermal-efficiency">Thermal Efficiency</a></li>
+  </ul></li>
+  <li><a href="#steam-properties-and-the-iapws-if97-standard" id="toc-steam-properties-and-the-iapws-if97-standard" class="nav-link" data-scroll-target="#steam-properties-and-the-iapws-if97-standard">4. Steam Properties and the IAPWS-IF97 Standard</a></li>
+  <li><a href="#baseline-cycle-calculation" id="toc-baseline-cycle-calculation" class="nav-link" data-scroll-target="#baseline-cycle-calculation">5. Baseline Cycle Calculation</a></li>
+  <li><a href="#factors-affecting-efficiency" id="toc-factors-affecting-efficiency" class="nav-link" data-scroll-target="#factors-affecting-efficiency">6. Factors Affecting Efficiency</a></li>
+  <li><a href="#steam-quality-at-turbine-exit" id="toc-steam-quality-at-turbine-exit" class="nav-link" data-scroll-target="#steam-quality-at-turbine-exit">7. Steam Quality at Turbine Exit</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">8. Looking Ahead</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#preparation-for-lab-1" id="toc-preparation-for-lab-1" class="nav-link" data-scroll-target="#preparation-for-lab-1">Preparation for Lab 1</a></li>
   </ul>
 </nav>
     </div>
@@ -178,18 +263,300 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="topics-covered" class="level2">
-<h2 class="anchored" data-anchor-id="topics-covered">Topics Covered</h2>
-<ul>
-<li>Overview of thermal power generation</li>
-<li>Basic Rankine cycle</li>
-<li>Main components of a thermal power plant</li>
-<li>Introduction to simulation software</li>
-</ul>
-</section>
 <section id="learning-outcomes" class="level2">
 <h2 class="anchored" data-anchor-id="learning-outcomes">Learning Outcomes</h2>
-<p>By the end of this lecture, students will understand the fundamental operating principles of thermal power plants.</p>
+<p>By the end of this lecture you will be able to:</p>
+<ul>
+<li>Describe the main components of a thermal power plant</li>
+<li>Explain the ideal Rankine cycle and its four processes</li>
+<li>Define thermal efficiency and identify factors that influence it</li>
+<li>Interpret T-s and h-s diagrams for steam cycles</li>
+</ul>
+<hr>
+</section>
+<section id="what-is-a-thermal-power-plant" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-thermal-power-plant">1. What Is a Thermal Power Plant?</h2>
+<p>A thermal power plant converts heat energy into electrical energy. The heat source may be combustion of fossil fuels, nuclear fission, concentrated solar, or geothermal energy. Regardless of the source, the working principle is the same: heat is used to produce high-pressure steam, which drives a turbine connected to a generator.</p>
+<p>The majority of the world’s electricity is produced this way. Understanding how these plants work — and how to model them — is the foundation of this course.</p>
+<section id="main-components" class="level3">
+<h3 class="anchored" data-anchor-id="main-components">Main Components</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Boiler / Steam generator</td>
+<td>Converts water to high-pressure steam</td>
+</tr>
+<tr class="even">
+<td>Turbine</td>
+<td>Expands steam to produce shaft work</td>
+</tr>
+<tr class="odd">
+<td>Condenser</td>
+<td>Rejects heat, converts steam back to liquid</td>
+</tr>
+<tr class="even">
+<td>Feed pump</td>
+<td>Returns condensate to boiler pressure</td>
+</tr>
+<tr class="odd">
+<td>Generator</td>
+<td>Converts shaft work to electricity</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="the-ideal-rankine-cycle" class="level2">
+<h2 class="anchored" data-anchor-id="the-ideal-rankine-cycle">2. The Ideal Rankine Cycle</h2>
+<p>The Rankine cycle is the theoretical model underpinning all steam power plants. It describes how a working fluid (water/steam) cycles through four thermodynamic processes.</p>
+<section id="the-four-processes" class="level3">
+<h3 class="anchored" data-anchor-id="the-four-processes">The Four Processes</h3>
+<p><strong>Process 1 → 2: Isentropic expansion (Turbine)</strong><br>
+High-pressure superheated steam enters the turbine at state 1 and expands isentropically (no heat transfer, no irreversibilities) to the condenser pressure at state 2. Shaft work is produced.</p>
+<p><strong>Process 2 → 3: Isothermal condensation (Condenser)</strong><br>
+Wet steam at state 2 rejects heat to the cooling medium at constant pressure until it becomes saturated liquid at state 3. No work is done.</p>
+<p><strong>Process 3 → 4: Isentropic compression (Pump)</strong><br>
+The saturated liquid is pumped isentropically from condenser pressure back to boiler pressure. The pump work is small compared to turbine output.</p>
+<p><strong>Process 4 → 1: Isobaric heat addition (Boiler)</strong><br>
+Compressed liquid is heated at constant pressure through the boiler until it reaches the desired turbine inlet conditions at state 1.</p>
+</section>
+<section id="state-point-summary" class="level3">
+<h3 class="anchored" data-anchor-id="state-point-summary">State Point Summary</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>State</th>
+<th>Location</th>
+<th>Phase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Turbine inlet</td>
+<td>Superheated steam</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Turbine exit / Condenser inlet</td>
+<td>Wet steam</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Condenser exit / Pump inlet</td>
+<td>Saturated liquid</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Pump exit / Boiler inlet</td>
+<td>Compressed liquid</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="energy-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="energy-analysis">3. Energy Analysis</h2>
+<p>For a steady-flow system, the first law of thermodynamics gives us the energy balance at each component.</p>
+<section id="work-and-heat-per-unit-mass-kjkg" class="level3">
+<h3 class="anchored" data-anchor-id="work-and-heat-per-unit-mass-kjkg">Work and Heat per Unit Mass (kJ/kg)</h3>
+<p><span class="math display">\[w_{turbine} = h_1 - h_2\]</span></p>
+<p><span class="math display">\[w_{pump} = h_4 - h_3\]</span></p>
+<p><span class="math display">\[q_{boiler} = h_1 - h_4\]</span></p>
+<p><span class="math display">\[q_{condenser} = h_2 - h_3\]</span></p>
+</section>
+<section id="net-work-output" class="level3">
+<h3 class="anchored" data-anchor-id="net-work-output">Net Work Output</h3>
+<p><span class="math display">\[w_{net} = w_{turbine} - w_{pump}\]</span></p>
+</section>
+<section id="thermal-efficiency" class="level3">
+<h3 class="anchored" data-anchor-id="thermal-efficiency">Thermal Efficiency</h3>
+<p><span class="math display">\[\eta_{th} = \frac{w_{net}}{q_{boiler}} = \frac{w_{turbine} - w_{pump}}{q_{boiler}}\]</span></p>
+<p>Note that the pump work is typically less than 1% of the turbine output for steam cycles, which is why early approximations often ignored it. We will always include it in our calculations.</p>
+<hr>
+</section>
+</section>
+<section id="steam-properties-and-the-iapws-if97-standard" class="level2">
+<h2 class="anchored" data-anchor-id="steam-properties-and-the-iapws-if97-standard">4. Steam Properties and the IAPWS-IF97 Standard</h2>
+<p>To evaluate enthalpies at each state point we need accurate steam property data. The International Association for the Properties of Water and Steam publishes the IF97 formulation, which is the industry standard for power plant calculations.</p>
+<p>In this course we use the <code>iapws</code> Python library, which implements IF97.</p>
+<div id="eeac0ff1" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> iapws <span class="im">import</span> IAPWS97</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Superheated steam at turbine inlet: 500°C, 10 MPa</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>state1 <span class="op">=</span> IAPWS97(T<span class="op">=</span><span class="dv">500</span> <span class="op">+</span> <span class="fl">273.15</span>, P<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Temperature  : </span><span class="sc">{</span>state1<span class="sc">.</span>T <span class="op">-</span> <span class="fl">273.15</span><span class="sc">:.1f}</span><span class="ss"> °C"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Pressure     : </span><span class="sc">{</span>state1<span class="sc">.</span>P<span class="sc">:.1f}</span><span class="ss"> MPa"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Enthalpy     : </span><span class="sc">{</span>state1<span class="sc">.</span>h<span class="sc">:.2f}</span><span class="ss"> kJ/kg"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Entropy      : </span><span class="sc">{</span>state1<span class="sc">.</span>s<span class="sc">:.4f}</span><span class="ss"> kJ/kg·K"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Specific vol : </span><span class="sc">{</span>state1<span class="sc">.</span>v<span class="sc">:.4f}</span><span class="ss"> m³/kg"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Temperature  : 500.0 °C
+Pressure     : 10.0 MPa
+Enthalpy     : 3375.06 kJ/kg
+Entropy      : 6.5993 kJ/kg·K
+Specific vol : 0.0328 m³/kg</code></pre>
+</div>
+</div>
+<p>The <code>IAPWS97</code> object accepts any two independent properties as arguments and returns all others. We will use temperature and pressure for the turbine inlet, and entropy for the isentropic processes.</p>
+<hr>
+</section>
+<section id="baseline-cycle-calculation" class="level2">
+<h2 class="anchored" data-anchor-id="baseline-cycle-calculation">5. Baseline Cycle Calculation</h2>
+<p>Let us compute all four state points for a representative utility cycle:</p>
+<ul>
+<li>Boiler: 500°C, 10 MPa</li>
+<li>Condenser: 0.006 MPa (~36°C saturation temperature)</li>
+</ul>
+<div id="219b9ea2" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># State 1: Turbine inlet</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>state1 <span class="op">=</span> IAPWS97(T<span class="op">=</span><span class="dv">500</span> <span class="op">+</span> <span class="fl">273.15</span>, P<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># State 2: Turbine exit — isentropic (s2 = s1)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>state2 <span class="op">=</span> IAPWS97(P<span class="op">=</span><span class="fl">0.006</span>, s<span class="op">=</span>state1.s)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># State 3: Pump inlet — saturated liquid</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>state3 <span class="op">=</span> IAPWS97(P<span class="op">=</span><span class="fl">0.006</span>, x<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># State 4: Boiler inlet — isentropic pump (s4 = s3)</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>state4 <span class="op">=</span> IAPWS97(P<span class="op">=</span><span class="dv">10</span>, s<span class="op">=</span>state3.s)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Energy balance</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>w_turbine <span class="op">=</span> state1.h <span class="op">-</span> state2.h</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>w_pump    <span class="op">=</span> state4.h <span class="op">-</span> state3.h</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>q_boiler  <span class="op">=</span> state1.h <span class="op">-</span> state4.h</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>w_net     <span class="op">=</span> w_turbine <span class="op">-</span> w_pump</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>eta       <span class="op">=</span> w_net <span class="op">/</span> q_boiler</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'State'</span><span class="sc">:&lt;8}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'T (°C)'</span><span class="sc">:&lt;10}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'P (MPa)'</span><span class="sc">:&lt;10}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'h (kJ/kg)'</span><span class="sc">:&lt;12}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'s (kJ/kg·K)'</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">55</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> label, state <span class="kw">in</span> [(<span class="st">"1"</span>, state1), (<span class="st">"2"</span>, state2), (<span class="st">"3"</span>, state3), (<span class="st">"4"</span>, state4)]:</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>label<span class="sc">:&lt;8}</span><span class="ss"> </span><span class="sc">{</span>state<span class="sc">.</span>T <span class="op">-</span> <span class="fl">273.15</span><span class="sc">:&lt;10.1f}</span><span class="ss"> </span><span class="sc">{</span>state<span class="sc">.</span>P<span class="sc">:&lt;10.3f}</span><span class="ss"> </span><span class="sc">{</span>state<span class="sc">.</span>h<span class="sc">:&lt;12.2f}</span><span class="ss"> </span><span class="sc">{</span>state<span class="sc">.</span>s<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Turbine work   : </span><span class="sc">{</span>w_turbine<span class="sc">:.2f}</span><span class="ss"> kJ/kg"</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Pump work      : </span><span class="sc">{</span>w_pump<span class="sc">:.2f}</span><span class="ss"> kJ/kg"</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Net work       : </span><span class="sc">{</span>w_net<span class="sc">:.2f}</span><span class="ss"> kJ/kg"</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Boiler heat in : </span><span class="sc">{</span>q_boiler<span class="sc">:.2f}</span><span class="ss"> kJ/kg"</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Thermal eff.   : </span><span class="sc">{</span>eta<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>State    T (°C)     P (MPa)    h (kJ/kg)    s (kJ/kg·K)
+-------------------------------------------------------
+1        500.0      10.000     3375.06      6.5993
+2        36.2       0.006      2031.62      6.5993
+3        36.2       0.006      151.49       0.5209
+4        36.4       10.000     161.53       0.5209
+
+Turbine work   : 1343.44 kJ/kg
+Pump work      : 10.04 kJ/kg
+Net work       : 1333.41 kJ/kg
+Boiler heat in : 3213.53 kJ/kg
+Thermal eff.   : 41.5%</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="factors-affecting-efficiency" class="level2">
+<h2 class="anchored" data-anchor-id="factors-affecting-efficiency">6. Factors Affecting Efficiency</h2>
+<p>Three operating parameters have the greatest influence on cycle efficiency:</p>
+<p><strong>Boiler temperature</strong> — Higher turbine inlet temperature increases <span class="math inline">\(w_{turbine}\)</span> without proportionally increasing <span class="math inline">\(q_{boiler}\)</span>, raising efficiency. Limited by material constraints (typically 600–620°C for modern steels).</p>
+<p><strong>Boiler pressure</strong> — Higher pressure raises the mean temperature of heat addition, improving efficiency. Limited by turbine exit steam quality — excessive moisture damages turbine blades.</p>
+<p><strong>Condenser pressure</strong> — Lower condenser pressure (lower condensing temperature) reduces heat rejection and increases <span class="math inline">\(w_{net}\)</span>. Limited by cooling water temperature and vacuum system capability.</p>
+<div id="74a88f03" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cycle_eta(T_boiler<span class="op">=</span><span class="dv">500</span>, P_boiler<span class="op">=</span><span class="dv">10</span>, P_condenser<span class="op">=</span><span class="fl">0.006</span>):</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    s1 <span class="op">=</span> IAPWS97(T<span class="op">=</span>T_boiler <span class="op">+</span> <span class="fl">273.15</span>, P<span class="op">=</span>P_boiler)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    s2 <span class="op">=</span> IAPWS97(P<span class="op">=</span>P_condenser, s<span class="op">=</span>s1.s)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    s3 <span class="op">=</span> IAPWS97(P<span class="op">=</span>P_condenser, x<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    s4 <span class="op">=</span> IAPWS97(P<span class="op">=</span>P_boiler, s<span class="op">=</span>s3.s)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    w_net <span class="op">=</span> (s1.h <span class="op">-</span> s2.h) <span class="op">-</span> (s4.h <span class="op">-</span> s3.h)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    q_in  <span class="op">=</span> s1.h <span class="op">-</span> s4.h</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> w_net <span class="op">/</span> q_in <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>temperatures <span class="op">=</span> np.arange(<span class="dv">300</span>, <span class="dv">620</span>, <span class="dv">10</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>efficiencies <span class="op">=</span> [cycle_eta(T_boiler<span class="op">=</span>T) <span class="cf">for</span> T <span class="kw">in</span> temperatures]</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>ax.plot(temperatures, efficiencies, <span class="st">"ro-"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, markersize<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>ax.axvline(x<span class="op">=</span><span class="dv">500</span>, color<span class="op">=</span><span class="st">"gray"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">"Baseline (500°C)"</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Effect of Boiler Temperature on Cycle Efficiency"</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Boiler Temperature (°C)"</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Thermal Efficiency (%)"</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lecture-01_files/figure-html/cell-4-output-1.png" width="854" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="steam-quality-at-turbine-exit" class="level2">
+<h2 class="anchored" data-anchor-id="steam-quality-at-turbine-exit">7. Steam Quality at Turbine Exit</h2>
+<p>Steam quality <span class="math inline">\(x\)</span> represents the fraction of the mixture that is vapour:</p>
+<p><span class="math display">\[x = \frac{m_{vapour}}{m_{total}} \quad (0 \leq x \leq 1)\]</span></p>
+<p>At <span class="math inline">\(x = 0\)</span> we have saturated liquid; at <span class="math inline">\(x = 1\)</span> saturated vapour. Values below <strong>0.88</strong> are generally unacceptable in practice — liquid droplets erode turbine blades, reducing lifespan and efficiency.</p>
+<div id="a0fa9223" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Turbine exit quality (baseline): </span><span class="sc">{</span>state2<span class="sc">.</span>x<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> state2.x <span class="op">&lt;</span> <span class="fl">0.88</span>:</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"WARNING: Quality below 0.88 — reheat cycle recommended"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Quality acceptable for direct expansion"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Turbine exit quality (baseline): 0.778
+WARNING: Quality below 0.88 — reheat cycle recommended</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="looking-ahead">8. Looking Ahead</h2>
+<p>The ideal Rankine cycle is our starting point. Real plants deviate from this ideal due to:</p>
+<ul>
+<li>Isentropic inefficiencies in turbines and pumps</li>
+<li>Pressure drops in pipes and heat exchangers<br>
+</li>
+<li>Heat losses from the boiler</li>
+<li>Feedwater heating stages</li>
+</ul>
+<p>In subsequent lectures we will add these real-world effects and explore cycle modifications such as reheat, regeneration, and combined cycles that push efficiencies above 45%.</p>
+<hr>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<ul>
+<li>A thermal power plant converts heat to electricity via a steam cycle</li>
+<li>The ideal Rankine cycle has four processes: expansion, condensation, compression, and heat addition</li>
+<li>Thermal efficiency is <span class="math inline">\(\eta = w_{net} / q_{boiler}\)</span>, typically 35–45% for modern steam plants</li>
+<li>Steam properties are evaluated using the IAPWS-IF97 standard via <code>iapws</code></li>
+<li>Higher boiler temperature and pressure improve efficiency; low condenser pressure also helps</li>
+</ul>
+<hr>
+</section>
+<section id="preparation-for-lab-1" class="level2">
+<h2 class="anchored" data-anchor-id="preparation-for-lab-1">Preparation for Lab 1</h2>
+<p>Before attending Lab 1 on September 10:</p>
+<ol type="1">
+<li>Ensure <code>iapws</code> is installed in your environment (<code>uv sync</code>)</li>
+<li>Review the four state point definitions above</li>
+<li>Be ready to explain what turbine exit quality means and why it matters</li>
+</ol>
 
 
 </section>

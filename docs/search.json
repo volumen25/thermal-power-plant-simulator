@@ -67,7 +67,7 @@
     "href": "about.html",
     "title": "About the Instructor",
     "section": "",
-    "text": "[Insert your professional background, contact information, and office hours here.]"
+    "text": "Serhat Beyenir is an instructor in Power Engineering at BCIT, where he teaches Thermal Power Plant Simulator courses and previously taught Thermodynamics, Applied Mechanics, Propulsion Engines, and Propulsion Plant Simulator courses at BCIT Marine Engineering.\nHis interest in computing dates back to high school, when he taught himself BASIC to plot trigonometric functions on an Amstrad 64K microcomputer. He completed programming coursework at the university level but is largely self-taught in the use of Unix and Linux systems, later adopting macOS for personal projects in 2007. While teaching Power Engineering, he employed MATLAB for engineering computations and compiled his instructional materials into an open textbook, A Brief Introduction to Engineering Computation with MATLAB, published in 2011.\nIn February 2025, he attended a Python course at the West Vancouver Memorial Library and subsequently began using Python in his Marine and Power Engineering lecture materials, gradually incorporating computational examples into his teaching.\nSerhat holds a Class 1 Marine Engineer certification, a Master of Education in Distance Education, and a Bachelor of Science in Marine Engineering."
   },
   {
     "objectID": "assignments/assignment-01.html",
@@ -179,21 +179,84 @@
     "href": "lectures/lecture-01.html",
     "title": "Lecture 1: Introduction to Thermal Power Plants",
     "section": "",
-    "text": "Overview of thermal power generation\nBasic Rankine cycle\nMain components of a thermal power plant\nIntroduction to simulation software"
-  },
-  {
-    "objectID": "lectures/lecture-01.html#topics-covered",
-    "href": "lectures/lecture-01.html#topics-covered",
-    "title": "Lecture 1: Introduction to Thermal Power Plants",
-    "section": "",
-    "text": "Overview of thermal power generation\nBasic Rankine cycle\nMain components of a thermal power plant\nIntroduction to simulation software"
+    "text": "By the end of this lecture you will be able to:\n\nDescribe the main components of a thermal power plant\nExplain the ideal Rankine cycle and its four processes\nDefine thermal efficiency and identify factors that influence it\nInterpret T-s and h-s diagrams for steam cycles"
   },
   {
     "objectID": "lectures/lecture-01.html#learning-outcomes",
     "href": "lectures/lecture-01.html#learning-outcomes",
     "title": "Lecture 1: Introduction to Thermal Power Plants",
-    "section": "Learning Outcomes",
-    "text": "Learning Outcomes\nBy the end of this lecture, students will understand the fundamental operating principles of thermal power plants."
+    "section": "",
+    "text": "By the end of this lecture you will be able to:\n\nDescribe the main components of a thermal power plant\nExplain the ideal Rankine cycle and its four processes\nDefine thermal efficiency and identify factors that influence it\nInterpret T-s and h-s diagrams for steam cycles"
+  },
+  {
+    "objectID": "lectures/lecture-01.html#what-is-a-thermal-power-plant",
+    "href": "lectures/lecture-01.html#what-is-a-thermal-power-plant",
+    "title": "Lecture 1: Introduction to Thermal Power Plants",
+    "section": "1. What Is a Thermal Power Plant?",
+    "text": "1. What Is a Thermal Power Plant?\nA thermal power plant converts heat energy into electrical energy. The heat source may be combustion of fossil fuels, nuclear fission, concentrated solar, or geothermal energy. Regardless of the source, the working principle is the same: heat is used to produce high-pressure steam, which drives a turbine connected to a generator.\nThe majority of the world’s electricity is produced this way. Understanding how these plants work — and how to model them — is the foundation of this course.\n\nMain Components\n\n\n\nComponent\nFunction\n\n\n\n\nBoiler / Steam generator\nConverts water to high-pressure steam\n\n\nTurbine\nExpands steam to produce shaft work\n\n\nCondenser\nRejects heat, converts steam back to liquid\n\n\nFeed pump\nReturns condensate to boiler pressure\n\n\nGenerator\nConverts shaft work to electricity"
+  },
+  {
+    "objectID": "lectures/lecture-01.html#the-ideal-rankine-cycle",
+    "href": "lectures/lecture-01.html#the-ideal-rankine-cycle",
+    "title": "Lecture 1: Introduction to Thermal Power Plants",
+    "section": "2. The Ideal Rankine Cycle",
+    "text": "2. The Ideal Rankine Cycle\nThe Rankine cycle is the theoretical model underpinning all steam power plants. It describes how a working fluid (water/steam) cycles through four thermodynamic processes.\n\nThe Four Processes\nProcess 1 → 2: Isentropic expansion (Turbine)\nHigh-pressure superheated steam enters the turbine at state 1 and expands isentropically (no heat transfer, no irreversibilities) to the condenser pressure at state 2. Shaft work is produced.\nProcess 2 → 3: Isothermal condensation (Condenser)\nWet steam at state 2 rejects heat to the cooling medium at constant pressure until it becomes saturated liquid at state 3. No work is done.\nProcess 3 → 4: Isentropic compression (Pump)\nThe saturated liquid is pumped isentropically from condenser pressure back to boiler pressure. The pump work is small compared to turbine output.\nProcess 4 → 1: Isobaric heat addition (Boiler)\nCompressed liquid is heated at constant pressure through the boiler until it reaches the desired turbine inlet conditions at state 1.\n\n\nState Point Summary\n\n\n\nState\nLocation\nPhase\n\n\n\n\n1\nTurbine inlet\nSuperheated steam\n\n\n2\nTurbine exit / Condenser inlet\nWet steam\n\n\n3\nCondenser exit / Pump inlet\nSaturated liquid\n\n\n4\nPump exit / Boiler inlet\nCompressed liquid"
+  },
+  {
+    "objectID": "lectures/lecture-01.html#energy-analysis",
+    "href": "lectures/lecture-01.html#energy-analysis",
+    "title": "Lecture 1: Introduction to Thermal Power Plants",
+    "section": "3. Energy Analysis",
+    "text": "3. Energy Analysis\nFor a steady-flow system, the first law of thermodynamics gives us the energy balance at each component.\n\nWork and Heat per Unit Mass (kJ/kg)\n\\[w_{turbine} = h_1 - h_2\\]\n\\[w_{pump} = h_4 - h_3\\]\n\\[q_{boiler} = h_1 - h_4\\]\n\\[q_{condenser} = h_2 - h_3\\]\n\n\nNet Work Output\n\\[w_{net} = w_{turbine} - w_{pump}\\]\n\n\nThermal Efficiency\n\\[\\eta_{th} = \\frac{w_{net}}{q_{boiler}} = \\frac{w_{turbine} - w_{pump}}{q_{boiler}}\\]\nNote that the pump work is typically less than 1% of the turbine output for steam cycles, which is why early approximations often ignored it. We will always include it in our calculations."
+  },
+  {
+    "objectID": "lectures/lecture-01.html#steam-properties-and-the-iapws-if97-standard",
+    "href": "lectures/lecture-01.html#steam-properties-and-the-iapws-if97-standard",
+    "title": "Lecture 1: Introduction to Thermal Power Plants",
+    "section": "4. Steam Properties and the IAPWS-IF97 Standard",
+    "text": "4. Steam Properties and the IAPWS-IF97 Standard\nTo evaluate enthalpies at each state point we need accurate steam property data. The International Association for the Properties of Water and Steam publishes the IF97 formulation, which is the industry standard for power plant calculations.\nIn this course we use the iapws Python library, which implements IF97.\n\nfrom iapws import IAPWS97\n\n# Superheated steam at turbine inlet: 500°C, 10 MPa\nstate1 = IAPWS97(T=500 + 273.15, P=10)\n\nprint(f\"Temperature  : {state1.T - 273.15:.1f} °C\")\nprint(f\"Pressure     : {state1.P:.1f} MPa\")\nprint(f\"Enthalpy     : {state1.h:.2f} kJ/kg\")\nprint(f\"Entropy      : {state1.s:.4f} kJ/kg·K\")\nprint(f\"Specific vol : {state1.v:.4f} m³/kg\")\n\nTemperature  : 500.0 °C\nPressure     : 10.0 MPa\nEnthalpy     : 3375.06 kJ/kg\nEntropy      : 6.5993 kJ/kg·K\nSpecific vol : 0.0328 m³/kg\n\n\nThe IAPWS97 object accepts any two independent properties as arguments and returns all others. We will use temperature and pressure for the turbine inlet, and entropy for the isentropic processes."
+  },
+  {
+    "objectID": "lectures/lecture-01.html#baseline-cycle-calculation",
+    "href": "lectures/lecture-01.html#baseline-cycle-calculation",
+    "title": "Lecture 1: Introduction to Thermal Power Plants",
+    "section": "5. Baseline Cycle Calculation",
+    "text": "5. Baseline Cycle Calculation\nLet us compute all four state points for a representative utility cycle:\n\nBoiler: 500°C, 10 MPa\nCondenser: 0.006 MPa (~36°C saturation temperature)\n\n\n# State 1: Turbine inlet\nstate1 = IAPWS97(T=500 + 273.15, P=10)\n\n# State 2: Turbine exit — isentropic (s2 = s1)\nstate2 = IAPWS97(P=0.006, s=state1.s)\n\n# State 3: Pump inlet — saturated liquid\nstate3 = IAPWS97(P=0.006, x=0)\n\n# State 4: Boiler inlet — isentropic pump (s4 = s3)\nstate4 = IAPWS97(P=10, s=state3.s)\n\n# Energy balance\nw_turbine = state1.h - state2.h\nw_pump    = state4.h - state3.h\nq_boiler  = state1.h - state4.h\nw_net     = w_turbine - w_pump\neta       = w_net / q_boiler\n\nprint(f\"{'State':&lt;8} {'T (°C)':&lt;10} {'P (MPa)':&lt;10} {'h (kJ/kg)':&lt;12} {'s (kJ/kg·K)'}\")\nprint(\"-\" * 55)\nfor label, state in [(\"1\", state1), (\"2\", state2), (\"3\", state3), (\"4\", state4)]:\n    print(f\"{label:&lt;8} {state.T - 273.15:&lt;10.1f} {state.P:&lt;10.3f} {state.h:&lt;12.2f} {state.s:.4f}\")\n\nprint(f\"\\nTurbine work   : {w_turbine:.2f} kJ/kg\")\nprint(f\"Pump work      : {w_pump:.2f} kJ/kg\")\nprint(f\"Net work       : {w_net:.2f} kJ/kg\")\nprint(f\"Boiler heat in : {q_boiler:.2f} kJ/kg\")\nprint(f\"Thermal eff.   : {eta:.1%}\")\n\nState    T (°C)     P (MPa)    h (kJ/kg)    s (kJ/kg·K)\n-------------------------------------------------------\n1        500.0      10.000     3375.06      6.5993\n2        36.2       0.006      2031.62      6.5993\n3        36.2       0.006      151.49       0.5209\n4        36.4       10.000     161.53       0.5209\n\nTurbine work   : 1343.44 kJ/kg\nPump work      : 10.04 kJ/kg\nNet work       : 1333.41 kJ/kg\nBoiler heat in : 3213.53 kJ/kg\nThermal eff.   : 41.5%"
+  },
+  {
+    "objectID": "lectures/lecture-01.html#factors-affecting-efficiency",
+    "href": "lectures/lecture-01.html#factors-affecting-efficiency",
+    "title": "Lecture 1: Introduction to Thermal Power Plants",
+    "section": "6. Factors Affecting Efficiency",
+    "text": "6. Factors Affecting Efficiency\nThree operating parameters have the greatest influence on cycle efficiency:\nBoiler temperature — Higher turbine inlet temperature increases \\(w_{turbine}\\) without proportionally increasing \\(q_{boiler}\\), raising efficiency. Limited by material constraints (typically 600–620°C for modern steels).\nBoiler pressure — Higher pressure raises the mean temperature of heat addition, improving efficiency. Limited by turbine exit steam quality — excessive moisture damages turbine blades.\nCondenser pressure — Lower condenser pressure (lower condensing temperature) reduces heat rejection and increases \\(w_{net}\\). Limited by cooling water temperature and vacuum system capability.\n\nimport numpy as np\nimport matplotlib.pyplot as plt\n\ndef cycle_eta(T_boiler=500, P_boiler=10, P_condenser=0.006):\n    s1 = IAPWS97(T=T_boiler + 273.15, P=P_boiler)\n    s2 = IAPWS97(P=P_condenser, s=s1.s)\n    s3 = IAPWS97(P=P_condenser, x=0)\n    s4 = IAPWS97(P=P_boiler, s=s3.s)\n    w_net = (s1.h - s2.h) - (s4.h - s3.h)\n    q_in  = s1.h - s4.h\n    return w_net / q_in * 100\n\ntemperatures = np.arange(300, 620, 10)\nefficiencies = [cycle_eta(T_boiler=T) for T in temperatures]\n\nfig, ax = plt.subplots(figsize=(9, 5))\nax.plot(temperatures, efficiencies, \"ro-\", linewidth=2, markersize=4)\nax.axvline(x=500, color=\"gray\", linestyle=\"--\", alpha=0.6, label=\"Baseline (500°C)\")\nax.set_title(\"Effect of Boiler Temperature on Cycle Efficiency\")\nax.set_xlabel(\"Boiler Temperature (°C)\")\nax.set_ylabel(\"Thermal Efficiency (%)\")\nax.grid(True, alpha=0.3)\nax.legend()\nfig.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "lectures/lecture-01.html#steam-quality-at-turbine-exit",
+    "href": "lectures/lecture-01.html#steam-quality-at-turbine-exit",
+    "title": "Lecture 1: Introduction to Thermal Power Plants",
+    "section": "7. Steam Quality at Turbine Exit",
+    "text": "7. Steam Quality at Turbine Exit\nSteam quality \\(x\\) represents the fraction of the mixture that is vapour:\n\\[x = \\frac{m_{vapour}}{m_{total}} \\quad (0 \\leq x \\leq 1)\\]\nAt \\(x = 0\\) we have saturated liquid; at \\(x = 1\\) saturated vapour. Values below 0.88 are generally unacceptable in practice — liquid droplets erode turbine blades, reducing lifespan and efficiency.\n\nprint(f\"Turbine exit quality (baseline): {state2.x:.3f}\")\n\nif state2.x &lt; 0.88:\n    print(\"WARNING: Quality below 0.88 — reheat cycle recommended\")\nelse:\n    print(\"Quality acceptable for direct expansion\")\n\nTurbine exit quality (baseline): 0.778\nWARNING: Quality below 0.88 — reheat cycle recommended"
+  },
+  {
+    "objectID": "lectures/lecture-01.html#looking-ahead",
+    "href": "lectures/lecture-01.html#looking-ahead",
+    "title": "Lecture 1: Introduction to Thermal Power Plants",
+    "section": "8. Looking Ahead",
+    "text": "8. Looking Ahead\nThe ideal Rankine cycle is our starting point. Real plants deviate from this ideal due to:\n\nIsentropic inefficiencies in turbines and pumps\nPressure drops in pipes and heat exchangers\n\nHeat losses from the boiler\nFeedwater heating stages\n\nIn subsequent lectures we will add these real-world effects and explore cycle modifications such as reheat, regeneration, and combined cycles that push efficiencies above 45%."
+  },
+  {
+    "objectID": "lectures/lecture-01.html#summary",
+    "href": "lectures/lecture-01.html#summary",
+    "title": "Lecture 1: Introduction to Thermal Power Plants",
+    "section": "Summary",
+    "text": "Summary\n\nA thermal power plant converts heat to electricity via a steam cycle\nThe ideal Rankine cycle has four processes: expansion, condensation, compression, and heat addition\nThermal efficiency is \\(\\eta = w_{net} / q_{boiler}\\), typically 35–45% for modern steam plants\nSteam properties are evaluated using the IAPWS-IF97 standard via iapws\nHigher boiler temperature and pressure improve efficiency; low condenser pressure also helps"
+  },
+  {
+    "objectID": "lectures/lecture-01.html#preparation-for-lab-1",
+    "href": "lectures/lecture-01.html#preparation-for-lab-1",
+    "title": "Lecture 1: Introduction to Thermal Power Plants",
+    "section": "Preparation for Lab 1",
+    "text": "Preparation for Lab 1\nBefore attending Lab 1 on September 10:\n\nEnsure iapws is installed in your environment (uv sync)\nReview the four state point definitions above\nBe ready to explain what turbine exit quality means and why it matters"
   },
   {
     "objectID": "resources.html",
