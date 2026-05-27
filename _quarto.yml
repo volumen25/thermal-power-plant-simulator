@@ -18,16 +18,16 @@ website:
         text: Materials
       - href: resources.qmd
         text: Resources
+      - href: references.qmd
+        text: References
       - href: about.qmd
         text: About
     right:
       - icon: github
         href: https://github.com/volumen25/thermal-power-plant-simulator
-
   page-footer:
-    left: © 2026 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
-    right: |
-      Built with <a href="https://quarto.org">Quarto {{< version >}}</a>
+    left: "© 2026 <a href='https://creativecommons.org/licenses/by-sa/4.0/'>CC BY-SA 4.0</a>"
+    right: "Built with <a href='https://quarto.org'>Quarto</a>"
 
 format:
   html:
@@ -36,6 +36,9 @@ format:
     toc: true
     number-sections: true
     smooth-scroll: true
+
+bibliography: references.bib
+csl: apa.csl
 
 execute:
   freeze: auto

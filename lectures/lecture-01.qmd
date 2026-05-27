@@ -1,7 +1,7 @@
 ---
 title: "Lecture 1: Introduction to Thermal Power Plants"
 date: "2026-09-08"
-type: "lecture"
+type: "Lecture"
 ---
 
 ## Topics Covered

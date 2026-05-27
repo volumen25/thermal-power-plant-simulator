@@ -1,6 +1,6 @@
 ---
 title: "Course Schedule"
-
+number-sections: false
 listing:
   contents: 
     - lectures/*.qmd
@@ -8,6 +8,7 @@ listing:
   type: table
   fields: [title, date, type]
   sort: date
+  filter-ui: true
   field-display-names:
     title: "Topic"
     date: "Date"
