@@ -34,7 +34,7 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
-    number-sections: true
+    number-sections: false
     smooth-scroll: true
 
 bibliography: references.bib

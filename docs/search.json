@@ -45,22 +45,22 @@
     "objectID": "syllabus.html#learning-objectives",
     "href": "syllabus.html#learning-objectives",
     "title": "Syllabus",
-    "section": "2 Learning Objectives",
-    "text": "2 Learning Objectives\nStudents will be able to: 1. Simulate steady-state and transient operation of thermal power plants. 2. Analyze the performance of boilers, turbines, condensers, and feedwater systems. 3. Optimize plant efficiency and evaluate environmental performance. 4. Diagnose and troubleshoot common operational issues."
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nStudents will be able to: 1. Simulate steady-state and transient operation of thermal power plants. 2. Analyze the performance of boilers, turbines, condensers, and feedwater systems. 3. Optimize plant efficiency and evaluate environmental performance. 4. Diagnose and troubleshoot common operational issues."
   },
   {
     "objectID": "syllabus.html#assessment",
     "href": "syllabus.html#assessment",
     "title": "Syllabus",
-    "section": "3 Assessment",
-    "text": "3 Assessment\n\n\n\nComponent\nWeight\n\n\n\n\nLaboratory Simulations\n40%\n\n\nAssignments\n25%\n\n\nMidterm Examination\n15%\n\n\nFinal Project\n20%"
+    "section": "Assessment",
+    "text": "Assessment\n\n\n\nComponent\nWeight\n\n\n\n\nLaboratory Simulations\n40%\n\n\nAssignments\n25%\n\n\nMidterm Examination\n15%\n\n\nFinal Project\n20%"
   },
   {
     "objectID": "syllabus.html#policies",
     "href": "syllabus.html#policies",
     "title": "Syllabus",
-    "section": "4 Policies",
-    "text": "4 Policies\n\nAll simulation reports must be submitted through the course platform.\nLate submissions will be penalized by 10% per day.\nAcademic integrity is strictly enforced."
+    "section": "Policies",
+    "text": "Policies\n\nAll simulation reports must be submitted through the course platform.\nLate submissions will be penalized by 10% per day.\nAcademic integrity is strictly enforced."
   },
   {
     "objectID": "about.html",
@@ -79,23 +79,65 @@
   {
     "objectID": "labs/lab-01.html",
     "href": "labs/lab-01.html",
-    "title": "Lab 1: Building a Simple Rankine Cycle Model",
+    "title": "Lab 1: Basic Rankine Cycle Simulation",
     "section": "",
-    "text": "Create a basic Rankine cycle simulation\nCalculate thermal efficiency\nPerform sensitivity analysis on key parameters"
+    "text": "By the end of this lab you will be able to:\n\nRun a basic ideal Rankine cycle simulation using steam tables\nIdentify the four state points of the cycle\nInterpret thermal efficiency in terms of operating conditions\nObserve how boiler pressure and temperature affect performance"
   },
   {
     "objectID": "labs/lab-01.html#objectives",
     "href": "labs/lab-01.html#objectives",
-    "title": "Lab 1: Building a Simple Rankine Cycle Model",
+    "title": "Lab 1: Basic Rankine Cycle Simulation",
     "section": "",
-    "text": "Create a basic Rankine cycle simulation\nCalculate thermal efficiency\nPerform sensitivity analysis on key parameters"
+    "text": "By the end of this lab you will be able to:\n\nRun a basic ideal Rankine cycle simulation using steam tables\nIdentify the four state points of the cycle\nInterpret thermal efficiency in terms of operating conditions\nObserve how boiler pressure and temperature affect performance"
   },
   {
-    "objectID": "labs/lab-01.html#tasks",
-    "href": "labs/lab-01.html#tasks",
-    "title": "Lab 1: Building a Simple Rankine Cycle Model",
-    "section": "2 Tasks",
-    "text": "2 Tasks\n\nBuild the model using the simulator\nRun steady-state simulation\nGenerate performance curves"
+    "objectID": "labs/lab-01.html#background",
+    "href": "labs/lab-01.html#background",
+    "title": "Lab 1: Basic Rankine Cycle Simulation",
+    "section": "Background",
+    "text": "Background\nThe ideal Rankine cycle is the theoretical basis for steam power generation. It consists of four processes:\n\n\n\nProcess\nDevice\nDescription\n\n\n\n\n1 → 2\nTurbine\nIsentropic expansion\n\n\n2 → 3\nCondenser\nIsothermal heat rejection\n\n\n3 → 4\nPump\nIsentropic compression\n\n\n4 → 1\nBoiler\nIsobaric heat addition"
+  },
+  {
+    "objectID": "labs/lab-01.html#setup",
+    "href": "labs/lab-01.html#setup",
+    "title": "Lab 1: Basic Rankine Cycle Simulation",
+    "section": "Setup",
+    "text": "Setup\nRun the cell below to import the required libraries.\n\nfrom iapws import IAPWS97\nimport numpy as np\nimport matplotlib.pyplot as plt"
+  },
+  {
+    "objectID": "labs/lab-01.html#part-1-baseline-cycle",
+    "href": "labs/lab-01.html#part-1-baseline-cycle",
+    "title": "Lab 1: Basic Rankine Cycle Simulation",
+    "section": "Part 1: Baseline Cycle",
+    "text": "Part 1: Baseline Cycle\nRun the simulation with default conditions:\n\nBoiler: 500°C, 10 MPa\n\nCondenser: 0.006 MPa (~36°C)\n\n\ndef rankine_cycle(T_boiler=500, P_boiler=10, P_condenser=0.006):\n    \"\"\"Ideal Rankine cycle using IAPWS-IF97 steam tables.\"\"\"\n    state1 = IAPWS97(T=T_boiler + 273.15, P=P_boiler)\n    state2 = IAPWS97(P=P_condenser, s=state1.s)\n    state3 = IAPWS97(P=P_condenser, x=0)\n    state4 = IAPWS97(P=P_boiler, s=state3.s)\n\n    w_turbine = state1.h - state2.h\n    w_pump    = state4.h - state3.h\n    q_boiler  = state1.h - state4.h\n    w_net     = w_turbine - w_pump\n    eta       = w_net / q_boiler\n\n    return {\n        \"T_condenser_C\":    round(state3.T - 273.15, 2),\n        \"h1\": round(state1.h, 2),\n        \"h2\": round(state2.h, 2),\n        \"h3\": round(state3.h, 2),\n        \"h4\": round(state4.h, 2),\n        \"w_turbine\":        round(w_turbine, 2),\n        \"w_pump\":           round(w_pump, 2),\n        \"w_net\":            round(w_net, 2),\n        \"q_boiler\":         round(q_boiler, 2),\n        \"eta\":              round(eta, 4),\n        \"turbine_quality\":  round(state2.x, 3) if state2.x else None,\n    }\n\nbaseline = rankine_cycle()\n\nprint(f\"Condenser temperature : {baseline['T_condenser_C']} °C\")\nprint(f\"h1 (turbine inlet)    : {baseline['h1']} kJ/kg\")\nprint(f\"h2 (turbine exit)     : {baseline['h2']} kJ/kg\")\nprint(f\"h3 (pump inlet)       : {baseline['h3']} kJ/kg\")\nprint(f\"h4 (boiler inlet)     : {baseline['h4']} kJ/kg\")\nprint(f\"Turbine work          : {baseline['w_turbine']} kJ/kg\")\nprint(f\"Pump work             : {baseline['w_pump']} kJ/kg\")\nprint(f\"Net work              : {baseline['w_net']} kJ/kg\")\nprint(f\"Boiler heat input     : {baseline['q_boiler']} kJ/kg\")\nprint(f\"Turbine exit quality  : {baseline['turbine_quality']}\")\nprint(f\"Thermal efficiency    : {baseline['eta']:.1%}\")\n\nCondenser temperature : 36.16 °C\nh1 (turbine inlet)    : 3375.06 kJ/kg\nh2 (turbine exit)     : 2031.62 kJ/kg\nh3 (pump inlet)       : 151.49 kJ/kg\nh4 (boiler inlet)     : 161.53 kJ/kg\nTurbine work          : 1343.44 kJ/kg\nPump work             : 10.04 kJ/kg\nNet work              : 1333.41 kJ/kg\nBoiler heat input     : 3213.53 kJ/kg\nTurbine exit quality  : 0.778\nThermal efficiency    : 41.5%"
+  },
+  {
+    "objectID": "labs/lab-01.html#part-2-effect-of-boiler-temperature",
+    "href": "labs/lab-01.html#part-2-effect-of-boiler-temperature",
+    "title": "Lab 1: Basic Rankine Cycle Simulation",
+    "section": "Part 2: Effect of Boiler Temperature",
+    "text": "Part 2: Effect of Boiler Temperature\nObserve how thermal efficiency changes as boiler temperature increases from 300°C to 600°C, keeping pressure constant at 10 MPa.\n\ntemperatures = np.arange(300, 620, 20)\nefficiencies = [rankine_cycle(T_boiler=T)[\"eta\"] * 100 for T in temperatures]\n\nfig, ax = plt.subplots(figsize=(9, 5))\nax.plot(temperatures, efficiencies, \"ro-\", linewidth=2, markersize=6)\nax.axvline(x=500, color=\"gray\", linestyle=\"--\", alpha=0.6, label=\"Baseline (500°C)\")\nax.set_title(\"Effect of Boiler Temperature on Thermal Efficiency\")\nax.set_xlabel(\"Boiler Temperature (°C)\")\nax.set_ylabel(\"Thermal Efficiency (%)\")\nax.grid(True, alpha=0.3)\nax.legend()\nfig.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "labs/lab-01.html#part-3-effect-of-boiler-pressure",
+    "href": "labs/lab-01.html#part-3-effect-of-boiler-pressure",
+    "title": "Lab 1: Basic Rankine Cycle Simulation",
+    "section": "Part 3: Effect of Boiler Pressure",
+    "text": "Part 3: Effect of Boiler Pressure\nNow observe how efficiency changes with boiler pressure (3–20 MPa) at a fixed boiler temperature of 500°C.\n\npressures = np.arange(3, 21, 1)\neff_pressure = [rankine_cycle(P_boiler=P)[\"eta\"] * 100 for P in pressures]\n\nfig, ax = plt.subplots(figsize=(9, 5))\nax.plot(pressures, eff_pressure, \"bo-\", linewidth=2, markersize=6)\nax.axvline(x=10, color=\"gray\", linestyle=\"--\", alpha=0.6, label=\"Baseline (10 MPa)\")\nax.set_title(\"Effect of Boiler Pressure on Thermal Efficiency\")\nax.set_xlabel(\"Boiler Pressure (MPa)\")\nax.set_ylabel(\"Thermal Efficiency (%)\")\nax.grid(True, alpha=0.3)\nax.legend()\nfig.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "labs/lab-01.html#questions",
+    "href": "labs/lab-01.html#questions",
+    "title": "Lab 1: Basic Rankine Cycle Simulation",
+    "section": "Questions",
+    "text": "Questions\nAnswer the following in the cells provided below each question.\nQ1. What is the thermal efficiency of the baseline cycle? How does it compare to the Carnot efficiency between the same temperature limits?\n\n# Your calculation here\n\nQ2. At what boiler temperature does efficiency exceed 43%? What practical constraints limit operating at that temperature?\n\n# Your calculation here\n\nQ3. Looking at the pressure curve, does efficiency increase indefinitely with pressure? What happens to turbine exit quality at very high pressures?\n\n# Your calculation here — hint: check baseline['turbine_quality']\npressures_extended = np.arange(3, 31, 1)\nqualities = [rankine_cycle(P_boiler=P)[\"turbine_quality\"] for P in pressures_extended]\n\nfig, ax = plt.subplots(figsize=(9, 5))\nax.plot(pressures_extended, qualities, \"go-\", linewidth=2, markersize=6)\nax.axhline(y=0.88, color=\"r\", linestyle=\"--\", alpha=0.7, label=\"Minimum acceptable quality (0.88)\")\nax.set_title(\"Turbine Exit Quality vs Boiler Pressure\")\nax.set_xlabel(\"Boiler Pressure (MPa)\")\nax.set_ylabel(\"Steam Quality (x)\")\nax.grid(True, alpha=0.3)\nax.legend()\nfig.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "labs/lab-01.html#submission",
+    "href": "labs/lab-01.html#submission",
+    "title": "Lab 1: Basic Rankine Cycle Simulation",
+    "section": "Submission",
+    "text": "Submission\nSave this file with your name added to the filename: lab-01-firstname-lastname.qmd and submit the completed .qmd file."
   },
   {
     "objectID": "index.html",
@@ -129,8 +171,8 @@
     "objectID": "materials.html#laboratory-manuals",
     "href": "materials.html#laboratory-manuals",
     "title": "Course Materials",
-    "section": "2 Laboratory Manuals",
-    "text": "2 Laboratory Manuals\n\nLab 1 – Rankine Cycle"
+    "section": "Laboratory Manuals",
+    "text": "Laboratory Manuals\n\nLab 1 – Rankine Cycle"
   },
   {
     "objectID": "lectures/lecture-01.html",
@@ -150,8 +192,8 @@
     "objectID": "lectures/lecture-01.html#learning-outcomes",
     "href": "lectures/lecture-01.html#learning-outcomes",
     "title": "Lecture 1: Introduction to Thermal Power Plants",
-    "section": "2 Learning Outcomes",
-    "text": "2 Learning Outcomes\nBy the end of this lecture, students will understand the fundamental operating principles of thermal power plants."
+    "section": "Learning Outcomes",
+    "text": "Learning Outcomes\nBy the end of this lecture, students will understand the fundamental operating principles of thermal power plants."
   },
   {
     "objectID": "resources.html",
@@ -171,14 +213,14 @@
     "objectID": "resources.html#additional-study-materials",
     "href": "resources.html#additional-study-materials",
     "title": "Additional Resources",
-    "section": "2 Additional Study Materials",
-    "text": "2 Additional Study Materials\n\nThermodynamic property tables\nSimulation software user manuals\nOnline resources and standards (ASME, IEEE)"
+    "section": "Additional Study Materials",
+    "text": "Additional Study Materials\n\nThermodynamic property tables\nSimulation software user manuals\nOnline resources and standards (ASME, IEEE)"
   },
   {
     "objectID": "resources.html#recommended-textbooks",
     "href": "resources.html#recommended-textbooks",
     "title": "Additional Resources",
-    "section": "3 Recommended Textbooks",
-    "text": "3 Recommended Textbooks\n\n“Power Plant Engineering” by P.K. Nag\n“Thermal Power Plants: Simulation and Control” (various references)"
+    "section": "Recommended Textbooks",
+    "text": "Recommended Textbooks\n\n“Power Plant Engineering” by P.K. Nag\n“Thermal Power Plants: Simulation and Control” (various references)"
   }
 ]

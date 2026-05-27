@@ -1,17 +1,173 @@
 ---
-title: "Lab 1: Building a Simple Rankine Cycle Model"
+title: "Lab 1: Basic Rankine Cycle Simulation"
 date: "2026-09-10"
 type: "Lab"
+jupyter: python3
 ---
 
 ## Objectives
 
-- Create a basic Rankine cycle simulation
-- Calculate thermal efficiency
-- Perform sensitivity analysis on key parameters
+By the end of this lab you will be able to:
 
-## Tasks
+- Run a basic ideal Rankine cycle simulation using steam tables
+- Identify the four state points of the cycle
+- Interpret thermal efficiency in terms of operating conditions
+- Observe how boiler pressure and temperature affect performance
 
-1. Build the model using the simulator
-2. Run steady-state simulation
-3. Generate performance curves
+## Background
+
+The ideal Rankine cycle is the theoretical basis for steam power generation. 
+It consists of four processes:
+
+| Process | Device | Description |
+|---|---|---|
+| 1 → 2 | Turbine | Isentropic expansion |
+| 2 → 3 | Condenser | Isothermal heat rejection |
+| 3 → 4 | Pump | Isentropic compression |
+| 4 → 1 | Boiler | Isobaric heat addition |
+
+## Setup
+
+Run the cell below to import the required libraries.
+
+```{python}
+from iapws import IAPWS97
+import numpy as np
+import matplotlib.pyplot as plt
+```
+
+## Part 1: Baseline Cycle
+
+Run the simulation with default conditions:
+
+- Boiler: 500°C, 10 MPa  
+- Condenser: 0.006 MPa (~36°C)
+
+```{python}
+def rankine_cycle(T_boiler=500, P_boiler=10, P_condenser=0.006):
+    """Ideal Rankine cycle using IAPWS-IF97 steam tables."""
+    state1 = IAPWS97(T=T_boiler + 273.15, P=P_boiler)
+    state2 = IAPWS97(P=P_condenser, s=state1.s)
+    state3 = IAPWS97(P=P_condenser, x=0)
+    state4 = IAPWS97(P=P_boiler, s=state3.s)
+
+    w_turbine = state1.h - state2.h
+    w_pump    = state4.h - state3.h
+    q_boiler  = state1.h - state4.h
+    w_net     = w_turbine - w_pump
+    eta       = w_net / q_boiler
+
+    return {
+        "T_condenser_C":    round(state3.T - 273.15, 2),
+        "h1": round(state1.h, 2),
+        "h2": round(state2.h, 2),
+        "h3": round(state3.h, 2),
+        "h4": round(state4.h, 2),
+        "w_turbine":        round(w_turbine, 2),
+        "w_pump":           round(w_pump, 2),
+        "w_net":            round(w_net, 2),
+        "q_boiler":         round(q_boiler, 2),
+        "eta":              round(eta, 4),
+        "turbine_quality":  round(state2.x, 3) if state2.x else None,
+    }
+
+baseline = rankine_cycle()
+
+print(f"Condenser temperature : {baseline['T_condenser_C']} °C")
+print(f"h1 (turbine inlet)    : {baseline['h1']} kJ/kg")
+print(f"h2 (turbine exit)     : {baseline['h2']} kJ/kg")
+print(f"h3 (pump inlet)       : {baseline['h3']} kJ/kg")
+print(f"h4 (boiler inlet)     : {baseline['h4']} kJ/kg")
+print(f"Turbine work          : {baseline['w_turbine']} kJ/kg")
+print(f"Pump work             : {baseline['w_pump']} kJ/kg")
+print(f"Net work              : {baseline['w_net']} kJ/kg")
+print(f"Boiler heat input     : {baseline['q_boiler']} kJ/kg")
+print(f"Turbine exit quality  : {baseline['turbine_quality']}")
+print(f"Thermal efficiency    : {baseline['eta']:.1%}")
+```
+
+## Part 2: Effect of Boiler Temperature
+
+Observe how thermal efficiency changes as boiler temperature increases 
+from 300°C to 600°C, keeping pressure constant at 10 MPa.
+
+```{python}
+temperatures = np.arange(300, 620, 20)
+efficiencies = [rankine_cycle(T_boiler=T)["eta"] * 100 for T in temperatures]
+
+fig, ax = plt.subplots(figsize=(9, 5))
+ax.plot(temperatures, efficiencies, "ro-", linewidth=2, markersize=6)
+ax.axvline(x=500, color="gray", linestyle="--", alpha=0.6, label="Baseline (500°C)")
+ax.set_title("Effect of Boiler Temperature on Thermal Efficiency")
+ax.set_xlabel("Boiler Temperature (°C)")
+ax.set_ylabel("Thermal Efficiency (%)")
+ax.grid(True, alpha=0.3)
+ax.legend()
+fig.tight_layout()
+plt.show()
+```
+
+## Part 3: Effect of Boiler Pressure
+
+Now observe how efficiency changes with boiler pressure (3–20 MPa) 
+at a fixed boiler temperature of 500°C.
+
+```{python}
+pressures = np.arange(3, 21, 1)
+eff_pressure = [rankine_cycle(P_boiler=P)["eta"] * 100 for P in pressures]
+
+fig, ax = plt.subplots(figsize=(9, 5))
+ax.plot(pressures, eff_pressure, "bo-", linewidth=2, markersize=6)
+ax.axvline(x=10, color="gray", linestyle="--", alpha=0.6, label="Baseline (10 MPa)")
+ax.set_title("Effect of Boiler Pressure on Thermal Efficiency")
+ax.set_xlabel("Boiler Pressure (MPa)")
+ax.set_ylabel("Thermal Efficiency (%)")
+ax.grid(True, alpha=0.3)
+ax.legend()
+fig.tight_layout()
+plt.show()
+```
+
+## Questions
+
+Answer the following in the cells provided below each question.
+
+**Q1.** What is the thermal efficiency of the baseline cycle? 
+How does it compare to the Carnot efficiency between the same temperature limits?
+
+```{python}
+# Your calculation here
+```
+
+**Q2.** At what boiler temperature does efficiency exceed 43%? 
+What practical constraints limit operating at that temperature?
+
+```{python}
+# Your calculation here
+```
+
+**Q3.** Looking at the pressure curve, does efficiency increase 
+indefinitely with pressure? What happens to turbine exit quality 
+at very high pressures?
+
+```{python}
+# Your calculation here — hint: check baseline['turbine_quality']
+pressures_extended = np.arange(3, 31, 1)
+qualities = [rankine_cycle(P_boiler=P)["turbine_quality"] for P in pressures_extended]
+
+fig, ax = plt.subplots(figsize=(9, 5))
+ax.plot(pressures_extended, qualities, "go-", linewidth=2, markersize=6)
+ax.axhline(y=0.88, color="r", linestyle="--", alpha=0.7, label="Minimum acceptable quality (0.88)")
+ax.set_title("Turbine Exit Quality vs Boiler Pressure")
+ax.set_xlabel("Boiler Pressure (MPa)")
+ax.set_ylabel("Steam Quality (x)")
+ax.grid(True, alpha=0.3)
+ax.legend()
+fig.tight_layout()
+plt.show()
+```
+
+## Submission
+
+Save this file with your name added to the filename: 
+`lab-01-firstname-lastname.qmd` and submit the completed `.qmd` file.
