@@ -26,8 +26,9 @@ website:
       - icon: github
         href: https://github.com/volumen25/thermal-power-plant-simulator
   page-footer:
-    left: "© 2026 <a href='https://creativecommons.org/licenses/by-sa/4.0/'>CC BY-SA 4.0</a>"
-    right: "Built with <a href='https://quarto.org'>Quarto</a>"
+    left: © 2026 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+    right: |
+      Built with <a href="https://quarto.org">Quarto {{< version >}}</a>
 
 format:
   html:
