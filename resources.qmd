@@ -14,5 +14,4 @@ For the full bibliography, see the [References](references.qmd) page.
 
 ## Recommended Textbooks
 
-- "Power Plant Engineering" by P.K. Nag
-- "Thermal Power Plants: Simulation and Control" (various references)
+- "Thermal Power Plants Simulator Course Manual" (BCIT Bookstore)
