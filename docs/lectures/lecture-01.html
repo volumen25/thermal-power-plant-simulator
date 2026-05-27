@@ -78,7 +78,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8c38fd85d21bfe44b50360969156fb14.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ff38ca5759cea8d2b4e40dc1c167d4da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -281,6 +281,10 @@ window.Quarto = {
 <section id="main-components" class="level3">
 <h3 class="anchored" data-anchor-id="main-components">Main Components</h3>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 63%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Component</th>
@@ -388,7 +392,7 @@ Compressed liquid is heated at constant pressure through the boiler until it rea
 <h2 class="anchored" data-anchor-id="steam-properties-and-the-iapws-if97-standard">4. Steam Properties and the IAPWS-IF97 Standard</h2>
 <p>To evaluate enthalpies at each state point we need accurate steam property data. The International Association for the Properties of Water and Steam publishes the IF97 formulation, which is the industry standard for power plant calculations.</p>
 <p>In this course we use the <code>iapws</code> Python library, which implements IF97.</p>
-<div id="eeac0ff1" class="cell" data-execution_count="1">
+<div id="645668e9" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> iapws <span class="im">import</span> IAPWS97</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Superheated steam at turbine inlet: 500°C, 10 MPa</span></span>
@@ -417,7 +421,7 @@ Specific vol : 0.0328 m³/kg</code></pre>
 <li>Boiler: 500°C, 10 MPa</li>
 <li>Condenser: 0.006 MPa (~36°C saturation temperature)</li>
 </ul>
-<div id="219b9ea2" class="cell" data-execution_count="2">
+<div id="5a4f6dd7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># State 1: Turbine inlet</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>state1 <span class="op">=</span> IAPWS97(T<span class="op">=</span><span class="dv">500</span> <span class="op">+</span> <span class="fl">273.15</span>, P<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -470,7 +474,7 @@ Thermal eff.   : 41.5%</code></pre>
 <p><strong>Boiler temperature</strong> — Higher turbine inlet temperature increases <span class="math inline">\(w_{turbine}\)</span> without proportionally increasing <span class="math inline">\(q_{boiler}\)</span>, raising efficiency. Limited by material constraints (typically 600–620°C for modern steels).</p>
 <p><strong>Boiler pressure</strong> — Higher pressure raises the mean temperature of heat addition, improving efficiency. Limited by turbine exit steam quality — excessive moisture damages turbine blades.</p>
 <p><strong>Condenser pressure</strong> — Lower condenser pressure (lower condensing temperature) reduces heat rejection and increases <span class="math inline">\(w_{net}\)</span>. Limited by cooling water temperature and vacuum system capability.</p>
-<div id="74a88f03" class="cell" data-execution_count="3">
+<div id="3f431986" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -511,7 +515,7 @@ Thermal eff.   : 41.5%</code></pre>
 <p>Steam quality <span class="math inline">\(x\)</span> represents the fraction of the mixture that is vapour:</p>
 <p><span class="math display">\[x = \frac{m_{vapour}}{m_{total}} \quad (0 \leq x \leq 1)\]</span></p>
 <p>At <span class="math inline">\(x = 0\)</span> we have saturated liquid; at <span class="math inline">\(x = 1\)</span> saturated vapour. Values below <strong>0.88</strong> are generally unacceptable in practice — liquid droplets erode turbine blades, reducing lifespan and efficiency.</p>
-<div id="a0fa9223" class="cell" data-execution_count="4">
+<div id="fe2460d8" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Turbine exit quality (baseline): </span><span class="sc">{</span>state2<span class="sc">.</span>x<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> state2.x <span class="op">&lt;</span> <span class="fl">0.88</span>:</span>

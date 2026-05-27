@@ -12,6 +12,7 @@ This course provides hands-on training in the simulation, operation, and optimiz
 **Format:** Lectures + Simulations
 
 ### Course Highlights
+
 - Dynamic simulation of Rankine and combined cycles
 - Plant performance analysis and optimization
 - Fault detection and troubleshooting scenarios

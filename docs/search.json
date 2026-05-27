@@ -1,33 +1,5 @@
 [
   {
-    "objectID": "schedule.html",
-    "href": "schedule.html",
-    "title": "Course Schedule",
-    "section": "",
-    "text": "Course Start: September 8, 2026\nMidterm Exam: October 20–24, 2026\nFinal Project Due: December 10, 2026\nLast Class: December 15, 2026"
-  },
-  {
-    "objectID": "schedule.html#important-dates",
-    "href": "schedule.html#important-dates",
-    "title": "Course Schedule",
-    "section": "",
-    "text": "Course Start: September 8, 2026\nMidterm Exam: October 20–24, 2026\nFinal Project Due: December 10, 2026\nLast Class: December 15, 2026"
-  },
-  {
-    "objectID": "schedule.html#weekly-schedule",
-    "href": "schedule.html#weekly-schedule",
-    "title": "Course Schedule",
-    "section": "Weekly Schedule",
-    "text": "Weekly Schedule"
-  },
-  {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "Students are expected to be comfortable with college-level mathematics and science and are strongly encouraged to consult reliable reference texts. For example, foundational and practical texts in mathematics, applied thermodynamics and computational tools, including Bird (2021), Hannah & Hillier (1995), Russell et al. (2021), Bolton (2021), Shaw (2017), Sweigart (2021), and Sweigart (2020).\n\n\n\n\nReferences\n\nBird, J. O. (2021). Bird’s engineering mathematics (9th ed.). Routledge.\n\n\nBolton, W. (2021). Engineering science (7th ed.). Routledge.\n\n\nHannah, J., & Hillier, M. J. (1995). Applied mechanics (3rd ed.). Longman.\n\n\nRussell, P. A., Jackson, L., & Embleton, W. (2021). Applied mechanics for marine engineers (7th ed.). Reeds.\n\n\nShaw, Z. (2017). Learn python 3 the hard way (4th ed.). Addison-Wesley Professional.\n\n\nSweigart, A. (2020). Automate the boring stuff with python (2nd ed.). No Starch Press.\n\n\nSweigart, A. (2021). Beyond the basic stuff with python. No Starch Press."
-  },
-  {
     "objectID": "syllabus.html",
     "href": "syllabus.html",
     "title": "Syllabus",
@@ -63,18 +35,53 @@
     "text": "Policies\n\nAll simulation reports must be submitted through the course platform.\nLate submissions will be penalized by 10% per day.\nAcademic integrity is strictly enforced."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About the Instructor",
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Additional Resources",
     "section": "",
-    "text": "Serhat Beyenir is an instructor in Power Engineering at BCIT, where he teaches Thermal Power Plant Simulator courses and previously taught Thermodynamics, Applied Mechanics, Propulsion Engines, and Propulsion Plant Simulator courses at BCIT Marine Engineering.\nHis interest in computing dates back to high school, when he taught himself BASIC to plot trigonometric functions on an Amstrad 64K microcomputer. He completed programming coursework at the university level but is largely self-taught in the use of Unix and Linux systems, later adopting macOS for personal projects in 2007. While teaching Power Engineering, he employed MATLAB for engineering computations and compiled his instructional materials into an open textbook, A Brief Introduction to Engineering Computation with MATLAB, published in 2011.\nIn February 2025, he attended a Python course at the West Vancouver Memorial Library and subsequently began using Python in his Marine and Power Engineering lecture materials, gradually incorporating computational examples into his teaching.\nSerhat holds a Class 1 Marine Engineer certification, a Master of Education in Distance Education, and a Bachelor of Science in Marine Engineering."
+    "text": "For the full bibliography, see the References page."
   },
   {
-    "objectID": "assignments/assignment-01.html",
-    "href": "assignments/assignment-01.html",
-    "title": "Assignment 1: Rankine Cycle Analysis",
+    "objectID": "resources.html#key-references-cited-in-this-course",
+    "href": "resources.html#key-references-cited-in-this-course",
+    "title": "Additional Resources",
     "section": "",
-    "text": "Complete the following simulation exercises and submit a detailed report."
+    "text": "For the full bibliography, see the References page."
+  },
+  {
+    "objectID": "resources.html#additional-study-materials",
+    "href": "resources.html#additional-study-materials",
+    "title": "Additional Resources",
+    "section": "Additional Study Materials",
+    "text": "Additional Study Materials\n\nThermodynamic property tables\nSimulation software user manuals\nOnline resources and standards (ASME, IEEE)"
+  },
+  {
+    "objectID": "resources.html#recommended-textbooks",
+    "href": "resources.html#recommended-textbooks",
+    "title": "Additional Resources",
+    "section": "Recommended Textbooks",
+    "text": "Recommended Textbooks\n\n“Thermal Power Plants Simulator Course Manual” (BCIT Bookstore)"
+  },
+  {
+    "objectID": "materials.html",
+    "href": "materials.html",
+    "title": "Course Materials",
+    "section": "",
+    "text": "Lecture 1 – Introduction"
+  },
+  {
+    "objectID": "materials.html#lecture-slides-notes",
+    "href": "materials.html#lecture-slides-notes",
+    "title": "Course Materials",
+    "section": "",
+    "text": "Lecture 1 – Introduction"
+  },
+  {
+    "objectID": "materials.html#laboratory-manuals",
+    "href": "materials.html#laboratory-manuals",
+    "title": "Course Materials",
+    "section": "Laboratory Manuals",
+    "text": "Laboratory Manuals\n\nLab 1 – Rankine Cycle"
   },
   {
     "objectID": "labs/lab-01.html",
@@ -140,6 +147,20 @@
     "text": "Submission\nSave this file with your name added to the filename: lab-01-firstname-lastname.qmd and submit the completed .qmd file."
   },
   {
+    "objectID": "assignments/assignment-01.html",
+    "href": "assignments/assignment-01.html",
+    "title": "Assignment 1: Rankine Cycle Analysis",
+    "section": "",
+    "text": "Complete the following simulation exercises and submit a detailed report."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About the Instructor",
+    "section": "",
+    "text": "Serhat Beyenir is an instructor in Power Engineering at BCIT, where he teaches Thermal Power Plant Simulator courses and previously taught Thermodynamics, Applied Mechanics, Propulsion Engines, and Propulsion Plant Simulator courses at BCIT Marine Engineering.\nHis interest in computing dates back to high school, when he taught himself BASIC to plot trigonometric functions on an Amstrad 64K microcomputer. He completed programming coursework at the university level but is largely self-taught in the use of Unix and Linux systems, later adopting macOS for personal projects in 2007. While teaching Power Engineering, he employed MATLAB for engineering computations and compiled his instructional materials into an open textbook, A Brief Introduction to Engineering Computation with MATLAB, published in 2011.\nIn February 2025, he attended a Python course at the West Vancouver Memorial Library and subsequently began using Python in his Marine and Power Engineering lecture materials, gradually incorporating computational examples into his teaching.\nSerhat holds a Class 1 Marine Engineer certification, a Master of Education in Distance Education, and a Bachelor of Science in Marine Engineering."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Thermal Power Plant Simulator",
@@ -152,27 +173,6 @@
     "title": "Thermal Power Plant Simulator",
     "section": "",
     "text": "This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.\nInstructor: Serhat Beyenir\nSchedule: 4 periods per week (September – December 2026)\nFormat: Lectures + Simulations\n\n\n\nDynamic simulation of Rankine and combined cycles\nPlant performance analysis and optimization\nFault detection and troubleshooting scenarios\nEfficiency and environmental impact assessment\n\n\n\n\n\n\n\nImportant\n\n\n\nFirst Class: September 8, 2026"
-  },
-  {
-    "objectID": "materials.html",
-    "href": "materials.html",
-    "title": "Course Materials",
-    "section": "",
-    "text": "Lecture 1 – Introduction"
-  },
-  {
-    "objectID": "materials.html#lecture-slides-notes",
-    "href": "materials.html#lecture-slides-notes",
-    "title": "Course Materials",
-    "section": "",
-    "text": "Lecture 1 – Introduction"
-  },
-  {
-    "objectID": "materials.html#laboratory-manuals",
-    "href": "materials.html#laboratory-manuals",
-    "title": "Course Materials",
-    "section": "Laboratory Manuals",
-    "text": "Laboratory Manuals\n\nLab 1 – Rankine Cycle"
   },
   {
     "objectID": "lectures/lecture-01.html",
@@ -193,7 +193,7 @@
     "href": "lectures/lecture-01.html#what-is-a-thermal-power-plant",
     "title": "Lecture 1: Introduction to Thermal Power Plants",
     "section": "1. What Is a Thermal Power Plant?",
-    "text": "1. What Is a Thermal Power Plant?\nA thermal power plant converts heat energy into electrical energy. The heat source may be combustion of fossil fuels, nuclear fission, concentrated solar, or geothermal energy. Regardless of the source, the working principle is the same: heat is used to produce high-pressure steam, which drives a turbine connected to a generator.\nThe majority of the world’s electricity is produced this way. Understanding how these plants work — and how to model them — is the foundation of this course.\n\nMain Components\n\n\n\nComponent\nFunction\n\n\n\n\nBoiler / Steam generator\nConverts water to high-pressure steam\n\n\nTurbine\nExpands steam to produce shaft work\n\n\nCondenser\nRejects heat, converts steam back to liquid\n\n\nFeed pump\nReturns condensate to boiler pressure\n\n\nGenerator\nConverts shaft work to electricity"
+    "text": "1. What Is a Thermal Power Plant?\nA thermal power plant converts heat energy into electrical energy. The heat source may be combustion of fossil fuels, nuclear fission, concentrated solar, or geothermal energy. Regardless of the source, the working principle is the same: heat is used to produce high-pressure steam, which drives a turbine connected to a generator.\nThe majority of the world’s electricity is produced this way. Understanding how these plants work — and how to model them — is the foundation of this course.\n\nMain Components\n\n\n\n\n\n\n\nComponent\nFunction\n\n\n\n\nBoiler / Steam generator\nConverts water to high-pressure steam\n\n\nTurbine\nExpands steam to produce shaft work\n\n\nCondenser\nRejects heat, converts steam back to liquid\n\n\nFeed pump\nReturns condensate to boiler pressure\n\n\nGenerator\nConverts shaft work to electricity"
   },
   {
     "objectID": "lectures/lecture-01.html#the-ideal-rankine-cycle",
@@ -259,31 +259,31 @@
     "text": "Preparation for Lab 1\nBefore attending Lab 1 on September 10:\n\nEnsure iapws is installed in your environment (uv sync)\nReview the four state point definitions above\nBe ready to explain what turbine exit quality means and why it matters"
   },
   {
-    "objectID": "resources.html",
-    "href": "resources.html",
-    "title": "Additional Resources",
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
     "section": "",
-    "text": "For the full bibliography, see the References page."
+    "text": "Students are expected to be comfortable with college-level mathematics and science and are strongly encouraged to consult reliable reference texts. For example, foundational and practical texts in mathematics, applied thermodynamics and computational tools, including Bird (2021), Hannah & Hillier (1995), Russell et al. (2021), Bolton (2021), Shaw (2017), Sweigart (2021), and Sweigart (2020).\n\n\n\n\nReferences\n\nBird, J. O. (2021). Bird’s engineering mathematics (9th ed.). Routledge.\n\n\nBolton, W. (2021). Engineering science (7th ed.). Routledge.\n\n\nHannah, J., & Hillier, M. J. (1995). Applied mechanics (3rd ed.). Longman.\n\n\nRussell, P. A., Jackson, L., & Embleton, W. (2021). Applied mechanics for marine engineers (7th ed.). Reeds.\n\n\nShaw, Z. (2017). Learn python 3 the hard way (4th ed.). Addison-Wesley Professional.\n\n\nSweigart, A. (2020). Automate the boring stuff with python (2nd ed.). No Starch Press.\n\n\nSweigart, A. (2021). Beyond the basic stuff with python. No Starch Press."
   },
   {
-    "objectID": "resources.html#key-references-cited-in-this-course",
-    "href": "resources.html#key-references-cited-in-this-course",
-    "title": "Additional Resources",
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Course Schedule",
     "section": "",
-    "text": "For the full bibliography, see the References page."
+    "text": "Course Start: September 8, 2026\nMidterm Exam: October 20–24, 2026\nFinal Project Due: December 10, 2026\nLast Class: December 15, 2026"
   },
   {
-    "objectID": "resources.html#additional-study-materials",
-    "href": "resources.html#additional-study-materials",
-    "title": "Additional Resources",
-    "section": "Additional Study Materials",
-    "text": "Additional Study Materials\n\nThermodynamic property tables\nSimulation software user manuals\nOnline resources and standards (ASME, IEEE)"
+    "objectID": "schedule.html#important-dates",
+    "href": "schedule.html#important-dates",
+    "title": "Course Schedule",
+    "section": "",
+    "text": "Course Start: September 8, 2026\nMidterm Exam: October 20–24, 2026\nFinal Project Due: December 10, 2026\nLast Class: December 15, 2026"
   },
   {
-    "objectID": "resources.html#recommended-textbooks",
-    "href": "resources.html#recommended-textbooks",
-    "title": "Additional Resources",
-    "section": "Recommended Textbooks",
-    "text": "Recommended Textbooks\n\n“Thermal Power Plants Simulator Course Manual” (BCIT Bookstore)"
+    "objectID": "schedule.html#weekly-schedule",
+    "href": "schedule.html#weekly-schedule",
+    "title": "Course Schedule",
+    "section": "Weekly Schedule",
+    "text": "Weekly Schedule"
   }
 ]

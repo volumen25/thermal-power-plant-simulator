@@ -14,71 +14,58 @@ By the end of this lecture you will be able to:
 - Define thermal efficiency and identify factors that influence it
 - Interpret T-s and h-s diagrams for steam cycles
 
----
+------------------------------------------------------------------------
 
 ## 1. What Is a Thermal Power Plant?
 
-A thermal power plant converts heat energy into electrical energy. The heat 
-source may be combustion of fossil fuels, nuclear fission, concentrated solar, 
-or geothermal energy. Regardless of the source, the working principle is the same: 
-heat is used to produce high-pressure steam, which drives a turbine connected to 
-a generator.
+A thermal power plant converts heat energy into electrical energy. The heat source may be combustion of fossil fuels, nuclear fission, concentrated solar, or geothermal energy. Regardless of the source, the working principle is the same: heat is used to produce high-pressure steam, which drives a turbine connected to a generator.
 
-The majority of the world's electricity is produced this way. Understanding how 
-these plants work — and how to model them — is the foundation of this course.
+The majority of the world's electricity is produced this way. Understanding how these plants work — and how to model them — is the foundation of this course.
 
 ### Main Components
 
-| Component | Function |
-|---|---|
-| Boiler / Steam generator | Converts water to high-pressure steam |
-| Turbine | Expands steam to produce shaft work |
-| Condenser | Rejects heat, converts steam back to liquid |
-| Feed pump | Returns condensate to boiler pressure |
-| Generator | Converts shaft work to electricity |
+| Component                | Function                                    |
+|--------------------------|---------------------------------------------|
+| Boiler / Steam generator | Converts water to high-pressure steam       |
+| Turbine                  | Expands steam to produce shaft work         |
+| Condenser                | Rejects heat, converts steam back to liquid |
+| Feed pump                | Returns condensate to boiler pressure       |
+| Generator                | Converts shaft work to electricity          |
 
----
+------------------------------------------------------------------------
 
 ## 2. The Ideal Rankine Cycle
 
-The Rankine cycle is the theoretical model underpinning all steam power plants. 
-It describes how a working fluid (water/steam) cycles through four 
-thermodynamic processes.
+The Rankine cycle is the theoretical model underpinning all steam power plants. It describes how a working fluid (water/steam) cycles through four thermodynamic processes.
 
 ### The Four Processes
 
-**Process 1 → 2: Isentropic expansion (Turbine)**  
-High-pressure superheated steam enters the turbine at state 1 and expands 
-isentropically (no heat transfer, no irreversibilities) to the condenser 
-pressure at state 2. Shaft work is produced.
+**Process 1 → 2: Isentropic expansion (Turbine)**\
+High-pressure superheated steam enters the turbine at state 1 and expands isentropically (no heat transfer, no irreversibilities) to the condenser pressure at state 2. Shaft work is produced.
 
-**Process 2 → 3: Isothermal condensation (Condenser)**  
-Wet steam at state 2 rejects heat to the cooling medium at constant pressure 
-until it becomes saturated liquid at state 3. No work is done.
+**Process 2 → 3: Isothermal condensation (Condenser)**\
+Wet steam at state 2 rejects heat to the cooling medium at constant pressure until it becomes saturated liquid at state 3. No work is done.
 
-**Process 3 → 4: Isentropic compression (Pump)**  
-The saturated liquid is pumped isentropically from condenser pressure back to 
-boiler pressure. The pump work is small compared to turbine output.
+**Process 3 → 4: Isentropic compression (Pump)**\
+The saturated liquid is pumped isentropically from condenser pressure back to boiler pressure. The pump work is small compared to turbine output.
 
-**Process 4 → 1: Isobaric heat addition (Boiler)**  
-Compressed liquid is heated at constant pressure through the boiler until it 
-reaches the desired turbine inlet conditions at state 1.
+**Process 4 → 1: Isobaric heat addition (Boiler)**\
+Compressed liquid is heated at constant pressure through the boiler until it reaches the desired turbine inlet conditions at state 1.
 
 ### State Point Summary
 
-| State | Location | Phase |
-|---|---|---|
-| 1 | Turbine inlet | Superheated steam |
-| 2 | Turbine exit / Condenser inlet | Wet steam |
-| 3 | Condenser exit / Pump inlet | Saturated liquid |
-| 4 | Pump exit / Boiler inlet | Compressed liquid |
+| State | Location                       | Phase             |
+|-------|--------------------------------|-------------------|
+| 1     | Turbine inlet                  | Superheated steam |
+| 2     | Turbine exit / Condenser inlet | Wet steam         |
+| 3     | Condenser exit / Pump inlet    | Saturated liquid  |
+| 4     | Pump exit / Boiler inlet       | Compressed liquid |
 
----
+------------------------------------------------------------------------
 
 ## 3. Energy Analysis
 
-For a steady-flow system, the first law of thermodynamics gives us the 
-energy balance at each component.
+For a steady-flow system, the first law of thermodynamics gives us the energy balance at each component.
 
 ### Work and Heat per Unit Mass (kJ/kg)
 
@@ -98,17 +85,13 @@ $$w_{net} = w_{turbine} - w_{pump}$$
 
 $$\eta_{th} = \frac{w_{net}}{q_{boiler}} = \frac{w_{turbine} - w_{pump}}{q_{boiler}}$$
 
-Note that the pump work is typically less than 1% of the turbine output 
-for steam cycles, which is why early approximations often ignored it. 
-We will always include it in our calculations.
+Note that the pump work is typically less than 1% of the turbine output for steam cycles, which is why early approximations often ignored it. We will always include it in our calculations.
 
----
+------------------------------------------------------------------------
 
 ## 4. Steam Properties and the IAPWS-IF97 Standard
 
-To evaluate enthalpies at each state point we need accurate steam property data. 
-The International Association for the Properties of Water and Steam publishes 
-the IF97 formulation, which is the industry standard for power plant calculations.
+To evaluate enthalpies at each state point we need accurate steam property data. The International Association for the Properties of Water and Steam publishes the IF97 formulation, which is the industry standard for power plant calculations.
 
 In this course we use the `iapws` Python library, which implements IF97.
 
@@ -125,18 +108,16 @@ print(f"Entropy      : {state1.s:.4f} kJ/kg·K")
 print(f"Specific vol : {state1.v:.4f} m³/kg")
 ```
 
-The `IAPWS97` object accepts any two independent properties as arguments 
-and returns all others. We will use temperature and pressure for the 
-turbine inlet, and entropy for the isentropic processes.
+The `IAPWS97` object accepts any two independent properties as arguments and returns all others. We will use temperature and pressure for the turbine inlet, and entropy for the isentropic processes.
 
----
+------------------------------------------------------------------------
 
 ## 5. Baseline Cycle Calculation
 
 Let us compute all four state points for a representative utility cycle:
 
 - Boiler: 500°C, 10 MPa
-- Condenser: 0.006 MPa (~36°C saturation temperature)
+- Condenser: 0.006 MPa (\~36°C saturation temperature)
 
 ```{python}
 # State 1: Turbine inlet
@@ -170,23 +151,17 @@ print(f"Boiler heat in : {q_boiler:.2f} kJ/kg")
 print(f"Thermal eff.   : {eta:.1%}")
 ```
 
----
+------------------------------------------------------------------------
 
 ## 6. Factors Affecting Efficiency
 
 Three operating parameters have the greatest influence on cycle efficiency:
 
-**Boiler temperature** — Higher turbine inlet temperature increases $w_{turbine}$ 
-without proportionally increasing $q_{boiler}$, raising efficiency. 
-Limited by material constraints (typically 600–620°C for modern steels).
+**Boiler temperature** — Higher turbine inlet temperature increases $w_{turbine}$ without proportionally increasing $q_{boiler}$, raising efficiency. Limited by material constraints (typically 600–620°C for modern steels).
 
-**Boiler pressure** — Higher pressure raises the mean temperature of heat 
-addition, improving efficiency. Limited by turbine exit steam quality — 
-excessive moisture damages turbine blades.
+**Boiler pressure** — Higher pressure raises the mean temperature of heat addition, improving efficiency. Limited by turbine exit steam quality — excessive moisture damages turbine blades.
 
-**Condenser pressure** — Lower condenser pressure (lower condensing temperature) 
-reduces heat rejection and increases $w_{net}$. Limited by cooling water 
-temperature and vacuum system capability.
+**Condenser pressure** — Lower condenser pressure (lower condensing temperature) reduces heat rejection and increases $w_{net}$. Limited by cooling water temperature and vacuum system capability.
 
 ```{python}
 import numpy as np
@@ -216,7 +191,7 @@ fig.tight_layout()
 plt.show()
 ```
 
----
+------------------------------------------------------------------------
 
 ## 7. Steam Quality at Turbine Exit
 
@@ -224,9 +199,7 @@ Steam quality $x$ represents the fraction of the mixture that is vapour:
 
 $$x = \frac{m_{vapour}}{m_{total}} \quad (0 \leq x \leq 1)$$
 
-At $x = 0$ we have saturated liquid; at $x = 1$ saturated vapour. 
-Values below **0.88** are generally unacceptable in practice — 
-liquid droplets erode turbine blades, reducing lifespan and efficiency.
+At $x = 0$ we have saturated liquid; at $x = 1$ saturated vapour. Values below **0.88** are generally unacceptable in practice — liquid droplets erode turbine blades, reducing lifespan and efficiency.
 
 ```{python}
 print(f"Turbine exit quality (baseline): {state2.x:.3f}")
@@ -237,41 +210,35 @@ else:
     print("Quality acceptable for direct expansion")
 ```
 
----
+------------------------------------------------------------------------
 
 ## 8. Looking Ahead
 
-The ideal Rankine cycle is our starting point. Real plants deviate from 
-this ideal due to:
+The ideal Rankine cycle is our starting point. Real plants deviate from this ideal due to:
 
 - Isentropic inefficiencies in turbines and pumps
-- Pressure drops in pipes and heat exchangers  
+- Pressure drops in pipes and heat exchangers\
 - Heat losses from the boiler
 - Feedwater heating stages
 
-In subsequent lectures we will add these real-world effects and explore 
-cycle modifications such as reheat, regeneration, and combined cycles 
-that push efficiencies above 45%.
+In subsequent lectures we will add these real-world effects and explore cycle modifications such as reheat, regeneration, and combined cycles that push efficiencies above 45%.
 
----
+------------------------------------------------------------------------
 
 ## Summary
 
 - A thermal power plant converts heat to electricity via a steam cycle
-- The ideal Rankine cycle has four processes: expansion, condensation, 
-  compression, and heat addition
-- Thermal efficiency is $\eta = w_{net} / q_{boiler}$, typically 35–45% 
-  for modern steam plants
+- The ideal Rankine cycle has four processes: expansion, condensation, compression, and heat addition
+- Thermal efficiency is $\eta = w_{net} / q_{boiler}$, typically 35–45% for modern steam plants
 - Steam properties are evaluated using the IAPWS-IF97 standard via `iapws`
-- Higher boiler temperature and pressure improve efficiency; 
-  low condenser pressure also helps
+- Higher boiler temperature and pressure improve efficiency; low condenser pressure also helps
 
----
+------------------------------------------------------------------------
 
 ## Preparation for Lab 1
 
 Before attending Lab 1 on September 10:
 
-1. Ensure `iapws` is installed in your environment (`uv sync`)
-2. Review the four state point definitions above
-3. Be ready to explain what turbine exit quality means and why it matters
+1.  Ensure `iapws` is installed in your environment (`uv sync`)
+2.  Review the four state point definitions above
+3.  Be ready to explain what turbine exit quality means and why it matters

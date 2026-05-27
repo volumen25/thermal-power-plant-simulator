@@ -16,15 +16,14 @@ By the end of this lab you will be able to:
 
 ## Background
 
-The ideal Rankine cycle is the theoretical basis for steam power generation. 
-It consists of four processes:
+The ideal Rankine cycle is the theoretical basis for steam power generation. It consists of four processes:
 
-| Process | Device | Description |
-|---|---|---|
-| 1 → 2 | Turbine | Isentropic expansion |
-| 2 → 3 | Condenser | Isothermal heat rejection |
-| 3 → 4 | Pump | Isentropic compression |
-| 4 → 1 | Boiler | Isobaric heat addition |
+| Process | Device    | Description               |
+|---------|-----------|---------------------------|
+| 1 → 2   | Turbine   | Isentropic expansion      |
+| 2 → 3   | Condenser | Isothermal heat rejection |
+| 3 → 4   | Pump      | Isentropic compression    |
+| 4 → 1   | Boiler    | Isobaric heat addition    |
 
 ## Setup
 
@@ -40,8 +39,8 @@ import matplotlib.pyplot as plt
 
 Run the simulation with default conditions:
 
-- Boiler: 500°C, 10 MPa  
-- Condenser: 0.006 MPa (~36°C)
+- Boiler: 500°C, 10 MPa\
+- Condenser: 0.006 MPa (\~36°C)
 
 ```{python}
 def rankine_cycle(T_boiler=500, P_boiler=10, P_condenser=0.006):
@@ -88,8 +87,7 @@ print(f"Thermal efficiency    : {baseline['eta']:.1%}")
 
 ## Part 2: Effect of Boiler Temperature
 
-Observe how thermal efficiency changes as boiler temperature increases 
-from 300°C to 600°C, keeping pressure constant at 10 MPa.
+Observe how thermal efficiency changes as boiler temperature increases from 300°C to 600°C, keeping pressure constant at 10 MPa.
 
 ```{python}
 temperatures = np.arange(300, 620, 20)
@@ -109,8 +107,7 @@ plt.show()
 
 ## Part 3: Effect of Boiler Pressure
 
-Now observe how efficiency changes with boiler pressure (3–20 MPa) 
-at a fixed boiler temperature of 500°C.
+Now observe how efficiency changes with boiler pressure (3–20 MPa) at a fixed boiler temperature of 500°C.
 
 ```{python}
 pressures = np.arange(3, 21, 1)
@@ -132,23 +129,19 @@ plt.show()
 
 Answer the following in the cells provided below each question.
 
-**Q1.** What is the thermal efficiency of the baseline cycle? 
-How does it compare to the Carnot efficiency between the same temperature limits?
+**Q1.** What is the thermal efficiency of the baseline cycle? How does it compare to the Carnot efficiency between the same temperature limits?
 
 ```{python}
 # Your calculation here
 ```
 
-**Q2.** At what boiler temperature does efficiency exceed 43%? 
-What practical constraints limit operating at that temperature?
+**Q2.** At what boiler temperature does efficiency exceed 43%? What practical constraints limit operating at that temperature?
 
 ```{python}
 # Your calculation here
 ```
 
-**Q3.** Looking at the pressure curve, does efficiency increase 
-indefinitely with pressure? What happens to turbine exit quality 
-at very high pressures?
+**Q3.** Looking at the pressure curve, does efficiency increase indefinitely with pressure? What happens to turbine exit quality at very high pressures?
 
 ```{python}
 # Your calculation here — hint: check baseline['turbine_quality']
@@ -169,5 +162,4 @@ plt.show()
 
 ## Submission
 
-Save this file with your name added to the filename: 
-`lab-01-firstname-lastname.qmd` and submit the completed `.qmd` file.
+Save this file with your name added to the filename: `lab-01-firstname-lastname.qmd` and submit the completed `.qmd` file.
