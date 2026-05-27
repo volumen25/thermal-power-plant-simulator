@@ -35,7 +35,7 @@ uv sync
 uv sync --group dev
 ```
 
-## Preview the Website
+## Preview Website
 
 ```bash
 uv run quarto preview

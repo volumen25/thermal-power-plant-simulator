@@ -1,5 +1,17 @@
 ---
 title: "Course Schedule"
+
+listing:
+  contents: 
+    - lectures/*.qmd
+    - labs/*.qmd
+  type: table
+  fields: [title, date, type]
+  sort: date
+  field-display-names:
+    title: "Topic"
+    date: "Date"
+    type: "Type"
 ---
 
 ## Important Dates
@@ -10,13 +22,3 @@ title: "Course Schedule"
 - **Last Class:** December 15, 2026
 
 ## Weekly Schedule
-
-```{yaml}
-listing:
-  contents: 
-    - lectures/*.qmd
-    - labs/*.qmd
-  type: table
-  fields: [title, date, type]
-  sort: date
-```

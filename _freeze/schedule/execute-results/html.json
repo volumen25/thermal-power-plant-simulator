@@ -1,8 +1,8 @@
 {
-  "hash": "26574fa9f40cd1d02f33848cd45e1667",
+  "hash": "0af4f545df82f2276185e9c8414834cc",
   "result": {
     "engine": "jupyter",
-    "markdown": "---\ntitle: \"Course Schedule\"\n---\n\n## Important Dates\n\n- **Course Start:** September 8, 2026\n- **Midterm Exam:** October 20–24, 2026\n- **Final Project Due:** December 10, 2026\n- **Last Class:** December 15, 2026\n\n## Weekly Schedule\n\n```{yaml}\nlisting:\n  contents: \n    - lectures/*.qmd\n    - labs/*.qmd\n  type: table\n  fields: [title, date, type]\n  sort: date\n```\n\n",
+    "markdown": "---\ntitle: \"Course Schedule\"\n---\n\n## Important Dates\n\n- **Course Start:** September 8, 2026\n- **Midterm Exam:** October 20–24, 2026\n- **Final Project Due:** December 10, 2026\n- **Last Class:** December 15, 2026\n\n## Weekly Schedule\n\n```{yaml}\nlisting:\n  contents: \n    - lectures/*.qmd\n    - labs/*.qmd\n  type: table\n  fields: [title, date, type]\n  sort: date\n  field-display-names:\n    title: \"Topic\"\n    date: \"Date\"\n    type: \"Type\"\n```\n\n",
     "supporting": [
       "schedule_files"
     ],
