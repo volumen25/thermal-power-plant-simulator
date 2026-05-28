@@ -117,17 +117,6 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./references.html"> 
 <span class="menu-text">References</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
-  </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/volumen25/thermal-power-plant-simulator"> <i class="bi bi-github" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -144,10 +133,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a>
-  <ul class="collapse">
+  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a></li>
   <li><a href="#course-highlights" id="toc-course-highlights" class="nav-link" data-scroll-target="#course-highlights">Course Highlights</a></li>
-  </ul></li>
+  <li><a href="#lectures-and-labs" id="toc-lectures-and-labs" class="nav-link" data-scroll-target="#lectures-and-labs">Lectures and Labs</a></li>
+  <li><a href="#computing" id="toc-computing" class="nav-link" data-scroll-target="#computing">Computing</a></li>
   </ul>
 </nav>
     </div>
@@ -157,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Thermal Power Plant Simulator</h1>
-<p class="subtitle lead">Fall 2026</p>
+<p class="subtitle lead">Winter 2027</p>
 </div>
 
 
@@ -174,20 +163,12 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome" class="level2">
-<h2 class="anchored" data-anchor-id="welcome">Welcome</h2>
-<p>This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.</p>
-<p><strong>Instructor:</strong> Serhat Beyenir<br>
-<strong>Schedule:</strong> 4 periods per week (September – December 2026)<br>
+<section id="welcome" class="level1">
+<h1>Welcome</h1>
+<p>This course offers hands-on training in simulating, operating, and optimizing thermal power plants using KONGSBERG’s K-Sim Connect cloud-based digital platform.</p>
+<p><strong>Instructors:</strong> Dr.&nbsp;Sanja Boskovic &amp; Serhat Beyenir<br>
+<strong>Schedule:</strong> <code>x</code> periods per week<br>
 <strong>Format:</strong> Lectures + Simulations</p>
-<section id="course-highlights" class="level3">
-<h3 class="anchored" data-anchor-id="course-highlights">Course Highlights</h3>
-<ul>
-<li>Dynamic simulation of Rankine and combined cycles</li>
-<li>Plant performance analysis and optimization</li>
-<li>Fault detection and troubleshooting scenarios</li>
-<li>Efficiency and environmental impact assessment</li>
-</ul>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -198,12 +179,78 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>First Class:</strong> September 8, 2026</p>
+<p><strong>First Class:</strong> [Insert date]</p>
 </div>
 </div>
-
-
 </section>
+<section id="course-highlights" class="level1">
+<h1>Course Highlights</h1>
+<p>The K-Sim Engine Thermal Power Plant simulator is based on a real thermal power plant in Västerås, Sweden. It trains and assesses plant operators in start-up, optimization, shutdown, emergency situations, and safety procedures.</p>
+<ul>
+<li>High-fidelity generic model replicating real power plant behaviour</li>
+<li>Real-time simulation of boilers, turbines, feedwater systems, and control loops</li>
+<li>Rankine cycle and district heat system simulation</li>
+<li>Plant performance analysis and optimization</li>
+<li>Efficiency and environmental impact assessment</li>
+</ul>
+</section>
+<section id="lectures-and-labs" class="level1">
+<h1>Lectures and Labs</h1>
+<p>Each topic pairs a lecture with a hands-on simulator lab. Students collect real operating data from the K-Sim platform and analyse it using Python.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Topic</th>
+<th>Key Calculations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Boiler Efficiency</td>
+<td>Direct method, Dulong formula, LHV</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Turbine Efficiency</td>
+<td>Isentropic efficiency, steam quality</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Power Plant Efficiency</td>
+<td>Overall cycle efficiency, heat rate</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>NOx Emissions</td>
+<td>Emission factors, regulatory limits</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Heat Exchangers</td>
+<td>LMTD, effectiveness, fouling</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Combustion Analysis</td>
+<td>Stoichiometry, excess air, flue gas</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="computing" class="level1">
+<h1>Computing</h1>
+<p>Simulation scripts are written in Python using industry-standard libraries:</p>
+<ul>
+<li><a href="https://iapws.readthedocs.io/"><code>iapws</code></a> — IAPWS-IF97 steam tables</li>
+<li><a href="https://numpy.org/"><code>numpy</code></a> — numerical computation</li>
+<li><a href="https://matplotlib.org/"><code>matplotlib</code></a> — plotting and visualization</li>
+<li><a href="https://scipy.org/"><code>scipy</code></a> — engineering calculations</li>
+</ul>
+<p>The course environment is managed with <a href="https://github.com/astral-sh/uv"><code>uv</code></a>. Code quality is maintained with <a href="https://docs.astral.sh/ruff/"><code>ruff</code></a> and <a href="https://black.readthedocs.io/"><code>black</code></a>.</p>
+
+
 </section>
 
 </main> <!-- /main -->

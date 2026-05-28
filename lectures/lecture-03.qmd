@@ -1,6 +1,6 @@
 ---
 title: "Lecture 3: Introduction to Thermal Power Plants"
-date: "2026-09-24"
+date: "2027-01-06"
 type: "Lecture"
 jupyter: python3
 ---

@@ -20,11 +20,11 @@ website:
         text: Resources
       - href: references.qmd
         text: References
-      - href: about.qmd
-        text: About
-    right:
-      - icon: github
-        href: https://github.com/volumen25/thermal-power-plant-simulator
+      # - href: about.qmd
+      #   text: About
+    # right:
+    #   - icon: github
+    #     href: https://github.com/volumen25/thermal-power-plant-simulator
   page-footer:
     left: © 2026 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
     right: |

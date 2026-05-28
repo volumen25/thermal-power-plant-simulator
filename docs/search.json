@@ -4,14 +4,14 @@
     "href": "schedule.html",
     "title": "Course Schedule",
     "section": "",
-    "text": "Course Start: September 8, 2026\nMidterm Exam: October 20–24, 2026\nFinal Project Due: December 10, 2026\nLast Class: December 15, 2026"
+    "text": "Course Start: [Insert date]\nMidterm Exam: [Insert date]\nFinal Project Due: [Insert date]\nLast Class: [Insert date]"
   },
   {
     "objectID": "schedule.html#important-dates",
     "href": "schedule.html#important-dates",
     "title": "Course Schedule",
     "section": "",
-    "text": "Course Start: September 8, 2026\nMidterm Exam: October 20–24, 2026\nFinal Project Due: December 10, 2026\nLast Class: December 15, 2026"
+    "text": "Course Start: [Insert date]\nMidterm Exam: [Insert date]\nFinal Project Due: [Insert date]\nLast Class: [Insert date]"
   },
   {
     "objectID": "schedule.html#weekly-schedule",
@@ -130,21 +130,21 @@
     "href": "syllabus.html",
     "title": "Syllabus",
     "section": "",
-    "text": "Course Title: Thermal Power Plant Simulator\nTerm: Fall 2026\nSchedule: 4 periods per week, September to December\nCredits: [Insert credits]\nPrerequisites: Thermodynamics, Fluid Mechanics"
+    "text": "Course Title: Thermal Power Plant Simulator\nTerm: Winter 2027\nSchedule: 4 periods per week, [Insert date] to [Insert date]\nCredits: [Insert credits]\nPrerequisites: Thermodynamics, Fluid Mechanics"
   },
   {
     "objectID": "syllabus.html#course-information",
     "href": "syllabus.html#course-information",
     "title": "Syllabus",
     "section": "",
-    "text": "Course Title: Thermal Power Plant Simulator\nTerm: Fall 2026\nSchedule: 4 periods per week, September to December\nCredits: [Insert credits]\nPrerequisites: Thermodynamics, Fluid Mechanics"
+    "text": "Course Title: Thermal Power Plant Simulator\nTerm: Winter 2027\nSchedule: 4 periods per week, [Insert date] to [Insert date]\nCredits: [Insert credits]\nPrerequisites: Thermodynamics, Fluid Mechanics"
   },
   {
     "objectID": "syllabus.html#learning-objectives",
     "href": "syllabus.html#learning-objectives",
     "title": "Syllabus",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nStudents will be able to: 1. Simulate steady-state and transient operation of thermal power plants. 2. Analyze the performance of boilers, turbines, condensers, and feedwater systems. 3. Optimize plant efficiency and evaluate environmental performance. 4. Diagnose and troubleshoot common operational issues."
+    "text": "Learning Objectives\nStudents will be able to: 1. Simulate steady-state and transient operation of thermal power plants. 2. Analyze the performance of boilers, turbines, condensers, and feedwater systems. 3. Optimize plant efficiency and evaluate environmental performance."
   },
   {
     "objectID": "syllabus.html#assessment",
@@ -158,7 +158,7 @@
     "href": "syllabus.html#policies",
     "title": "Syllabus",
     "section": "Policies",
-    "text": "Policies\n\nAll simulation reports must be submitted through the course platform.\nLate submissions will be penalized by 10% per day.\nAcademic integrity is strictly enforced."
+    "text": "Policies\n\nAll simulation reports must be submitted through the course platform.\nLate submissions will result in a 5% deduction for each day past the submission deadline.\nAcademic integrity policies will be strictly enforced."
   },
   {
     "objectID": "about.html",
@@ -312,14 +312,7 @@
     "href": "index.html",
     "title": "Thermal Power Plant Simulator",
     "section": "",
-    "text": "This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.\nInstructor: Serhat Beyenir\nSchedule: 4 periods per week (September – December 2026)\nFormat: Lectures + Simulations\n\n\n\nDynamic simulation of Rankine and combined cycles\nPlant performance analysis and optimization\nFault detection and troubleshooting scenarios\nEfficiency and environmental impact assessment\n\n\n\n\n\n\n\nImportant\n\n\n\nFirst Class: September 8, 2026"
-  },
-  {
-    "objectID": "index.html#welcome",
-    "href": "index.html#welcome",
-    "title": "Thermal Power Plant Simulator",
-    "section": "",
-    "text": "This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.\nInstructor: Serhat Beyenir\nSchedule: 4 periods per week (September – December 2026)\nFormat: Lectures + Simulations\n\n\n\nDynamic simulation of Rankine and combined cycles\nPlant performance analysis and optimization\nFault detection and troubleshooting scenarios\nEfficiency and environmental impact assessment\n\n\n\n\n\n\n\nImportant\n\n\n\nFirst Class: September 8, 2026"
+    "text": "Welcome\nThis course offers hands-on training in simulating, operating, and optimizing thermal power plants using KONGSBERG’s K-Sim Connect cloud-based digital platform.\nInstructors: Dr. Sanja Boskovic & Serhat Beyenir\nSchedule: x periods per week\nFormat: Lectures + Simulations\n\n\n\n\n\n\nImportant\n\n\n\nFirst Class: [Insert date]\n\n\n\n\nCourse Highlights\nThe K-Sim Engine Thermal Power Plant simulator is based on a real thermal power plant in Västerås, Sweden. It trains and assesses plant operators in start-up, optimization, shutdown, emergency situations, and safety procedures.\n\nHigh-fidelity generic model replicating real power plant behaviour\nReal-time simulation of boilers, turbines, feedwater systems, and control loops\nRankine cycle and district heat system simulation\nPlant performance analysis and optimization\nEfficiency and environmental impact assessment\n\n\n\nLectures and Labs\nEach topic pairs a lecture with a hands-on simulator lab. Students collect real operating data from the K-Sim platform and analyse it using Python.\n\n\n\n#\nTopic\nKey Calculations\n\n\n\n\n1\nBoiler Efficiency\nDirect method, Dulong formula, LHV\n\n\n2\nTurbine Efficiency\nIsentropic efficiency, steam quality\n\n\n3\nPower Plant Efficiency\nOverall cycle efficiency, heat rate\n\n\n4\nNOx Emissions\nEmission factors, regulatory limits\n\n\n5\nHeat Exchangers\nLMTD, effectiveness, fouling\n\n\n6\nCombustion Analysis\nStoichiometry, excess air, flue gas\n\n\n\n\n\nComputing\nSimulation scripts are written in Python using industry-standard libraries:\n\niapws — IAPWS-IF97 steam tables\nnumpy — numerical computation\nmatplotlib — plotting and visualization\nscipy — engineering calculations\n\nThe course environment is managed with uv. Code quality is maintained with ruff and black."
   },
   {
     "objectID": "materials.html",

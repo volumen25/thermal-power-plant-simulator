@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-09-10">
+<meta name="dcterms.date" content="2027-01-04">
 
 <title>Lab 1: Boiler Efficiency Calculation – Thermal Power Plant Simulator</title>
 <style>
@@ -182,17 +182,6 @@ window.Quarto = {
     <a class="nav-link" href="../references.html"> 
 <span class="menu-text">References</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
-<span class="menu-text">About</span></a>
-  </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/volumen25/thermal-power-plant-simulator"> <i class="bi bi-github" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -245,7 +234,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 10, 2026</p>
+      <p class="date">January 4, 2027</p>
     </div>
   </div>
   
@@ -287,7 +276,7 @@ window.Quarto = {
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="13e2340f" class="cell" data-execution_count="1">
+<div id="adf21246" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> iapws <span class="im">import</span> IAPWS97</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -299,7 +288,7 @@ window.Quarto = {
 <p>Heavy fuel oil heating value depends on its elemental composition. The <strong>Dulong formula</strong> relates LHV to HHV:</p>
 <p><span class="math display">\[LHV = HHV - 2442 \times (9H + W)\]</span></p>
 <p>Where <span class="math inline">\(H\)</span> is hydrogen mass fraction and <span class="math inline">\(W\)</span> is moisture mass fraction. The factor <span class="math inline">\(9H\)</span> accounts for water formed by hydrogen combustion; <span class="math inline">\(2442\)</span> kJ/kg is the latent heat of water vapour at 25°C.</p>
-<div id="019c336f" class="cell" data-execution_count="2">
+<div id="9c43cdfb" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># HFO elemental composition (mass fractions) — X008xx tags</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> <span class="fl">84.0</span> <span class="op">/</span> <span class="dv">100</span>  <span class="co"># X00800 carbon</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> <span class="fl">13.4</span> <span class="op">/</span> <span class="dv">100</span>  <span class="co"># X00801 hydrogen</span></span>
@@ -322,7 +311,7 @@ HHV - LHV        : 2969.47 kJ/kg</code></pre>
 </div>
 </div>
 <p><strong>Q1.</strong> Why is LHV lower than HHV? Which basis is used for boiler efficiency in marine and power engineering practice, and why?</p>
-<div id="4e76c6ee" class="cell" data-execution_count="3">
+<div id="17f39d7a" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your answer here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>
@@ -330,7 +319,7 @@ HHV - LHV        : 2969.47 kJ/kg</code></pre>
 <section id="part-2-direct-method" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-direct-method">Part 2: Direct Method</h2>
 <p>Using measured steam and feedwater enthalpies with actual fuel flow.</p>
-<div id="2e65788c" class="cell" data-execution_count="4">
+<div id="c8e3bf4f" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Steam side measurements</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>h_steam <span class="op">=</span> <span class="fl">3400.8</span>    <span class="co"># kJ/kg  H02603  HP line steam enthalpy</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>h_fw    <span class="op">=</span> <span class="fl">1097.1</span>    <span class="co"># kJ/kg  H02448  economizer water inlet enthalpy</span></span>
@@ -357,7 +346,7 @@ Boiler efficiency (direct): 82.1%</code></pre>
 </div>
 </div>
 <p><strong>Q2.</strong> The boiler nameplate efficiency is 90%. What does the difference between your result and nameplate suggest about current operating conditions?</p>
-<div id="4d188982" class="cell" data-execution_count="5">
+<div id="e6071b49" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your answer here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>
@@ -368,7 +357,7 @@ Boiler efficiency (direct): 82.1%</code></pre>
 <section id="step-1-excess-air-from-o₂-measurement" class="level3">
 <h3 class="anchored" data-anchor-id="step-1-excess-air-from-o₂-measurement">Step 1: Excess Air from O₂ Measurement</h3>
 <p><span class="math display">\[\lambda = \frac{21}{21 - O_{2}\%}\]</span></p>
-<div id="e5f7ebfc" class="cell" data-execution_count="6">
+<div id="48a574e0" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>O2_fg  <span class="op">=</span> <span class="fl">0.75</span>   <span class="co"># vol%  X02419  O2 in flue gas (dry)</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>T_stack <span class="op">=</span> <span class="fl">141.57</span>  <span class="co"># °C  T02114  rotary air preheater gas outlet</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>T_ref   <span class="op">=</span> <span class="fl">25.0</span>    <span class="co"># °C  reference</span></span>
@@ -388,7 +377,7 @@ Excess air            : 3.7%</code></pre>
 </section>
 <section id="step-2-flue-gas-flow" class="level3">
 <h3 class="anchored" data-anchor-id="step-2-flue-gas-flow">Step 2: Flue Gas Flow</h3>
-<div id="faa4591e" class="cell" data-execution_count="7">
+<div id="399f5e5b" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stoichiometric air requirement (Dulong)</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>air_stoich <span class="op">=</span> (<span class="fl">2.667</span> <span class="op">*</span> C <span class="op">+</span> <span class="dv">8</span> <span class="op">*</span> (H <span class="op">-</span> O <span class="op">/</span> <span class="dv">8</span>) <span class="op">+</span> S) <span class="op">/</span> <span class="fl">0.232</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>air_actual <span class="op">=</span> air_stoich <span class="op">*</span> lambda_excess</span>
@@ -417,7 +406,7 @@ Flue gas flow         : 229.71 kg/s</code></pre>
 </section>
 <section id="step-3-stack-heat-loss" class="level3">
 <h3 class="anchored" data-anchor-id="step-3-stack-heat-loss">Step 3: Stack Heat Loss</h3>
-<div id="529f0f45" class="cell" data-execution_count="8">
+<div id="064aff13" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Cp_fg <span class="op">=</span> <span class="fl">1.10</span>  <span class="co"># kJ/kg·K — approximate mean Cp for combustion products</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>Q_stack    <span class="op">=</span> G_fluegas <span class="op">*</span> Cp_fg <span class="op">*</span> (T_stack <span class="op">-</span> T_ref)</span>
@@ -439,7 +428,7 @@ Boiler efficiency (indirect): 94.7%</code></pre>
 </section>
 <section id="part-4-comparison-and-sensitivity" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-comparison-and-sensitivity">Part 4: Comparison and Sensitivity</h2>
-<div id="4bcbb5fe" class="cell" data-execution_count="9">
+<div id="3be6cf4a" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Direct method   : </span><span class="sc">{</span>eta_direct<span class="sc">:.1%}</span><span class="ss">"</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Indirect method : </span><span class="sc">{</span>eta_indirect<span class="sc">:.1%}</span><span class="ss">"</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Difference      : </span><span class="sc">{</span><span class="bu">abs</span>(eta_indirect <span class="op">-</span> eta_direct) <span class="op">*</span> <span class="dv">100</span><span class="sc">:.1f}</span><span class="ss"> percentage points"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -450,7 +439,7 @@ Difference      : 12.6 percentage points</code></pre>
 </div>
 </div>
 <p>The indirect method accounts only for stack loss. Observe how efficiency changes with stack temperature — a key operational parameter.</p>
-<div id="bc652c80" class="cell" data-execution_count="10">
+<div id="6aadf350" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>stack_temps <span class="op">=</span> np.arange(<span class="dv">100</span>, <span class="dv">400</span>, <span class="dv">10</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>eta_stack <span class="op">=</span> [(Q_fuel <span class="op">-</span> G_fluegas <span class="op">*</span> Cp_fg <span class="op">*</span> (T <span class="op">-</span> T_ref)) <span class="op">/</span> Q_fuel <span class="op">*</span> <span class="dv">100</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>             <span class="cf">for</span> T <span class="kw">in</span> stack_temps]</span>
@@ -477,11 +466,11 @@ Difference      : 12.6 percentage points</code></pre>
 </div>
 </div>
 <p><strong>Q3.</strong> At what stack temperature does efficiency reach 90%? What equipment is responsible for reducing stack temperature, and what limits how low it can go?</p>
-<div id="09a5c322" class="cell" data-execution_count="11">
+<div id="0ca07570" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your calculation here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>Q4.</strong> The direct and indirect methods give different results. List at least three reasons that explain the difference.</p>
-<div id="c075b56a" class="cell" data-execution_count="12">
+<div id="69a8c7d3" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your answer here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>

@@ -5,18 +5,14 @@ title: "Syllabus"
 ## Course Information
 
 - **Course Title:** Thermal Power Plant Simulator
-- **Term:** Fall 2026
-- **Schedule:** 4 periods per week, September to December
-- **Credits:** [Insert credits]
+- **Term:** Winter 2027
+- **Schedule:** 4 periods per week, \[Insert date\] to \[Insert date\]
+- **Credits:** \[Insert credits\]
 - **Prerequisites:** Thermodynamics, Fluid Mechanics
 
 ## Learning Objectives
 
-Students will be able to:
-1. Simulate steady-state and transient operation of thermal power plants.
-2. Analyze the performance of boilers, turbines, condensers, and feedwater systems.
-3. Optimize plant efficiency and evaluate environmental performance.
-4. Diagnose and troubleshoot common operational issues.
+Students will be able to: 1. Simulate steady-state and transient operation of thermal power plants. 2. Analyze the performance of boilers, turbines, condensers, and feedwater systems. 3. Optimize plant efficiency and evaluate environmental performance.
 
 ## Assessment
 
@@ -30,5 +26,5 @@ Students will be able to:
 ## Policies
 
 - All simulation reports must be submitted through the course platform.
-- Late submissions will be penalized by 10% per day.
-- Academic integrity is strictly enforced.
+- Late submissions will result in a 5% deduction for each day past the submission deadline.
+- Academic integrity policies will be strictly enforced.

@@ -1,6 +1,6 @@
 ---
 title: "Lecture 1: Boiler Efficiency"
-date: "2026-09-08"
+date: "2027-01-04"
 type: "Lecture"
 jupyter: python3
 ---

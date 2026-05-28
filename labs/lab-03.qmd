@@ -1,6 +1,6 @@
 ---
 title: "Lab 3: Power Plant Efficiency"
-date: "2026-09-24"
+date: "2027-01-07"
 type: "Lab"
 jupyter: python3
 ---

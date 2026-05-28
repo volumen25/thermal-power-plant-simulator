@@ -1,6 +1,6 @@
 ---
 title: "Lecture 0: Python Tutorial"
-date: "2026-09-01"
+date: "2027-01-04"
 type: "Lecture"
 number-sections: false
 ---

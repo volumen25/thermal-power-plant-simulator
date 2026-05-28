@@ -17,9 +17,9 @@ listing:
 
 ## Important Dates
 
-- **Course Start:** September 8, 2026
-- **Midterm Exam:** October 20–24, 2026
-- **Final Project Due:** December 10, 2026
-- **Last Class:** December 15, 2026
+- **Course Start:** [Insert date]
+- **Midterm Exam:** [Insert date]
+- **Final Project Due:** [Insert date]
+- **Last Class:** [Insert date]
 
 ## Weekly Schedule

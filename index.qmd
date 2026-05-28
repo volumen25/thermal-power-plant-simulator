@@ -1,23 +1,55 @@
 ---
 title: "Thermal Power Plant Simulator"
-subtitle: "Fall 2026"
+subtitle: "Winter 2027"
 ---
+# Welcome
 
-## Welcome
+This course offers hands-on training in simulating, operating, and optimizing
+thermal power plants using KONGSBERG's K-Sim Connect cloud-based digital platform.
 
-This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.
-
-**Instructor:** Serhat Beyenir  
-**Schedule:** 4 periods per week (September – December 2026)  
+**Instructors:** Dr. Sanja Boskovic & Serhat Beyenir  
+**Schedule:** `x` periods per week   
 **Format:** Lectures + Simulations
 
-### Course Highlights
+::: {.callout-important}
+**First Class:** [Insert date]
+:::
 
-- Dynamic simulation of Rankine and combined cycles
+# Course Highlights
+
+The K-Sim Engine Thermal Power Plant simulator is based on a real thermal power
+plant in Västerås, Sweden. It trains and assesses plant operators in start-up,
+optimization, shutdown, emergency situations, and safety procedures.
+
+- High-fidelity generic model replicating real power plant behaviour
+- Real-time simulation of boilers, turbines, feedwater systems, and control loops
+- Rankine cycle and district heat system simulation
 - Plant performance analysis and optimization
-- Fault detection and troubleshooting scenarios
 - Efficiency and environmental impact assessment
 
-::: {.callout-important}
-**First Class:** September 8, 2026
-:::
+# Lectures and Labs
+
+Each topic pairs a lecture with a hands-on simulator lab. Students collect
+real operating data from the K-Sim platform and analyse it using Python.
+
+| # | Topic | Key Calculations |
+|---|---|---|
+| 1 | Boiler Efficiency | Direct method, Dulong formula, LHV |
+| 2 | Turbine Efficiency | Isentropic efficiency, steam quality |
+| 3 | Power Plant Efficiency | Overall cycle efficiency, heat rate |
+| 4 | NOx Emissions | Emission factors, regulatory limits |
+| 5 | Heat Exchangers | LMTD, effectiveness, fouling |
+| 6 | Combustion Analysis | Stoichiometry, excess air, flue gas |
+
+# Computing
+
+Simulation scripts are written in Python using industry-standard libraries:
+
+- [`iapws`](https://iapws.readthedocs.io/) — IAPWS-IF97 steam tables
+- [`numpy`](https://numpy.org/) — numerical computation
+- [`matplotlib`](https://matplotlib.org/) — plotting and visualization
+- [`scipy`](https://scipy.org/) — engineering calculations
+
+The course environment is managed with [`uv`](https://github.com/astral-sh/uv).
+Code quality is maintained with [`ruff`](https://docs.astral.sh/ruff/) and
+[`black`](https://black.readthedocs.io/).

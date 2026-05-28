@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-09-24">
+<meta name="dcterms.date" content="2027-01-07">
 
 <title>Lab 3: Power Plant Efficiency – Thermal Power Plant Simulator</title>
 <style>
@@ -153,17 +153,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../references.html"> 
 <span class="menu-text">References</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
-<span class="menu-text">About</span></a>
-  </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/volumen25/thermal-power-plant-simulator"> <i class="bi bi-github" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -207,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 24, 2026</p>
+      <p class="date">January 7, 2027</p>
     </div>
   </div>
   
@@ -267,7 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Run the cell below to import the required libraries.</p>
-<div id="a779b394" class="cell" data-execution_count="1">
+<div id="695fc027" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> iapws <span class="im">import</span> IAPWS97</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -281,7 +270,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 <li>Condenser: 0.006 MPa (~36°C)</li>
 </ul>
-<div id="31d8b3dc" class="cell" data-execution_count="2">
+<div id="7171d205" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rankine_cycle(T_boiler<span class="op">=</span><span class="dv">500</span>, P_boiler<span class="op">=</span><span class="dv">10</span>, P_condenser<span class="op">=</span><span class="fl">0.006</span>):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Ideal Rankine cycle using IAPWS-IF97 steam tables."""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    state1 <span class="op">=</span> IAPWS97(T<span class="op">=</span>T_boiler <span class="op">+</span> <span class="fl">273.15</span>, P<span class="op">=</span>P_boiler)</span>
@@ -340,7 +329,7 @@ Thermal efficiency    : 41.5%</code></pre>
 <section id="part-2-effect-of-boiler-temperature" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-effect-of-boiler-temperature">Part 2: Effect of Boiler Temperature</h2>
 <p>Observe how thermal efficiency changes as boiler temperature increases from 300°C to 600°C, keeping pressure constant at 10 MPa.</p>
-<div id="2981e078" class="cell" data-execution_count="3">
+<div id="53df2a62" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>temperatures <span class="op">=</span> np.arange(<span class="dv">300</span>, <span class="dv">620</span>, <span class="dv">20</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>efficiencies <span class="op">=</span> [rankine_cycle(T_boiler<span class="op">=</span>T)[<span class="st">"eta"</span>] <span class="op">*</span> <span class="dv">100</span> <span class="cf">for</span> T <span class="kw">in</span> temperatures]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -366,7 +355,7 @@ Thermal efficiency    : 41.5%</code></pre>
 <section id="part-3-effect-of-boiler-pressure" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-effect-of-boiler-pressure">Part 3: Effect of Boiler Pressure</h2>
 <p>Now observe how efficiency changes with boiler pressure (3–20 MPa) at a fixed boiler temperature of 500°C.</p>
-<div id="58719f09" class="cell" data-execution_count="4">
+<div id="16986ff4" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pressures <span class="op">=</span> np.arange(<span class="dv">3</span>, <span class="dv">21</span>, <span class="dv">1</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>eff_pressure <span class="op">=</span> [rankine_cycle(P_boiler<span class="op">=</span>P)[<span class="st">"eta"</span>] <span class="op">*</span> <span class="dv">100</span> <span class="cf">for</span> P <span class="kw">in</span> pressures]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -393,15 +382,15 @@ Thermal efficiency    : 41.5%</code></pre>
 <h2 class="anchored" data-anchor-id="questions">Questions</h2>
 <p>Answer the following in the cells provided below each question.</p>
 <p><strong>Q1.</strong> What is the thermal efficiency of the baseline cycle? How does it compare to the Carnot efficiency between the same temperature limits?</p>
-<div id="d1b8d4dd" class="cell" data-execution_count="5">
+<div id="d74d97f4" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your calculation here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>Q2.</strong> At what boiler temperature does efficiency exceed 43%? What practical constraints limit operating at that temperature?</p>
-<div id="8e5a5a15" class="cell" data-execution_count="6">
+<div id="7a7cd078" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your calculation here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>Q3.</strong> Looking at the pressure curve, does efficiency increase indefinitely with pressure? What happens to turbine exit quality at very high pressures?</p>
-<div id="e0fbf31f" class="cell" data-execution_count="7">
+<div id="6363605c" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your calculation here — hint: check baseline['turbine_quality']</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>pressures_extended <span class="op">=</span> np.arange(<span class="dv">3</span>, <span class="dv">31</span>, <span class="dv">1</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>qualities <span class="op">=</span> [rankine_cycle(P_boiler<span class="op">=</span>P)[<span class="st">"turbine_quality"</span>] <span class="cf">for</span> P <span class="kw">in</span> pressures_extended]</span>
