@@ -4,9 +4,10 @@ project:
 
 website:
   title: "Thermal Power Plant Simulator"
-  description: "Fall 2026 - Official Course Website"
+  description: "Fall 2027 - Official Course Website"
   navbar:
     background: primary
+    pinned: true   # ← this makes it sticky
     left:
       - href: index.qmd
         text: Home
@@ -25,6 +26,7 @@ website:
     # right:
     #   - icon: github
     #     href: https://github.com/volumen25/thermal-power-plant-simulator
+  back-to-top-navigation: true
   page-footer:
     left: © 2026 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
     right: |
