@@ -1,0 +1,507 @@
+---
+title: "Lecture 0: Python Tutorial"
+date: "2026-09-01"
+type: "Lecture"
+number-sections: false
+---
+
+This tutorial introduces Python programming using thermal power plant
+examples. We will start by using Python as a calculator, then explore
+variables, functions, and control flow — building toward the simulation
+scripts used throughout this course.
+
+## Requirements
+
+To follow this tutorial, the easiest way to get started is a web-based
+Python environment. This lets you write and run Python code right in your
+browser with no downloads or setup needed. I recommend
+[python-fiddle.com](https://python-fiddle.com/), an easy-to-use online
+editor that lets you experiment with Python instantly.
+
+If you prefer working on your own computer, make sure you have
+[Python](https://www.python.org/downloads/) (version 3.14 or later)
+installed. You will also need an IDE to write your code. This course uses
+[Positron](https://positron.posit.co/), a beginner-friendly IDE with a
+built-in terminal. Dependencies are managed with
+[uv](https://github.com/astral-sh/uv).
+
+## Basic Syntax
+
+Python uses indentation (typically four spaces) to define code blocks.
+A colon (`:`) introduces a block, and statements within the block must
+be indented consistently. Python is case-sensitive, so `Pressure` and
+`pressure` are distinct identifiers. Comments start with `#`.
+
+```python
+# Calculate net power output
+turbine_output = 250      # MW
+auxiliary_load  = 12      # MW
+net_power = turbine_output - auxiliary_load
+print(net_power)          # Output: 238
+```
+
+Basic syntax rules:
+
+- Comments start with `#` and extend to the end of the line
+- Strings can be enclosed in single (`'`), double (`"`), or triple
+  quotes (`"""`) for multi-line strings
+- Python is case-sensitive: `Temperature` and `temperature` are
+  different identifiers
+
+## The `print()` Function
+
+The `print()` function displays output. F-strings provide clean,
+formatted output and are used throughout this course.
+
+```python
+fuel = "Heavy Fuel Oil"
+lhv  = 38333.68
+print(f"{fuel} has a lower heating value of {lhv:.2f} kJ/kg.")
+```
+
+Output: `Heavy Fuel Oil has a lower heating value of 38333.68 kJ/kg.`
+
+The following table shows common f-string formatting options:
+
+| Format | Code | Example | Output |
+|---|---|---|---|
+| 2 decimal places | `f"{x:.2f}"` | `f"{3.1415:.2f}"` | `3.14` |
+| Whole number | `f"{x:.0f}"` | `f"{3.9:.0f}"` | `4` |
+| Thousands separator | `f"{x:,.1f}"` | `f"{41303.16:,.1f}"` | `41,303.2` |
+| Percentage | `f"{x:.1%}"` | `f"{0.821:.1%}"` | `82.1%` |
+| Scientific notation | `f"{x:.3e}"` | `f"{458289:.3e}"` | `4.583e+05` |
+
+## Variables and Data Types
+
+Variables store data and are assigned values using the `=` operator.
+
+```python
+boiler_pressure     = 158.48    # bara  — float
+steam_temperature   = 535.85    # °C    — float
+steam_flow          = 716       # ton/h — int
+fuel_type           = "HFO"     # str
+economizer_clean    = True      # bool
+```
+
+Python has several built-in data types:
+
+- **Integers** (`int`): whole numbers, e.g. `716`, `-5`
+- **Floating-point** (`float`): decimal numbers, e.g. `158.48`, `535.85`
+- **Strings** (`str`): text, e.g. `"HFO"`, `"Steam drum"`
+- **Booleans** (`bool`): `True` or `False`
+
+### Arithmetic Operations
+
+```python
+w_turbine = 1343.44   # kJ/kg
+w_pump    = 10.04     # kJ/kg
+
+w_net = w_turbine - w_pump
+print(w_net)          # Subtraction: 1333.40
+
+q_boiler = 3213.53    # kJ/kg
+eta = w_net / q_boiler
+print(eta)            # Division: 0.4148...
+
+print(eta ** 2)       # Exponentiation: 0.1720...
+print(w_net // 100)   # Integer division: 13
+```
+
+### Unit Conversions
+
+Unit conversions are common in plant calculations. Python handles
+them cleanly with descriptive variable names:
+
+```python
+# Flow rate conversions
+G_steam_ton_h = 716.17          # ton/h
+G_steam_kg_s  = G_steam_ton_h / 3.6   # ton/h → kg/s
+print(f"Steam flow: {G_steam_kg_s:.4f} kg/s")
+
+# Pressure conversion
+P_bara = 158.48                  # bara
+P_MPa  = P_bara * 0.1            # bara → MPa
+print(f"Pressure: {P_MPa:.3f} MPa")
+
+# Temperature conversion
+T_celsius = 535.85               # °C
+T_kelvin  = T_celsius + 273.15   # °C → K
+print(f"Temperature: {T_kelvin:.2f} K")
+```
+
+## Python as a Calculator
+
+Python's interactive mode is ideal for quick plant calculations. Open
+a terminal and type `python3` (or `python` on Windows):
+
+```bash
+python3
+```
+
+You should see the Python prompt:
+
+```bash
+>>>
+```
+
+Try a simple boiler efficiency calculation:
+
+```python
+>>> h_steam     = 3400.8    # kJ/kg
+>>> h_feedwater = 1097.1    # kJ/kg
+>>> G_steam     = 716.17 / 3.6    # kg/s
+>>> G_fuel      = 52.42  / 3.6    # kg/s
+>>> LHV         = 38333.68        # kJ/kg
+>>> Q_steam = G_steam * (h_steam - h_feedwater)
+>>> Q_fuel  = G_fuel  * LHV
+>>> Q_steam / Q_fuel
+0.8214...
+```
+
+To exit interactive mode:
+
+```python
+exit()
+```
+
+Or use **Ctrl+D** (macOS/Linux) / **Ctrl+Z then Enter** (Windows).
+
+## Control Flow
+
+### Conditional Statements
+
+Conditional statements execute different code blocks based on conditions.
+The `if`, `elif`, and `else` keywords work together:
+
+```python
+# Assess turbine exit steam quality
+x = 0.91    # dryness fraction
+
+if x < 0.85:
+    print("WARNING: Excessive moisture — consider reheat cycle")
+elif x < 0.90:
+    print("CAUTION: Quality marginal — monitor closely")
+else:
+    print("OK: Steam quality acceptable")
+```
+
+Output: `OK: Steam quality acceptable`
+
+Another example — classify boiler efficiency:
+
+```python
+eta = 0.821     # boiler thermal efficiency
+
+if eta >= 0.90:
+    print("Excellent — above nameplate")
+elif eta >= 0.85:
+    print("Good — normal operating range")
+elif eta >= 0.80:
+    print("Acceptable — investigate losses")
+else:
+    print("Poor — maintenance required")
+```
+
+Output: `Acceptable — investigate losses`
+
+### For Loop
+
+A `for` loop iterates over a sequence. Here we calculate efficiency
+for multiple fuel types:
+
+```python
+fuels = [
+    ("HFO",     38333.68),
+    ("Biofuel",  17500.00),
+    ("Coal",     27000.00),
+]
+
+G_fuel  = 52.42 / 3.6      # kg/s
+Q_steam = 458289.1          # kW
+
+for name, lhv in fuels:
+    Q_fuel = G_fuel * lhv
+    eta    = Q_steam / Q_fuel
+    print(f"{name:<10}: {eta:.1%}")
+```
+
+Output:
+```
+HFO       : 82.1%
+Biofuel   : 187.5%
+Coal      : 121.7%
+```
+
+::: callout-note
+The biofuel and coal efficiencies above exceed 100% because the fuel
+flow `G_fuel` was measured during HFO operation. In Lab 1 you will
+collect the correct fuel flow for each condition from the simulator.
+:::
+
+### While Loop
+
+A `while` loop executes as long as a condition is true. Useful for
+iterative calculations:
+
+```python
+# Find the load at which efficiency exceeds 82%
+load       = 30       # % — starting load
+efficiency = 0.78     # starting efficiency
+
+while efficiency < 0.82:
+    load       += 5
+    efficiency += 0.008
+    print(f"Load: {load}%  Efficiency: {efficiency:.1%}")
+```
+
+## Functions
+
+### The `def` Keyword
+
+Functions are reusable code blocks defined with `def`. They keep
+calculations organised and repeatable — essential for simulator work.
+
+```python
+def bara_to_mpa(pressure_bara):
+    """Convert pressure from bara to MPa."""
+    return pressure_bara * 0.1
+
+
+def celsius_to_kelvin(temp_celsius):
+    """Convert temperature from Celsius to Kelvin."""
+    return temp_celsius + 273.15
+
+
+def boiler_efficiency(G_steam, h_steam, h_fw, G_fuel, LHV):
+    """
+    Calculate boiler thermal efficiency (direct method).
+
+    Parameters
+    ----------
+    G_steam : float  Steam mass flow rate (kg/s)
+    h_steam : float  Steam enthalpy (kJ/kg)
+    h_fw    : float  Feedwater enthalpy (kJ/kg)
+    G_fuel  : float  Fuel mass flow rate (kg/s)
+    LHV     : float  Lower heating value of fuel (kJ/kg)
+
+    Returns
+    -------
+    float  Thermal efficiency (dimensionless)
+    """
+    Q_steam = G_steam * (h_steam - h_fw)
+    Q_fuel  = G_fuel  * LHV
+    return Q_steam / Q_fuel
+
+
+# Call the function with HFO data
+eta = boiler_efficiency(
+    G_steam = 716.17 / 3.6,
+    h_steam = 3400.8,
+    h_fw    = 1097.1,
+    G_fuel  = 52.42 / 3.6,
+    LHV     = 38333.68,
+)
+print(f"Boiler efficiency: {eta:.1%}")
+```
+
+Output: `Boiler efficiency: 82.1%`
+
+Functions with default parameters allow quick what-if calculations:
+
+```python
+def dulong_lhv(HHV, H=0.134, W=0.010):
+    """
+    Calculate LHV from HHV using the Dulong formula.
+
+    Parameters
+    ----------
+    HHV : float  Higher heating value (kJ/kg)
+    H   : float  Hydrogen mass fraction (default: HFO typical)
+    W   : float  Moisture mass fraction (default: HFO typical)
+    """
+    return HHV - 2442 * (9 * H + W)
+
+
+print(dulong_lhv(41303.16))           # HFO with defaults
+print(dulong_lhv(29500, H=0.05, W=0.08))  # Coal example
+```
+
+### The `lambda` Keyword
+
+Lambda functions are compact, one-line functions useful for
+simple conversions:
+
+```python
+bara_to_mpa = lambda p: p * 0.1
+ton_h_to_kg_s = lambda g: g / 3.6
+
+print(bara_to_mpa(158.48))      # Output: 15.848
+print(ton_h_to_kg_s(716.17))    # Output: 198.936...
+```
+
+## The `math` Module
+
+The `math` module provides mathematical functions used in
+thermodynamic calculations.
+
+```python
+import math
+
+# Excess air from O2 measurement (Siegert method)
+O2_percent     = 0.75
+lambda_excess  = 21 / (21 - O2_percent)
+excess_air_pct = (lambda_excess - 1) * 100
+
+print(f"Excess air factor (λ): {lambda_excess:.4f}")
+print(f"Excess air           : {excess_air_pct:.1f}%")
+
+# Log mean temperature difference (LMTD) for heat exchangers
+dT1 = 120.0     # °C — hot end temperature difference
+dT2 = 45.0      # °C — cold end temperature difference
+LMTD = (dT1 - dT2) / math.log(dT1 / dT2)
+print(f"LMTD: {LMTD:.2f} °C")
+```
+
+::: callout-warning
+Python's `math` module trigonometric functions expect angles in
+**radians**, not degrees. Always convert with `math.radians()` before
+using `sin`, `cos`, or `tan`.
+:::
+
+## The `iapws` Library
+
+The `iapws` library implements the IAPWS-IF97 standard — the industry
+reference for water and steam properties used in power plant calculations.
+It replaces manual steam table lookups with accurate, programmatic access
+to thermodynamic properties.
+
+Install it in the course environment:
+
+```bash
+uv add iapws
+```
+
+Given any two independent properties, `IAPWS97` returns all others:
+
+```python
+from iapws import IAPWS97
+
+# HP steam at turbine inlet: 535.85°C, 158.48 bara
+steam = IAPWS97(T=535.85 + 273.15, P=158.48 * 0.1)
+
+print(f"Temperature : {steam.T - 273.15:.2f} °C")
+print(f"Pressure    : {steam.P:.3f} MPa")
+print(f"Enthalpy    : {steam.h:.2f} kJ/kg")
+print(f"Entropy     : {steam.s:.4f} kJ/kg·K")
+print(f"Density     : {steam.rho:.3f} kg/m³")
+```
+
+Common property attributes:
+
+| Attribute | Property | Unit |
+|---|---|---|
+| `.h` | Specific enthalpy | kJ/kg |
+| `.s` | Specific entropy | kJ/kg·K |
+| `.T` | Temperature | K |
+| `.P` | Pressure | MPa |
+| `.rho` | Density | kg/m³ |
+| `.x` | Steam quality (wet region) | — |
+
+::: callout-tip
+`IAPWS97` always takes temperature in **Kelvin** and pressure in **MPa**.
+Always convert before passing simulator tag values.
+:::
+
+For saturated conditions, use the quality parameter `x`:
+
+```python
+# Saturated liquid at condenser pressure (x=0)
+sat_liquid = IAPWS97(P=0.006, x=0)
+print(f"Saturation temperature : {sat_liquid.T - 273.15:.2f} °C")
+print(f"Enthalpy (sat liquid)  : {sat_liquid.h:.2f} kJ/kg")
+
+# Saturated vapour at the same pressure (x=1)
+sat_vapour = IAPWS97(P=0.006, x=1)
+print(f"Enthalpy (sat vapour)  : {sat_vapour.h:.2f} kJ/kg")
+print(f"Enthalpy of evaporation: {sat_vapour.h - sat_liquid.h:.2f} kJ/kg")
+```
+
+## Writing Python Scripts
+
+Write Python code in a `.py` file and run it as a script. Create
+`boiler_efficiency.py`:
+
+```python
+"""
+Boiler Efficiency Calculation — Direct Method
+Thermal Power Plant Simulator Course
+"""
+
+# Simulator tag values
+h_steam = 3400.8        # kJ/kg  H02603
+h_fw    = 1097.1        # kJ/kg  H02448
+G_steam = 716.17 / 3.6  # kg/s   G02600
+G_fuel  = 52.42  / 3.6  # kg/s   G01038
+LHV     = 38333.68      # kJ/kg
+
+# Heat flows
+Q_steam = G_steam * (h_steam - h_fw)
+Q_fuel  = G_fuel  * LHV
+eta     = Q_steam / Q_fuel
+
+print(f"Heat to steam    : {Q_steam:.1f} kW")
+print(f"Fuel heat input  : {Q_fuel:.1f} kW")
+print(f"Boiler efficiency: {eta:.1%}")
+```
+
+Run it from the terminal:
+
+```bash
+uv run python boiler_efficiency.py
+```
+
+Output:
+
+```
+Heat to steam    : 458289.1 kW
+Fuel heat input  : 558181.0 kW
+Boiler efficiency: 82.1%
+```
+
+## Python Style Guide
+
+> Code is read far more often than it is written. — Guido van Rossum,
+> creator of Python.
+
+Follow [PEP 8](https://peps.python.org/pep-0008/) as the primary style guide:
+
+- Use descriptive names: `steam_enthalpy` not `h` or `x1`
+- Add units in comments: `# kJ/kg`, `# kg/s`, `# MPa`
+- Include a module docstring at the top of every `.py` file
+- Keep lines under 88 characters
+- Two blank lines between top-level functions
+
+This course uses [Black](https://black.readthedocs.io/) for automatic
+formatting and [Ruff](https://docs.astral.sh/ruff/) for linting. Run
+them before submitting any script:
+
+```bash
+uv run black .
+uv run ruff check .
+```
+
+## Summary
+
+You have covered the Python basics needed for this course:
+
+- Syntax, variables, and data types
+- Unit conversions using descriptive variable names
+- Arithmetic operations for plant calculations
+- Control flow: `if/elif/else`, `for`, `while`
+- Functions with `def` and `lambda`
+- The `math` module
+- The `iapws` library for steam properties
+- Writing and running `.py` scripts with `uv`
+
+In Lecture 1 we build on these foundations to calculate boiler
+thermal efficiency from real simulator data.

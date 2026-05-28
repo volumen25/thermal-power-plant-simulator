@@ -2,6 +2,7 @@
   {
     "listing": "/schedule.html",
     "items": [
+      "/lectures/lecture-00.html",
       "/lectures/lecture-01.html",
       "/labs/lab-01.html",
       "/lectures/lecture-03.html",

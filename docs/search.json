@@ -28,6 +28,314 @@
     "text": "Students are expected to be comfortable with college-level mathematics and science and are strongly encouraged to consult reliable reference texts. For example, foundational and practical texts in mathematics, applied thermodynamics and computational tools, including Bird (2021), Bolton (2021), Wylen & Sonntag (1986), Solberg (n.d.), Eastop & McConkey (1993), Joel (1996), Granet & Bluestein (2015), Shaw (2017), Sweigart (2021), and Sweigart (2020).\n\n\n\n\nReferences\n\nBird, J. O. (2021). Bird’s engineering mathematics (9th ed.). Routledge.\n\n\nBolton, W. (2021). Engineering science (7th ed.). Routledge.\n\n\nEastop, T. D., & McConkey, A. (1993). Applied thermodynamics for engineering technologists (5th ed). Longman.\n\n\nGranet, I., & Bluestein, M. (2015). Thermodynamics and heat power. CRC Press.\n\n\nJoel, R. (1996). Basic engineering thermodynamics (5th ed). Pearson/Prenctice Hall.\n\n\nShaw, Z. (2017). Learn python 3 the hard way (4th ed.). Addison-Wesley Professional.\n\n\nSolberg, H. L. (n.d.). Thermal engineering. John Wiley & Sons Inc.\n\n\nSweigart, A. (2020). Automate the boring stuff with python (2nd ed.). No Starch Press.\n\n\nSweigart, A. (2021). Beyond the basic stuff with python. No Starch Press.\n\n\nWylen, G. J. V., & Sonntag, R. E. (1986). Fundamentals of classical thermodynamics. Wiley."
   },
   {
+    "objectID": "lectures/lecture-00.html",
+    "href": "lectures/lecture-00.html",
+    "title": "Lecture 0: Python Tutorial",
+    "section": "",
+    "text": "This tutorial introduces Python programming using thermal power plant examples. We will start by using Python as a calculator, then explore variables, functions, and control flow — building toward the simulation scripts used throughout this course."
+  },
+  {
+    "objectID": "lectures/lecture-00.html#requirements",
+    "href": "lectures/lecture-00.html#requirements",
+    "title": "Lecture 0: Python Tutorial",
+    "section": "Requirements",
+    "text": "Requirements\nTo follow this tutorial, the easiest way to get started is a web-based Python environment. This lets you write and run Python code right in your browser with no downloads or setup needed. I recommend python-fiddle.com, an easy-to-use online editor that lets you experiment with Python instantly.\nIf you prefer working on your own computer, make sure you have Python (version 3.14 or later) installed. You will also need an IDE to write your code. This course uses Positron, a beginner-friendly IDE with a built-in terminal. Dependencies are managed with uv."
+  },
+  {
+    "objectID": "lectures/lecture-00.html#basic-syntax",
+    "href": "lectures/lecture-00.html#basic-syntax",
+    "title": "Lecture 0: Python Tutorial",
+    "section": "Basic Syntax",
+    "text": "Basic Syntax\nPython uses indentation (typically four spaces) to define code blocks. A colon (:) introduces a block, and statements within the block must be indented consistently. Python is case-sensitive, so Pressure and pressure are distinct identifiers. Comments start with #.\n# Calculate net power output\nturbine_output = 250      # MW\nauxiliary_load  = 12      # MW\nnet_power = turbine_output - auxiliary_load\nprint(net_power)          # Output: 238\nBasic syntax rules:\n\nComments start with # and extend to the end of the line\nStrings can be enclosed in single ('), double (\"), or triple quotes (\"\"\") for multi-line strings\nPython is case-sensitive: Temperature and temperature are different identifiers"
+  },
+  {
+    "objectID": "lectures/lecture-00.html#the-print-function",
+    "href": "lectures/lecture-00.html#the-print-function",
+    "title": "Lecture 0: Python Tutorial",
+    "section": "The print() Function",
+    "text": "The print() Function\nThe print() function displays output. F-strings provide clean, formatted output and are used throughout this course.\nfuel = \"Heavy Fuel Oil\"\nlhv  = 38333.68\nprint(f\"{fuel} has a lower heating value of {lhv:.2f} kJ/kg.\")\nOutput: Heavy Fuel Oil has a lower heating value of 38333.68 kJ/kg.\nThe following table shows common f-string formatting options:\n\n\n\n\n\n\n\n\n\nFormat\nCode\nExample\nOutput\n\n\n\n\n2 decimal places\nf\"{x:.2f}\"\nf\"{3.1415:.2f}\"\n3.14\n\n\nWhole number\nf\"{x:.0f}\"\nf\"{3.9:.0f}\"\n4\n\n\nThousands separator\nf\"{x:,.1f}\"\nf\"{41303.16:,.1f}\"\n41,303.2\n\n\nPercentage\nf\"{x:.1%}\"\nf\"{0.821:.1%}\"\n82.1%\n\n\nScientific notation\nf\"{x:.3e}\"\nf\"{458289:.3e}\"\n4.583e+05"
+  },
+  {
+    "objectID": "lectures/lecture-00.html#variables-and-data-types",
+    "href": "lectures/lecture-00.html#variables-and-data-types",
+    "title": "Lecture 0: Python Tutorial",
+    "section": "Variables and Data Types",
+    "text": "Variables and Data Types\nVariables store data and are assigned values using the = operator.\nboiler_pressure     = 158.48    # bara  — float\nsteam_temperature   = 535.85    # °C    — float\nsteam_flow          = 716       # ton/h — int\nfuel_type           = \"HFO\"     # str\neconomizer_clean    = True      # bool\nPython has several built-in data types:\n\nIntegers (int): whole numbers, e.g. 716, -5\nFloating-point (float): decimal numbers, e.g. 158.48, 535.85\nStrings (str): text, e.g. \"HFO\", \"Steam drum\"\nBooleans (bool): True or False\n\n\nArithmetic Operations\nw_turbine = 1343.44   # kJ/kg\nw_pump    = 10.04     # kJ/kg\n\nw_net = w_turbine - w_pump\nprint(w_net)          # Subtraction: 1333.40\n\nq_boiler = 3213.53    # kJ/kg\neta = w_net / q_boiler\nprint(eta)            # Division: 0.4148...\n\nprint(eta ** 2)       # Exponentiation: 0.1720...\nprint(w_net // 100)   # Integer division: 13\n\n\nUnit Conversions\nUnit conversions are common in plant calculations. Python handles them cleanly with descriptive variable names:\n# Flow rate conversions\nG_steam_ton_h = 716.17          # ton/h\nG_steam_kg_s  = G_steam_ton_h / 3.6   # ton/h → kg/s\nprint(f\"Steam flow: {G_steam_kg_s:.4f} kg/s\")\n\n# Pressure conversion\nP_bara = 158.48                  # bara\nP_MPa  = P_bara * 0.1            # bara → MPa\nprint(f\"Pressure: {P_MPa:.3f} MPa\")\n\n# Temperature conversion\nT_celsius = 535.85               # °C\nT_kelvin  = T_celsius + 273.15   # °C → K\nprint(f\"Temperature: {T_kelvin:.2f} K\")"
+  },
+  {
+    "objectID": "lectures/lecture-00.html#python-as-a-calculator",
+    "href": "lectures/lecture-00.html#python-as-a-calculator",
+    "title": "Lecture 0: Python Tutorial",
+    "section": "Python as a Calculator",
+    "text": "Python as a Calculator\nPython’s interactive mode is ideal for quick plant calculations. Open a terminal and type python3 (or python on Windows):\npython3\nYou should see the Python prompt:\n&gt;&gt;&gt;\nTry a simple boiler efficiency calculation:\n&gt;&gt;&gt; h_steam     = 3400.8    # kJ/kg\n&gt;&gt;&gt; h_feedwater = 1097.1    # kJ/kg\n&gt;&gt;&gt; G_steam     = 716.17 / 3.6    # kg/s\n&gt;&gt;&gt; G_fuel      = 52.42  / 3.6    # kg/s\n&gt;&gt;&gt; LHV         = 38333.68        # kJ/kg\n&gt;&gt;&gt; Q_steam = G_steam * (h_steam - h_feedwater)\n&gt;&gt;&gt; Q_fuel  = G_fuel  * LHV\n&gt;&gt;&gt; Q_steam / Q_fuel\n0.8214...\nTo exit interactive mode:\nexit()\nOr use Ctrl+D (macOS/Linux) / Ctrl+Z then Enter (Windows)."
+  },
+  {
+    "objectID": "lectures/lecture-00.html#control-flow",
+    "href": "lectures/lecture-00.html#control-flow",
+    "title": "Lecture 0: Python Tutorial",
+    "section": "Control Flow",
+    "text": "Control Flow\n\nConditional Statements\nConditional statements execute different code blocks based on conditions. The if, elif, and else keywords work together:\n# Assess turbine exit steam quality\nx = 0.91    # dryness fraction\n\nif x &lt; 0.85:\n    print(\"WARNING: Excessive moisture — consider reheat cycle\")\nelif x &lt; 0.90:\n    print(\"CAUTION: Quality marginal — monitor closely\")\nelse:\n    print(\"OK: Steam quality acceptable\")\nOutput: OK: Steam quality acceptable\nAnother example — classify boiler efficiency:\neta = 0.821     # boiler thermal efficiency\n\nif eta &gt;= 0.90:\n    print(\"Excellent — above nameplate\")\nelif eta &gt;= 0.85:\n    print(\"Good — normal operating range\")\nelif eta &gt;= 0.80:\n    print(\"Acceptable — investigate losses\")\nelse:\n    print(\"Poor — maintenance required\")\nOutput: Acceptable — investigate losses\n\n\nFor Loop\nA for loop iterates over a sequence. Here we calculate efficiency for multiple fuel types:\nfuels = [\n    (\"HFO\",     38333.68),\n    (\"Biofuel\",  17500.00),\n    (\"Coal\",     27000.00),\n]\n\nG_fuel  = 52.42 / 3.6      # kg/s\nQ_steam = 458289.1          # kW\n\nfor name, lhv in fuels:\n    Q_fuel = G_fuel * lhv\n    eta    = Q_steam / Q_fuel\n    print(f\"{name:&lt;10}: {eta:.1%}\")\nOutput:\nHFO       : 82.1%\nBiofuel   : 187.5%\nCoal      : 121.7%\n\n\n\n\n\n\nNote\n\n\n\nThe biofuel and coal efficiencies above exceed 100% because the fuel flow G_fuel was measured during HFO operation. In Lab 1 you will collect the correct fuel flow for each condition from the simulator.\n\n\n\n\nWhile Loop\nA while loop executes as long as a condition is true. Useful for iterative calculations:\n# Find the load at which efficiency exceeds 82%\nload       = 30       # % — starting load\nefficiency = 0.78     # starting efficiency\n\nwhile efficiency &lt; 0.82:\n    load       += 5\n    efficiency += 0.008\n    print(f\"Load: {load}%  Efficiency: {efficiency:.1%}\")"
+  },
+  {
+    "objectID": "lectures/lecture-00.html#functions",
+    "href": "lectures/lecture-00.html#functions",
+    "title": "Lecture 0: Python Tutorial",
+    "section": "Functions",
+    "text": "Functions\n\nThe def Keyword\nFunctions are reusable code blocks defined with def. They keep calculations organised and repeatable — essential for simulator work.\ndef bara_to_mpa(pressure_bara):\n    \"\"\"Convert pressure from bara to MPa.\"\"\"\n    return pressure_bara * 0.1\n\n\ndef celsius_to_kelvin(temp_celsius):\n    \"\"\"Convert temperature from Celsius to Kelvin.\"\"\"\n    return temp_celsius + 273.15\n\n\ndef boiler_efficiency(G_steam, h_steam, h_fw, G_fuel, LHV):\n    \"\"\"\n    Calculate boiler thermal efficiency (direct method).\n\n    Parameters\n    ----------\n    G_steam : float  Steam mass flow rate (kg/s)\n    h_steam : float  Steam enthalpy (kJ/kg)\n    h_fw    : float  Feedwater enthalpy (kJ/kg)\n    G_fuel  : float  Fuel mass flow rate (kg/s)\n    LHV     : float  Lower heating value of fuel (kJ/kg)\n\n    Returns\n    -------\n    float  Thermal efficiency (dimensionless)\n    \"\"\"\n    Q_steam = G_steam * (h_steam - h_fw)\n    Q_fuel  = G_fuel  * LHV\n    return Q_steam / Q_fuel\n\n\n# Call the function with HFO data\neta = boiler_efficiency(\n    G_steam = 716.17 / 3.6,\n    h_steam = 3400.8,\n    h_fw    = 1097.1,\n    G_fuel  = 52.42 / 3.6,\n    LHV     = 38333.68,\n)\nprint(f\"Boiler efficiency: {eta:.1%}\")\nOutput: Boiler efficiency: 82.1%\nFunctions with default parameters allow quick what-if calculations:\ndef dulong_lhv(HHV, H=0.134, W=0.010):\n    \"\"\"\n    Calculate LHV from HHV using the Dulong formula.\n\n    Parameters\n    ----------\n    HHV : float  Higher heating value (kJ/kg)\n    H   : float  Hydrogen mass fraction (default: HFO typical)\n    W   : float  Moisture mass fraction (default: HFO typical)\n    \"\"\"\n    return HHV - 2442 * (9 * H + W)\n\n\nprint(dulong_lhv(41303.16))           # HFO with defaults\nprint(dulong_lhv(29500, H=0.05, W=0.08))  # Coal example\n\n\nThe lambda Keyword\nLambda functions are compact, one-line functions useful for simple conversions:\nbara_to_mpa = lambda p: p * 0.1\nton_h_to_kg_s = lambda g: g / 3.6\n\nprint(bara_to_mpa(158.48))      # Output: 15.848\nprint(ton_h_to_kg_s(716.17))    # Output: 198.936..."
+  },
+  {
+    "objectID": "lectures/lecture-00.html#the-math-module",
+    "href": "lectures/lecture-00.html#the-math-module",
+    "title": "Lecture 0: Python Tutorial",
+    "section": "The math Module",
+    "text": "The math Module\nThe math module provides mathematical functions used in thermodynamic calculations.\nimport math\n\n# Excess air from O2 measurement (Siegert method)\nO2_percent     = 0.75\nlambda_excess  = 21 / (21 - O2_percent)\nexcess_air_pct = (lambda_excess - 1) * 100\n\nprint(f\"Excess air factor (λ): {lambda_excess:.4f}\")\nprint(f\"Excess air           : {excess_air_pct:.1f}%\")\n\n# Log mean temperature difference (LMTD) for heat exchangers\ndT1 = 120.0     # °C — hot end temperature difference\ndT2 = 45.0      # °C — cold end temperature difference\nLMTD = (dT1 - dT2) / math.log(dT1 / dT2)\nprint(f\"LMTD: {LMTD:.2f} °C\")\n\n\n\n\n\n\nWarning\n\n\n\nPython’s math module trigonometric functions expect angles in radians, not degrees. Always convert with math.radians() before using sin, cos, or tan."
+  },
+  {
+    "objectID": "lectures/lecture-00.html#the-iapws-library",
+    "href": "lectures/lecture-00.html#the-iapws-library",
+    "title": "Lecture 0: Python Tutorial",
+    "section": "The iapws Library",
+    "text": "The iapws Library\nThe iapws library implements the IAPWS-IF97 standard — the industry reference for water and steam properties used in power plant calculations. It replaces manual steam table lookups with accurate, programmatic access to thermodynamic properties.\nInstall it in the course environment:\nuv add iapws\nGiven any two independent properties, IAPWS97 returns all others:\nfrom iapws import IAPWS97\n\n# HP steam at turbine inlet: 535.85°C, 158.48 bara\nsteam = IAPWS97(T=535.85 + 273.15, P=158.48 * 0.1)\n\nprint(f\"Temperature : {steam.T - 273.15:.2f} °C\")\nprint(f\"Pressure    : {steam.P:.3f} MPa\")\nprint(f\"Enthalpy    : {steam.h:.2f} kJ/kg\")\nprint(f\"Entropy     : {steam.s:.4f} kJ/kg·K\")\nprint(f\"Density     : {steam.rho:.3f} kg/m³\")\nCommon property attributes:\n\n\n\nAttribute\nProperty\nUnit\n\n\n\n\n.h\nSpecific enthalpy\nkJ/kg\n\n\n.s\nSpecific entropy\nkJ/kg·K\n\n\n.T\nTemperature\nK\n\n\n.P\nPressure\nMPa\n\n\n.rho\nDensity\nkg/m³\n\n\n.x\nSteam quality (wet region)\n—\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nIAPWS97 always takes temperature in Kelvin and pressure in MPa. Always convert before passing simulator tag values.\n\n\nFor saturated conditions, use the quality parameter x:\n# Saturated liquid at condenser pressure (x=0)\nsat_liquid = IAPWS97(P=0.006, x=0)\nprint(f\"Saturation temperature : {sat_liquid.T - 273.15:.2f} °C\")\nprint(f\"Enthalpy (sat liquid)  : {sat_liquid.h:.2f} kJ/kg\")\n\n# Saturated vapour at the same pressure (x=1)\nsat_vapour = IAPWS97(P=0.006, x=1)\nprint(f\"Enthalpy (sat vapour)  : {sat_vapour.h:.2f} kJ/kg\")\nprint(f\"Enthalpy of evaporation: {sat_vapour.h - sat_liquid.h:.2f} kJ/kg\")"
+  },
+  {
+    "objectID": "lectures/lecture-00.html#writing-python-scripts",
+    "href": "lectures/lecture-00.html#writing-python-scripts",
+    "title": "Lecture 0: Python Tutorial",
+    "section": "Writing Python Scripts",
+    "text": "Writing Python Scripts\nWrite Python code in a .py file and run it as a script. Create boiler_efficiency.py:\n\"\"\"\nBoiler Efficiency Calculation — Direct Method\nThermal Power Plant Simulator Course\n\"\"\"\n\n# Simulator tag values\nh_steam = 3400.8        # kJ/kg  H02603\nh_fw    = 1097.1        # kJ/kg  H02448\nG_steam = 716.17 / 3.6  # kg/s   G02600\nG_fuel  = 52.42  / 3.6  # kg/s   G01038\nLHV     = 38333.68      # kJ/kg\n\n# Heat flows\nQ_steam = G_steam * (h_steam - h_fw)\nQ_fuel  = G_fuel  * LHV\neta     = Q_steam / Q_fuel\n\nprint(f\"Heat to steam    : {Q_steam:.1f} kW\")\nprint(f\"Fuel heat input  : {Q_fuel:.1f} kW\")\nprint(f\"Boiler efficiency: {eta:.1%}\")\nRun it from the terminal:\nuv run python boiler_efficiency.py\nOutput:\nHeat to steam    : 458289.1 kW\nFuel heat input  : 558181.0 kW\nBoiler efficiency: 82.1%"
+  },
+  {
+    "objectID": "lectures/lecture-00.html#python-style-guide",
+    "href": "lectures/lecture-00.html#python-style-guide",
+    "title": "Lecture 0: Python Tutorial",
+    "section": "Python Style Guide",
+    "text": "Python Style Guide\n\nCode is read far more often than it is written. — Guido van Rossum, creator of Python.\n\nFollow PEP 8 as the primary style guide:\n\nUse descriptive names: steam_enthalpy not h or x1\nAdd units in comments: # kJ/kg, # kg/s, # MPa\nInclude a module docstring at the top of every .py file\nKeep lines under 88 characters\nTwo blank lines between top-level functions\n\nThis course uses Black for automatic formatting and Ruff for linting. Run them before submitting any script:\nuv run black .\nuv run ruff check ."
+  },
+  {
+    "objectID": "lectures/lecture-00.html#summary",
+    "href": "lectures/lecture-00.html#summary",
+    "title": "Lecture 0: Python Tutorial",
+    "section": "Summary",
+    "text": "Summary\nYou have covered the Python basics needed for this course:\n\nSyntax, variables, and data types\nUnit conversions using descriptive variable names\nArithmetic operations for plant calculations\nControl flow: if/elif/else, for, while\nFunctions with def and lambda\nThe math module\nThe iapws library for steam properties\nWriting and running .py scripts with uv\n\nIn Lecture 1 we build on these foundations to calculate boiler thermal efficiency from real simulator data."
+  },
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Course Title: Thermal Power Plant Simulator\nTerm: Fall 2026\nSchedule: 4 periods per week, September to December\nCredits: [Insert credits]\nPrerequisites: Thermodynamics, Fluid Mechanics"
+  },
+  {
+    "objectID": "syllabus.html#course-information",
+    "href": "syllabus.html#course-information",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Course Title: Thermal Power Plant Simulator\nTerm: Fall 2026\nSchedule: 4 periods per week, September to December\nCredits: [Insert credits]\nPrerequisites: Thermodynamics, Fluid Mechanics"
+  },
+  {
+    "objectID": "syllabus.html#learning-objectives",
+    "href": "syllabus.html#learning-objectives",
+    "title": "Syllabus",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nStudents will be able to: 1. Simulate steady-state and transient operation of thermal power plants. 2. Analyze the performance of boilers, turbines, condensers, and feedwater systems. 3. Optimize plant efficiency and evaluate environmental performance. 4. Diagnose and troubleshoot common operational issues."
+  },
+  {
+    "objectID": "syllabus.html#assessment",
+    "href": "syllabus.html#assessment",
+    "title": "Syllabus",
+    "section": "Assessment",
+    "text": "Assessment\n\n\n\nComponent\nWeight\n\n\n\n\nLaboratory Simulations\n40%\n\n\nAssignments\n25%\n\n\nMidterm Examination\n15%\n\n\nFinal Project\n20%"
+  },
+  {
+    "objectID": "syllabus.html#policies",
+    "href": "syllabus.html#policies",
+    "title": "Syllabus",
+    "section": "Policies",
+    "text": "Policies\n\nAll simulation reports must be submitted through the course platform.\nLate submissions will be penalized by 10% per day.\nAcademic integrity is strictly enforced."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About the Instructor",
+    "section": "",
+    "text": "Serhat Beyenir is an instructor in Power Engineering at BCIT, where he teaches Thermal Power Plant Simulator courses and previously taught Thermodynamics, Applied Mechanics, Propulsion Engines, and Propulsion Plant Simulator courses at BCIT Marine Engineering.\nHis interest in computing dates back to high school, when he taught himself BASIC to plot trigonometric functions on an Amstrad 64K microcomputer. He completed programming coursework at the university level but is largely self-taught in the use of Unix and Linux systems, later adopting macOS for personal projects in 2007. While teaching Power Engineering, he employed MATLAB for engineering computations and compiled his instructional materials into an open textbook, A Brief Introduction to Engineering Computation with MATLAB, published in 2011.\nIn February 2025, he attended a Python course at the West Vancouver Memorial Library and subsequently began using Python in his Marine and Power Engineering lecture materials, gradually incorporating computational examples into his teaching.\nSerhat holds a Class 1 Marine Engineer certification, a Master of Education in Distance Education, and a Bachelor of Science in Marine Engineering."
+  },
+  {
+    "objectID": "assignments/assignment-01.html",
+    "href": "assignments/assignment-01.html",
+    "title": "Assignment 1: Rankine Cycle Analysis",
+    "section": "",
+    "text": "Complete the following simulation exercises and submit a detailed report."
+  },
+  {
+    "objectID": "labs/lab-03.html",
+    "href": "labs/lab-03.html",
+    "title": "Lab 3: Power Plant Efficiency",
+    "section": "",
+    "text": "By the end of this lab you will be able to:\n\nRun a basic ideal Rankine cycle simulation using steam tables\nIdentify the four state points of the cycle\nInterpret thermal efficiency in terms of operating conditions\nObserve how boiler pressure and temperature affect performance"
+  },
+  {
+    "objectID": "labs/lab-03.html#objectives",
+    "href": "labs/lab-03.html#objectives",
+    "title": "Lab 3: Power Plant Efficiency",
+    "section": "",
+    "text": "By the end of this lab you will be able to:\n\nRun a basic ideal Rankine cycle simulation using steam tables\nIdentify the four state points of the cycle\nInterpret thermal efficiency in terms of operating conditions\nObserve how boiler pressure and temperature affect performance"
+  },
+  {
+    "objectID": "labs/lab-03.html#background",
+    "href": "labs/lab-03.html#background",
+    "title": "Lab 3: Power Plant Efficiency",
+    "section": "Background",
+    "text": "Background\nThe ideal Rankine cycle is the theoretical basis for steam power generation. It consists of four processes:\n\n\n\nProcess\nDevice\nDescription\n\n\n\n\n1 → 2\nTurbine\nIsentropic expansion\n\n\n2 → 3\nCondenser\nIsothermal heat rejection\n\n\n3 → 4\nPump\nIsentropic compression\n\n\n4 → 1\nBoiler\nIsobaric heat addition"
+  },
+  {
+    "objectID": "labs/lab-03.html#setup",
+    "href": "labs/lab-03.html#setup",
+    "title": "Lab 3: Power Plant Efficiency",
+    "section": "Setup",
+    "text": "Setup\nRun the cell below to import the required libraries.\n\nfrom iapws import IAPWS97\nimport numpy as np\nimport matplotlib.pyplot as plt"
+  },
+  {
+    "objectID": "labs/lab-03.html#part-1-baseline-cycle",
+    "href": "labs/lab-03.html#part-1-baseline-cycle",
+    "title": "Lab 3: Power Plant Efficiency",
+    "section": "Part 1: Baseline Cycle",
+    "text": "Part 1: Baseline Cycle\nRun the simulation with default conditions:\n\nBoiler: 500°C, 10 MPa\n\nCondenser: 0.006 MPa (~36°C)\n\n\ndef rankine_cycle(T_boiler=500, P_boiler=10, P_condenser=0.006):\n    \"\"\"Ideal Rankine cycle using IAPWS-IF97 steam tables.\"\"\"\n    state1 = IAPWS97(T=T_boiler + 273.15, P=P_boiler)\n    state2 = IAPWS97(P=P_condenser, s=state1.s)\n    state3 = IAPWS97(P=P_condenser, x=0)\n    state4 = IAPWS97(P=P_boiler, s=state3.s)\n\n    w_turbine = state1.h - state2.h\n    w_pump    = state4.h - state3.h\n    q_boiler  = state1.h - state4.h\n    w_net     = w_turbine - w_pump\n    eta       = w_net / q_boiler\n\n    return {\n        \"T_condenser_C\":    round(state3.T - 273.15, 2),\n        \"h1\": round(state1.h, 2),\n        \"h2\": round(state2.h, 2),\n        \"h3\": round(state3.h, 2),\n        \"h4\": round(state4.h, 2),\n        \"w_turbine\":        round(w_turbine, 2),\n        \"w_pump\":           round(w_pump, 2),\n        \"w_net\":            round(w_net, 2),\n        \"q_boiler\":         round(q_boiler, 2),\n        \"eta\":              round(eta, 4),\n        \"turbine_quality\":  round(state2.x, 3) if state2.x else None,\n    }\n\nbaseline = rankine_cycle()\n\nprint(f\"Condenser temperature : {baseline['T_condenser_C']} °C\")\nprint(f\"h1 (turbine inlet)    : {baseline['h1']} kJ/kg\")\nprint(f\"h2 (turbine exit)     : {baseline['h2']} kJ/kg\")\nprint(f\"h3 (pump inlet)       : {baseline['h3']} kJ/kg\")\nprint(f\"h4 (boiler inlet)     : {baseline['h4']} kJ/kg\")\nprint(f\"Turbine work          : {baseline['w_turbine']} kJ/kg\")\nprint(f\"Pump work             : {baseline['w_pump']} kJ/kg\")\nprint(f\"Net work              : {baseline['w_net']} kJ/kg\")\nprint(f\"Boiler heat input     : {baseline['q_boiler']} kJ/kg\")\nprint(f\"Turbine exit quality  : {baseline['turbine_quality']}\")\nprint(f\"Thermal efficiency    : {baseline['eta']:.1%}\")\n\nCondenser temperature : 36.16 °C\nh1 (turbine inlet)    : 3375.06 kJ/kg\nh2 (turbine exit)     : 2031.62 kJ/kg\nh3 (pump inlet)       : 151.49 kJ/kg\nh4 (boiler inlet)     : 161.53 kJ/kg\nTurbine work          : 1343.44 kJ/kg\nPump work             : 10.04 kJ/kg\nNet work              : 1333.41 kJ/kg\nBoiler heat input     : 3213.53 kJ/kg\nTurbine exit quality  : 0.778\nThermal efficiency    : 41.5%"
+  },
+  {
+    "objectID": "labs/lab-03.html#part-2-effect-of-boiler-temperature",
+    "href": "labs/lab-03.html#part-2-effect-of-boiler-temperature",
+    "title": "Lab 3: Power Plant Efficiency",
+    "section": "Part 2: Effect of Boiler Temperature",
+    "text": "Part 2: Effect of Boiler Temperature\nObserve how thermal efficiency changes as boiler temperature increases from 300°C to 600°C, keeping pressure constant at 10 MPa.\n\ntemperatures = np.arange(300, 620, 20)\nefficiencies = [rankine_cycle(T_boiler=T)[\"eta\"] * 100 for T in temperatures]\n\nfig, ax = plt.subplots(figsize=(9, 5))\nax.plot(temperatures, efficiencies, \"ro-\", linewidth=2, markersize=6)\nax.axvline(x=500, color=\"gray\", linestyle=\"--\", alpha=0.6, label=\"Baseline (500°C)\")\nax.set_title(\"Effect of Boiler Temperature on Thermal Efficiency\")\nax.set_xlabel(\"Boiler Temperature (°C)\")\nax.set_ylabel(\"Thermal Efficiency (%)\")\nax.grid(True, alpha=0.3)\nax.legend()\nfig.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "labs/lab-03.html#part-3-effect-of-boiler-pressure",
+    "href": "labs/lab-03.html#part-3-effect-of-boiler-pressure",
+    "title": "Lab 3: Power Plant Efficiency",
+    "section": "Part 3: Effect of Boiler Pressure",
+    "text": "Part 3: Effect of Boiler Pressure\nNow observe how efficiency changes with boiler pressure (3–20 MPa) at a fixed boiler temperature of 500°C.\n\npressures = np.arange(3, 21, 1)\neff_pressure = [rankine_cycle(P_boiler=P)[\"eta\"] * 100 for P in pressures]\n\nfig, ax = plt.subplots(figsize=(9, 5))\nax.plot(pressures, eff_pressure, \"bo-\", linewidth=2, markersize=6)\nax.axvline(x=10, color=\"gray\", linestyle=\"--\", alpha=0.6, label=\"Baseline (10 MPa)\")\nax.set_title(\"Effect of Boiler Pressure on Thermal Efficiency\")\nax.set_xlabel(\"Boiler Pressure (MPa)\")\nax.set_ylabel(\"Thermal Efficiency (%)\")\nax.grid(True, alpha=0.3)\nax.legend()\nfig.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "labs/lab-03.html#questions",
+    "href": "labs/lab-03.html#questions",
+    "title": "Lab 3: Power Plant Efficiency",
+    "section": "Questions",
+    "text": "Questions\nAnswer the following in the cells provided below each question.\nQ1. What is the thermal efficiency of the baseline cycle? How does it compare to the Carnot efficiency between the same temperature limits?\n\n# Your calculation here\n\nQ2. At what boiler temperature does efficiency exceed 43%? What practical constraints limit operating at that temperature?\n\n# Your calculation here\n\nQ3. Looking at the pressure curve, does efficiency increase indefinitely with pressure? What happens to turbine exit quality at very high pressures?\n\n# Your calculation here — hint: check baseline['turbine_quality']\npressures_extended = np.arange(3, 31, 1)\nqualities = [rankine_cycle(P_boiler=P)[\"turbine_quality\"] for P in pressures_extended]\n\nfig, ax = plt.subplots(figsize=(9, 5))\nax.plot(pressures_extended, qualities, \"go-\", linewidth=2, markersize=6)\nax.axhline(y=0.88, color=\"r\", linestyle=\"--\", alpha=0.7, label=\"Minimum acceptable quality (0.88)\")\nax.set_title(\"Turbine Exit Quality vs Boiler Pressure\")\nax.set_xlabel(\"Boiler Pressure (MPa)\")\nax.set_ylabel(\"Steam Quality (x)\")\nax.grid(True, alpha=0.3)\nax.legend()\nfig.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "labs/lab-03.html#submission",
+    "href": "labs/lab-03.html#submission",
+    "title": "Lab 3: Power Plant Efficiency",
+    "section": "Submission",
+    "text": "Submission\nSave this file with your name added to the filename: lab-01-firstname-lastname.qmd and submit the completed .qmd file."
+  },
+  {
+    "objectID": "labs/lab-01.html",
+    "href": "labs/lab-01.html",
+    "title": "Lab 1: Boiler Efficiency Calculation",
+    "section": "",
+    "text": "By the end of this lab you will be able to:\n\nApply the direct method to calculate boiler efficiency from plant data\nCalculate LHV from HFO elemental composition using the Dulong formula\nApply the indirect method using flue gas stack loss\nInterpret the difference between direct and indirect efficiency results"
+  },
+  {
+    "objectID": "labs/lab-01.html#objectives",
+    "href": "labs/lab-01.html#objectives",
+    "title": "Lab 1: Boiler Efficiency Calculation",
+    "section": "",
+    "text": "By the end of this lab you will be able to:\n\nApply the direct method to calculate boiler efficiency from plant data\nCalculate LHV from HFO elemental composition using the Dulong formula\nApply the indirect method using flue gas stack loss\nInterpret the difference between direct and indirect efficiency results"
+  },
+  {
+    "objectID": "labs/lab-01.html#background",
+    "href": "labs/lab-01.html#background",
+    "title": "Lab 1: Boiler Efficiency Calculation",
+    "section": "Background",
+    "text": "Background\nBoiler efficiency measures how effectively the boiler converts fuel energy into useful steam energy. Two methods are used in practice:\nDirect method (input/output):\n\\[\\eta = \\frac{Q_{steam}}{Q_{fuel}} = \\frac{\\dot{m}_{steam} \\times (h_{steam} - h_{fw})}{\\dot{m}_{fuel} \\times LHV}\\]\nIndirect method (loss method):\n\\[\\eta = 1 - \\frac{Q_{losses}}{Q_{fuel}}\\]\nThe indirect method accounts for individual losses — the dominant one being stack (flue gas) heat loss. A complete indirect analysis also includes radiation, convection, and unburnt carbon losses.\n\nMeasurement Boundary\nFeedwater (T02447, 254°C) → [BOILER SYSTEM] → HP Steam (T02602, 536°C)\n                                    ↑\n                          Fuel (G01038, 52.42 ton/h)\nThe economizer is inside the boiler boundary — its heat recovery is credited to the boiler in both methods."
+  },
+  {
+    "objectID": "labs/lab-01.html#setup",
+    "href": "labs/lab-01.html#setup",
+    "title": "Lab 1: Boiler Efficiency Calculation",
+    "section": "Setup",
+    "text": "Setup\n\nfrom iapws import IAPWS97\nimport numpy as np\nimport matplotlib.pyplot as plt"
+  },
+  {
+    "objectID": "labs/lab-01.html#part-1-hfo-heating-value",
+    "href": "labs/lab-01.html#part-1-hfo-heating-value",
+    "title": "Lab 1: Boiler Efficiency Calculation",
+    "section": "Part 1: HFO Heating Value",
+    "text": "Part 1: HFO Heating Value\nHeavy fuel oil heating value depends on its elemental composition. The Dulong formula relates LHV to HHV:\n\\[LHV = HHV - 2442 \\times (9H + W)\\]\nWhere \\(H\\) is hydrogen mass fraction and \\(W\\) is moisture mass fraction. The factor \\(9H\\) accounts for water formed by hydrogen combustion; \\(2442\\) kJ/kg is the latent heat of water vapour at 25°C.\n\n# HFO elemental composition (mass fractions) — X008xx tags\nC = 84.0 / 100  # X00800 carbon\nH = 13.4 / 100  # X00801 hydrogen\nS = 0.6  / 100  # X00802 sulfur\nO = 1.5  / 100  # X00803 oxygen\nN = 0.5  / 100  # X00804 nitrogen\nW = 1.0  / 100  # X00807 moisture\n\nHHV = 41303.16  # kJ/kg  H00810\n\nLHV = HHV - 2442 * (9 * H + W)\n\nprint(f\"HHV              : {HHV:.2f} kJ/kg\")\nprint(f\"LHV (Dulong)     : {LHV:.2f} kJ/kg\")\nprint(f\"HHV - LHV        : {HHV - LHV:.2f} kJ/kg\")\n\nHHV              : 41303.16 kJ/kg\nLHV (Dulong)     : 38333.69 kJ/kg\nHHV - LHV        : 2969.47 kJ/kg\n\n\nQ1. Why is LHV lower than HHV? Which basis is used for boiler efficiency in marine and power engineering practice, and why?\n\n# Your answer here"
+  },
+  {
+    "objectID": "labs/lab-01.html#part-2-direct-method",
+    "href": "labs/lab-01.html#part-2-direct-method",
+    "title": "Lab 1: Boiler Efficiency Calculation",
+    "section": "Part 2: Direct Method",
+    "text": "Part 2: Direct Method\nUsing measured steam and feedwater enthalpies with actual fuel flow.\n\n# Steam side measurements\nh_steam = 3400.8    # kJ/kg  H02603  HP line steam enthalpy\nh_fw    = 1097.1    # kJ/kg  H02448  economizer water inlet enthalpy\nG_steam = 716.17 / 3.6  # kg/s  G02600  (ton/h → kg/s)\n\n# Fuel side\nG_fuel = 52.42 / 3.6    # kg/s  G01038  HFO supply flow (ton/h → kg/s)\n\n# Heat flows\nQ_steam = G_steam * (h_steam - h_fw)\nQ_fuel  = G_fuel  * LHV\n\neta_direct = Q_steam / Q_fuel\n\nprint(f\"Enthalpy rise    : {h_steam - h_fw:.2f} kJ/kg\")\nprint(f\"Heat to steam    : {Q_steam:.1f} kW\")\nprint(f\"Fuel heat input  : {Q_fuel:.1f} kW\")\nprint(f\"Boiler efficiency (direct): {eta_direct:.1%}\")\n\nEnthalpy rise    : 2303.70 kJ/kg\nHeat to steam    : 458289.1 kW\nFuel heat input  : 558181.1 kW\nBoiler efficiency (direct): 82.1%\n\n\nQ2. The boiler nameplate efficiency is 90%. What does the difference between your result and nameplate suggest about current operating conditions?\n\n# Your answer here"
+  },
+  {
+    "objectID": "labs/lab-01.html#part-3-indirect-method-stack-loss",
+    "href": "labs/lab-01.html#part-3-indirect-method-stack-loss",
+    "title": "Lab 1: Boiler Efficiency Calculation",
+    "section": "Part 3: Indirect Method — Stack Loss",
+    "text": "Part 3: Indirect Method — Stack Loss\nThe largest single boiler loss is heat carried away by flue gas. We calculate flue gas flow from fuel composition and excess air, then quantify the stack loss.\n\nStep 1: Excess Air from O₂ Measurement\n\\[\\lambda = \\frac{21}{21 - O_{2}\\%}\\]\n\nO2_fg  = 0.75   # vol%  X02419  O2 in flue gas (dry)\nT_stack = 141.57  # °C  T02114  rotary air preheater gas outlet\nT_ref   = 25.0    # °C  reference\n\nlambda_excess = 21 / (21 - O2_fg)\nexcess_air_pct = (lambda_excess - 1) * 100\n\nprint(f\"O2 in flue gas        : {O2_fg:.2f} vol%\")\nprint(f\"Excess air factor (λ) : {lambda_excess:.4f}\")\nprint(f\"Excess air            : {excess_air_pct:.1f}%\")\n\nO2 in flue gas        : 0.75 vol%\nExcess air factor (λ) : 1.0370\nExcess air            : 3.7%\n\n\n\n\nStep 2: Flue Gas Flow\n\n# Stoichiometric air requirement (Dulong)\nair_stoich = (2.667 * C + 8 * (H - O / 8) + S) / 0.232\nair_actual = air_stoich * lambda_excess\n\n# Flue gas composition (kg/kg fuel)\nfg_CO2     = 3.667 * C\nfg_SO2     = 2.0 * S\nfg_H2O     = 9.0 * H + W\nfg_N2      = N + air_actual * 0.768\nfg_O2_exc  = air_actual * 0.232 - (2.667 * C + 8 * (H - O / 8) + S)\n\nG_fg_per_kg = fg_CO2 + fg_SO2 + fg_H2O + fg_N2 + fg_O2_exc\nG_fluegas   = G_fuel * G_fg_per_kg\n\nprint(f\"Stoichiometric air    : {air_stoich:.3f} kg/kg fuel\")\nprint(f\"Actual air            : {air_actual:.3f} kg/kg fuel\")\nprint(f\"Flue gas yield        : {G_fg_per_kg:.3f} kg/kg fuel\")\nprint(f\"Flue gas flow         : {G_fluegas:.2f} kg/s\")\n\nStoichiometric air    : 14.238 kg/kg fuel\nActual air            : 14.766 kg/kg fuel\nFlue gas yield        : 15.776 kg/kg fuel\nFlue gas flow         : 229.71 kg/s\n\n\n\n\nStep 3: Stack Heat Loss\n\nCp_fg = 1.10  # kJ/kg·K — approximate mean Cp for combustion products\n\nQ_stack    = G_fluegas * Cp_fg * (T_stack - T_ref)\neta_indirect = (Q_fuel - Q_stack) / Q_fuel\n\nprint(f\"Stack temperature     : {T_stack:.2f} °C\")\nprint(f\"Stack heat loss       : {Q_stack:.1f} kW\")\nprint(f\"Stack loss (% of LHV) : {Q_stack / Q_fuel * 100:.1f}%\")\nprint(f\"Boiler efficiency (indirect): {eta_indirect:.1%}\")\n\nStack temperature     : 141.57 °C\nStack heat loss       : 29455.1 kW\nStack loss (% of LHV) : 5.3%\nBoiler efficiency (indirect): 94.7%"
+  },
+  {
+    "objectID": "labs/lab-01.html#part-4-comparison-and-sensitivity",
+    "href": "labs/lab-01.html#part-4-comparison-and-sensitivity",
+    "title": "Lab 1: Boiler Efficiency Calculation",
+    "section": "Part 4: Comparison and Sensitivity",
+    "text": "Part 4: Comparison and Sensitivity\n\nprint(f\"Direct method   : {eta_direct:.1%}\")\nprint(f\"Indirect method : {eta_indirect:.1%}\")\nprint(f\"Difference      : {abs(eta_indirect - eta_direct) * 100:.1f} percentage points\")\n\nDirect method   : 82.1%\nIndirect method : 94.7%\nDifference      : 12.6 percentage points\n\n\nThe indirect method accounts only for stack loss. Observe how efficiency changes with stack temperature — a key operational parameter.\n\nstack_temps = np.arange(100, 400, 10)\neta_stack = [(Q_fuel - G_fluegas * Cp_fg * (T - T_ref)) / Q_fuel * 100\n             for T in stack_temps]\n\nfig, ax = plt.subplots(figsize=(9, 5))\nax.plot(stack_temps, eta_stack, \"ro-\", linewidth=2, markersize=4)\nax.axvline(x=T_stack, color=\"gray\", linestyle=\"--\", alpha=0.7,\n           label=f\"Current stack temp ({T_stack}°C)\")\nax.axhline(y=90, color=\"blue\", linestyle=\"--\", alpha=0.7,\n           label=\"Typical nameplate (90%)\")\nax.set_title(\"Effect of Stack Temperature on Boiler Efficiency\")\nax.set_xlabel(\"Stack Temperature (°C)\")\nax.set_ylabel(\"Boiler Efficiency (%)\")\nax.grid(True, alpha=0.3)\nax.legend()\nfig.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nQ3. At what stack temperature does efficiency reach 90%? What equipment is responsible for reducing stack temperature, and what limits how low it can go?\n\n# Your calculation here\n\nQ4. The direct and indirect methods give different results. List at least three reasons that explain the difference.\n\n# Your answer here"
+  },
+  {
+    "objectID": "labs/lab-01.html#summary",
+    "href": "labs/lab-01.html#summary",
+    "title": "Lab 1: Boiler Efficiency Calculation",
+    "section": "Summary",
+    "text": "Summary\nComplete the table below with your results:\n\n\n\nParameter\nValue\nUnit\n\n\n\n\nHFO LHV\n\nkJ/kg\n\n\nSteam flow\n\nkg/s\n\n\nFuel flow\n\nkg/s\n\n\nHeat to steam\n\nkW\n\n\nFuel heat input\n\nkW\n\n\nStack loss\n\nkW\n\n\nBoiler efficiency (direct)\n\n%\n\n\nBoiler efficiency (indirect)\n\n%"
+  },
+  {
+    "objectID": "labs/lab-01.html#submission",
+    "href": "labs/lab-01.html#submission",
+    "title": "Lab 1: Boiler Efficiency Calculation",
+    "section": "Submission",
+    "text": "Submission\nSave as lab-02-firstname-lastname.qmd and submit the completed .qmd file."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Thermal Power Plant Simulator",
+    "section": "",
+    "text": "This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.\nInstructor: Serhat Beyenir\nSchedule: 4 periods per week (September – December 2026)\nFormat: Lectures + Simulations\n\n\n\nDynamic simulation of Rankine and combined cycles\nPlant performance analysis and optimization\nFault detection and troubleshooting scenarios\nEfficiency and environmental impact assessment\n\n\n\n\n\n\n\nImportant\n\n\n\nFirst Class: September 8, 2026"
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "Thermal Power Plant Simulator",
+    "section": "",
+    "text": "This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.\nInstructor: Serhat Beyenir\nSchedule: 4 periods per week (September – December 2026)\nFormat: Lectures + Simulations\n\n\n\nDynamic simulation of Rankine and combined cycles\nPlant performance analysis and optimization\nFault detection and troubleshooting scenarios\nEfficiency and environmental impact assessment\n\n\n\n\n\n\n\nImportant\n\n\n\nFirst Class: September 8, 2026"
+  },
+  {
+    "objectID": "materials.html",
+    "href": "materials.html",
+    "title": "Course Materials",
+    "section": "",
+    "text": "Lecture 0: Python Tutorial\nLecture 1: Boiler Efficiency\nLecture 3: Introduction to Thermal Power Plants"
+  },
+  {
+    "objectID": "materials.html#lecture-notes",
+    "href": "materials.html#lecture-notes",
+    "title": "Course Materials",
+    "section": "",
+    "text": "Lecture 0: Python Tutorial\nLecture 1: Boiler Efficiency\nLecture 3: Introduction to Thermal Power Plants"
+  },
+  {
+    "objectID": "materials.html#simulator-labs",
+    "href": "materials.html#simulator-labs",
+    "title": "Course Materials",
+    "section": "Simulator Labs",
+    "text": "Simulator Labs\n\nLab 1: Boiler Efficiency Calculation\nLab 3: Power Plant Efficiency"
+  },
+  {
     "objectID": "lectures/lecture-03.html",
     "href": "lectures/lecture-03.html",
     "title": "Lecture 3: Introduction to Thermal Power Plants",
@@ -110,223 +418,6 @@
     "title": "Lecture 3: Introduction to Thermal Power Plants",
     "section": "Preparation for Lab 1",
     "text": "Preparation for Lab 1\nBefore attending Lab 1 on September 10:\n\nEnsure iapws is installed in your environment (uv sync)\nReview the four state point definitions above\nBe ready to explain what turbine exit quality means and why it matters"
-  },
-  {
-    "objectID": "materials.html",
-    "href": "materials.html",
-    "title": "Course Materials",
-    "section": "",
-    "text": "Lecture 1: Boiler Efficiency\nLecture 3: Introduction to Thermal Power Plants"
-  },
-  {
-    "objectID": "materials.html#lecture-notes",
-    "href": "materials.html#lecture-notes",
-    "title": "Course Materials",
-    "section": "",
-    "text": "Lecture 1: Boiler Efficiency\nLecture 3: Introduction to Thermal Power Plants"
-  },
-  {
-    "objectID": "materials.html#simulator-labs",
-    "href": "materials.html#simulator-labs",
-    "title": "Course Materials",
-    "section": "Simulator Labs",
-    "text": "Simulator Labs\n\nLab 1: Boiler Efficiency Calculation\nLab 3: Power Plant Efficiency"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Thermal Power Plant Simulator",
-    "section": "",
-    "text": "This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.\nInstructor: Serhat Beyenir\nSchedule: 4 periods per week (September – December 2026)\nFormat: Lectures + Simulations\n\n\n\nDynamic simulation of Rankine and combined cycles\nPlant performance analysis and optimization\nFault detection and troubleshooting scenarios\nEfficiency and environmental impact assessment\n\n\n\n\n\n\n\nImportant\n\n\n\nFirst Class: September 8, 2026"
-  },
-  {
-    "objectID": "index.html#welcome",
-    "href": "index.html#welcome",
-    "title": "Thermal Power Plant Simulator",
-    "section": "",
-    "text": "This course provides hands-on training in the simulation, operation, and optimization of thermal power plants using industry-standard simulation software.\nInstructor: Serhat Beyenir\nSchedule: 4 periods per week (September – December 2026)\nFormat: Lectures + Simulations\n\n\n\nDynamic simulation of Rankine and combined cycles\nPlant performance analysis and optimization\nFault detection and troubleshooting scenarios\nEfficiency and environmental impact assessment\n\n\n\n\n\n\n\nImportant\n\n\n\nFirst Class: September 8, 2026"
-  },
-  {
-    "objectID": "labs/lab-01.html",
-    "href": "labs/lab-01.html",
-    "title": "Lab 1: Boiler Efficiency Calculation",
-    "section": "",
-    "text": "By the end of this lab you will be able to:\n\nApply the direct method to calculate boiler efficiency from plant data\nCalculate LHV from HFO elemental composition using the Dulong formula\nApply the indirect method using flue gas stack loss\nInterpret the difference between direct and indirect efficiency results"
-  },
-  {
-    "objectID": "labs/lab-01.html#objectives",
-    "href": "labs/lab-01.html#objectives",
-    "title": "Lab 1: Boiler Efficiency Calculation",
-    "section": "",
-    "text": "By the end of this lab you will be able to:\n\nApply the direct method to calculate boiler efficiency from plant data\nCalculate LHV from HFO elemental composition using the Dulong formula\nApply the indirect method using flue gas stack loss\nInterpret the difference between direct and indirect efficiency results"
-  },
-  {
-    "objectID": "labs/lab-01.html#background",
-    "href": "labs/lab-01.html#background",
-    "title": "Lab 1: Boiler Efficiency Calculation",
-    "section": "Background",
-    "text": "Background\nBoiler efficiency measures how effectively the boiler converts fuel energy into useful steam energy. Two methods are used in practice:\nDirect method (input/output):\n\\[\\eta = \\frac{Q_{steam}}{Q_{fuel}} = \\frac{\\dot{m}_{steam} \\times (h_{steam} - h_{fw})}{\\dot{m}_{fuel} \\times LHV}\\]\nIndirect method (loss method):\n\\[\\eta = 1 - \\frac{Q_{losses}}{Q_{fuel}}\\]\nThe indirect method accounts for individual losses — the dominant one being stack (flue gas) heat loss. A complete indirect analysis also includes radiation, convection, and unburnt carbon losses.\n\nMeasurement Boundary\nFeedwater (T02447, 254°C) → [BOILER SYSTEM] → HP Steam (T02602, 536°C)\n                                    ↑\n                          Fuel (G01038, 52.42 ton/h)\nThe economizer is inside the boiler boundary — its heat recovery is credited to the boiler in both methods."
-  },
-  {
-    "objectID": "labs/lab-01.html#setup",
-    "href": "labs/lab-01.html#setup",
-    "title": "Lab 1: Boiler Efficiency Calculation",
-    "section": "Setup",
-    "text": "Setup\n\nfrom iapws import IAPWS97\nimport numpy as np\nimport matplotlib.pyplot as plt"
-  },
-  {
-    "objectID": "labs/lab-01.html#part-1-hfo-heating-value",
-    "href": "labs/lab-01.html#part-1-hfo-heating-value",
-    "title": "Lab 1: Boiler Efficiency Calculation",
-    "section": "Part 1: HFO Heating Value",
-    "text": "Part 1: HFO Heating Value\nHeavy fuel oil heating value depends on its elemental composition. The Dulong formula relates LHV to HHV:\n\\[LHV = HHV - 2442 \\times (9H + W)\\]\nWhere \\(H\\) is hydrogen mass fraction and \\(W\\) is moisture mass fraction. The factor \\(9H\\) accounts for water formed by hydrogen combustion; \\(2442\\) kJ/kg is the latent heat of water vapour at 25°C.\n\n# HFO elemental composition (mass fractions) — X008xx tags\nC = 84.0 / 100  # X00800 carbon\nH = 13.4 / 100  # X00801 hydrogen\nS = 0.6  / 100  # X00802 sulfur\nO = 1.5  / 100  # X00803 oxygen\nN = 0.5  / 100  # X00804 nitrogen\nW = 1.0  / 100  # X00807 moisture\n\nHHV = 41303.16  # kJ/kg  H00810\n\nLHV = HHV - 2442 * (9 * H + W)\n\nprint(f\"HHV              : {HHV:.2f} kJ/kg\")\nprint(f\"LHV (Dulong)     : {LHV:.2f} kJ/kg\")\nprint(f\"HHV - LHV        : {HHV - LHV:.2f} kJ/kg\")\n\nHHV              : 41303.16 kJ/kg\nLHV (Dulong)     : 38333.69 kJ/kg\nHHV - LHV        : 2969.47 kJ/kg\n\n\nQ1. Why is LHV lower than HHV? Which basis is used for boiler efficiency in marine and power engineering practice, and why?\n\n# Your answer here"
-  },
-  {
-    "objectID": "labs/lab-01.html#part-2-direct-method",
-    "href": "labs/lab-01.html#part-2-direct-method",
-    "title": "Lab 1: Boiler Efficiency Calculation",
-    "section": "Part 2: Direct Method",
-    "text": "Part 2: Direct Method\nUsing measured steam and feedwater enthalpies with actual fuel flow.\n\n# Steam side measurements\nh_steam = 3400.8    # kJ/kg  H02603  HP line steam enthalpy\nh_fw    = 1097.1    # kJ/kg  H02448  economizer water inlet enthalpy\nG_steam = 716.17 / 3.6  # kg/s  G02600  (ton/h → kg/s)\n\n# Fuel side\nG_fuel = 52.42 / 3.6    # kg/s  G01038  HFO supply flow (ton/h → kg/s)\n\n# Heat flows\nQ_steam = G_steam * (h_steam - h_fw)\nQ_fuel  = G_fuel  * LHV\n\neta_direct = Q_steam / Q_fuel\n\nprint(f\"Enthalpy rise    : {h_steam - h_fw:.2f} kJ/kg\")\nprint(f\"Heat to steam    : {Q_steam:.1f} kW\")\nprint(f\"Fuel heat input  : {Q_fuel:.1f} kW\")\nprint(f\"Boiler efficiency (direct): {eta_direct:.1%}\")\n\nEnthalpy rise    : 2303.70 kJ/kg\nHeat to steam    : 458289.1 kW\nFuel heat input  : 558181.1 kW\nBoiler efficiency (direct): 82.1%\n\n\nQ2. The boiler nameplate efficiency is 90%. What does the difference between your result and nameplate suggest about current operating conditions?\n\n# Your answer here"
-  },
-  {
-    "objectID": "labs/lab-01.html#part-3-indirect-method-stack-loss",
-    "href": "labs/lab-01.html#part-3-indirect-method-stack-loss",
-    "title": "Lab 1: Boiler Efficiency Calculation",
-    "section": "Part 3: Indirect Method — Stack Loss",
-    "text": "Part 3: Indirect Method — Stack Loss\nThe largest single boiler loss is heat carried away by flue gas. We calculate flue gas flow from fuel composition and excess air, then quantify the stack loss.\n\nStep 1: Excess Air from O₂ Measurement\n\\[\\lambda = \\frac{21}{21 - O_{2}\\%}\\]\n\nO2_fg  = 0.75   # vol%  X02419  O2 in flue gas (dry)\nT_stack = 141.57  # °C  T02114  rotary air preheater gas outlet\nT_ref   = 25.0    # °C  reference\n\nlambda_excess = 21 / (21 - O2_fg)\nexcess_air_pct = (lambda_excess - 1) * 100\n\nprint(f\"O2 in flue gas        : {O2_fg:.2f} vol%\")\nprint(f\"Excess air factor (λ) : {lambda_excess:.4f}\")\nprint(f\"Excess air            : {excess_air_pct:.1f}%\")\n\nO2 in flue gas        : 0.75 vol%\nExcess air factor (λ) : 1.0370\nExcess air            : 3.7%\n\n\n\n\nStep 2: Flue Gas Flow\n\n# Stoichiometric air requirement (Dulong)\nair_stoich = (2.667 * C + 8 * (H - O / 8) + S) / 0.232\nair_actual = air_stoich * lambda_excess\n\n# Flue gas composition (kg/kg fuel)\nfg_CO2     = 3.667 * C\nfg_SO2     = 2.0 * S\nfg_H2O     = 9.0 * H + W\nfg_N2      = N + air_actual * 0.768\nfg_O2_exc  = air_actual * 0.232 - (2.667 * C + 8 * (H - O / 8) + S)\n\nG_fg_per_kg = fg_CO2 + fg_SO2 + fg_H2O + fg_N2 + fg_O2_exc\nG_fluegas   = G_fuel * G_fg_per_kg\n\nprint(f\"Stoichiometric air    : {air_stoich:.3f} kg/kg fuel\")\nprint(f\"Actual air            : {air_actual:.3f} kg/kg fuel\")\nprint(f\"Flue gas yield        : {G_fg_per_kg:.3f} kg/kg fuel\")\nprint(f\"Flue gas flow         : {G_fluegas:.2f} kg/s\")\n\nStoichiometric air    : 14.238 kg/kg fuel\nActual air            : 14.766 kg/kg fuel\nFlue gas yield        : 15.776 kg/kg fuel\nFlue gas flow         : 229.71 kg/s\n\n\n\n\nStep 3: Stack Heat Loss\n\nCp_fg = 1.10  # kJ/kg·K — approximate mean Cp for combustion products\n\nQ_stack    = G_fluegas * Cp_fg * (T_stack - T_ref)\neta_indirect = (Q_fuel - Q_stack) / Q_fuel\n\nprint(f\"Stack temperature     : {T_stack:.2f} °C\")\nprint(f\"Stack heat loss       : {Q_stack:.1f} kW\")\nprint(f\"Stack loss (% of LHV) : {Q_stack / Q_fuel * 100:.1f}%\")\nprint(f\"Boiler efficiency (indirect): {eta_indirect:.1%}\")\n\nStack temperature     : 141.57 °C\nStack heat loss       : 29455.1 kW\nStack loss (% of LHV) : 5.3%\nBoiler efficiency (indirect): 94.7%"
-  },
-  {
-    "objectID": "labs/lab-01.html#part-4-comparison-and-sensitivity",
-    "href": "labs/lab-01.html#part-4-comparison-and-sensitivity",
-    "title": "Lab 1: Boiler Efficiency Calculation",
-    "section": "Part 4: Comparison and Sensitivity",
-    "text": "Part 4: Comparison and Sensitivity\n\nprint(f\"Direct method   : {eta_direct:.1%}\")\nprint(f\"Indirect method : {eta_indirect:.1%}\")\nprint(f\"Difference      : {abs(eta_indirect - eta_direct) * 100:.1f} percentage points\")\n\nDirect method   : 82.1%\nIndirect method : 94.7%\nDifference      : 12.6 percentage points\n\n\nThe indirect method accounts only for stack loss. Observe how efficiency changes with stack temperature — a key operational parameter.\n\nstack_temps = np.arange(100, 400, 10)\neta_stack = [(Q_fuel - G_fluegas * Cp_fg * (T - T_ref)) / Q_fuel * 100\n             for T in stack_temps]\n\nfig, ax = plt.subplots(figsize=(9, 5))\nax.plot(stack_temps, eta_stack, \"ro-\", linewidth=2, markersize=4)\nax.axvline(x=T_stack, color=\"gray\", linestyle=\"--\", alpha=0.7,\n           label=f\"Current stack temp ({T_stack}°C)\")\nax.axhline(y=90, color=\"blue\", linestyle=\"--\", alpha=0.7,\n           label=\"Typical nameplate (90%)\")\nax.set_title(\"Effect of Stack Temperature on Boiler Efficiency\")\nax.set_xlabel(\"Stack Temperature (°C)\")\nax.set_ylabel(\"Boiler Efficiency (%)\")\nax.grid(True, alpha=0.3)\nax.legend()\nfig.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\nQ3. At what stack temperature does efficiency reach 90%? What equipment is responsible for reducing stack temperature, and what limits how low it can go?\n\n# Your calculation here\n\nQ4. The direct and indirect methods give different results. List at least three reasons that explain the difference.\n\n# Your answer here"
-  },
-  {
-    "objectID": "labs/lab-01.html#summary",
-    "href": "labs/lab-01.html#summary",
-    "title": "Lab 1: Boiler Efficiency Calculation",
-    "section": "Summary",
-    "text": "Summary\nComplete the table below with your results:\n\n\n\nParameter\nValue\nUnit\n\n\n\n\nHFO LHV\n\nkJ/kg\n\n\nSteam flow\n\nkg/s\n\n\nFuel flow\n\nkg/s\n\n\nHeat to steam\n\nkW\n\n\nFuel heat input\n\nkW\n\n\nStack loss\n\nkW\n\n\nBoiler efficiency (direct)\n\n%\n\n\nBoiler efficiency (indirect)\n\n%"
-  },
-  {
-    "objectID": "labs/lab-01.html#submission",
-    "href": "labs/lab-01.html#submission",
-    "title": "Lab 1: Boiler Efficiency Calculation",
-    "section": "Submission",
-    "text": "Submission\nSave as lab-02-firstname-lastname.qmd and submit the completed .qmd file."
-  },
-  {
-    "objectID": "labs/lab-03.html",
-    "href": "labs/lab-03.html",
-    "title": "Lab 3: Power Plant Efficiency",
-    "section": "",
-    "text": "By the end of this lab you will be able to:\n\nRun a basic ideal Rankine cycle simulation using steam tables\nIdentify the four state points of the cycle\nInterpret thermal efficiency in terms of operating conditions\nObserve how boiler pressure and temperature affect performance"
-  },
-  {
-    "objectID": "labs/lab-03.html#objectives",
-    "href": "labs/lab-03.html#objectives",
-    "title": "Lab 3: Power Plant Efficiency",
-    "section": "",
-    "text": "By the end of this lab you will be able to:\n\nRun a basic ideal Rankine cycle simulation using steam tables\nIdentify the four state points of the cycle\nInterpret thermal efficiency in terms of operating conditions\nObserve how boiler pressure and temperature affect performance"
-  },
-  {
-    "objectID": "labs/lab-03.html#background",
-    "href": "labs/lab-03.html#background",
-    "title": "Lab 3: Power Plant Efficiency",
-    "section": "Background",
-    "text": "Background\nThe ideal Rankine cycle is the theoretical basis for steam power generation. It consists of four processes:\n\n\n\nProcess\nDevice\nDescription\n\n\n\n\n1 → 2\nTurbine\nIsentropic expansion\n\n\n2 → 3\nCondenser\nIsothermal heat rejection\n\n\n3 → 4\nPump\nIsentropic compression\n\n\n4 → 1\nBoiler\nIsobaric heat addition"
-  },
-  {
-    "objectID": "labs/lab-03.html#setup",
-    "href": "labs/lab-03.html#setup",
-    "title": "Lab 3: Power Plant Efficiency",
-    "section": "Setup",
-    "text": "Setup\nRun the cell below to import the required libraries.\n\nfrom iapws import IAPWS97\nimport numpy as np\nimport matplotlib.pyplot as plt"
-  },
-  {
-    "objectID": "labs/lab-03.html#part-1-baseline-cycle",
-    "href": "labs/lab-03.html#part-1-baseline-cycle",
-    "title": "Lab 3: Power Plant Efficiency",
-    "section": "Part 1: Baseline Cycle",
-    "text": "Part 1: Baseline Cycle\nRun the simulation with default conditions:\n\nBoiler: 500°C, 10 MPa\n\nCondenser: 0.006 MPa (~36°C)\n\n\ndef rankine_cycle(T_boiler=500, P_boiler=10, P_condenser=0.006):\n    \"\"\"Ideal Rankine cycle using IAPWS-IF97 steam tables.\"\"\"\n    state1 = IAPWS97(T=T_boiler + 273.15, P=P_boiler)\n    state2 = IAPWS97(P=P_condenser, s=state1.s)\n    state3 = IAPWS97(P=P_condenser, x=0)\n    state4 = IAPWS97(P=P_boiler, s=state3.s)\n\n    w_turbine = state1.h - state2.h\n    w_pump    = state4.h - state3.h\n    q_boiler  = state1.h - state4.h\n    w_net     = w_turbine - w_pump\n    eta       = w_net / q_boiler\n\n    return {\n        \"T_condenser_C\":    round(state3.T - 273.15, 2),\n        \"h1\": round(state1.h, 2),\n        \"h2\": round(state2.h, 2),\n        \"h3\": round(state3.h, 2),\n        \"h4\": round(state4.h, 2),\n        \"w_turbine\":        round(w_turbine, 2),\n        \"w_pump\":           round(w_pump, 2),\n        \"w_net\":            round(w_net, 2),\n        \"q_boiler\":         round(q_boiler, 2),\n        \"eta\":              round(eta, 4),\n        \"turbine_quality\":  round(state2.x, 3) if state2.x else None,\n    }\n\nbaseline = rankine_cycle()\n\nprint(f\"Condenser temperature : {baseline['T_condenser_C']} °C\")\nprint(f\"h1 (turbine inlet)    : {baseline['h1']} kJ/kg\")\nprint(f\"h2 (turbine exit)     : {baseline['h2']} kJ/kg\")\nprint(f\"h3 (pump inlet)       : {baseline['h3']} kJ/kg\")\nprint(f\"h4 (boiler inlet)     : {baseline['h4']} kJ/kg\")\nprint(f\"Turbine work          : {baseline['w_turbine']} kJ/kg\")\nprint(f\"Pump work             : {baseline['w_pump']} kJ/kg\")\nprint(f\"Net work              : {baseline['w_net']} kJ/kg\")\nprint(f\"Boiler heat input     : {baseline['q_boiler']} kJ/kg\")\nprint(f\"Turbine exit quality  : {baseline['turbine_quality']}\")\nprint(f\"Thermal efficiency    : {baseline['eta']:.1%}\")\n\nCondenser temperature : 36.16 °C\nh1 (turbine inlet)    : 3375.06 kJ/kg\nh2 (turbine exit)     : 2031.62 kJ/kg\nh3 (pump inlet)       : 151.49 kJ/kg\nh4 (boiler inlet)     : 161.53 kJ/kg\nTurbine work          : 1343.44 kJ/kg\nPump work             : 10.04 kJ/kg\nNet work              : 1333.41 kJ/kg\nBoiler heat input     : 3213.53 kJ/kg\nTurbine exit quality  : 0.778\nThermal efficiency    : 41.5%"
-  },
-  {
-    "objectID": "labs/lab-03.html#part-2-effect-of-boiler-temperature",
-    "href": "labs/lab-03.html#part-2-effect-of-boiler-temperature",
-    "title": "Lab 3: Power Plant Efficiency",
-    "section": "Part 2: Effect of Boiler Temperature",
-    "text": "Part 2: Effect of Boiler Temperature\nObserve how thermal efficiency changes as boiler temperature increases from 300°C to 600°C, keeping pressure constant at 10 MPa.\n\ntemperatures = np.arange(300, 620, 20)\nefficiencies = [rankine_cycle(T_boiler=T)[\"eta\"] * 100 for T in temperatures]\n\nfig, ax = plt.subplots(figsize=(9, 5))\nax.plot(temperatures, efficiencies, \"ro-\", linewidth=2, markersize=6)\nax.axvline(x=500, color=\"gray\", linestyle=\"--\", alpha=0.6, label=\"Baseline (500°C)\")\nax.set_title(\"Effect of Boiler Temperature on Thermal Efficiency\")\nax.set_xlabel(\"Boiler Temperature (°C)\")\nax.set_ylabel(\"Thermal Efficiency (%)\")\nax.grid(True, alpha=0.3)\nax.legend()\nfig.tight_layout()\nplt.show()"
-  },
-  {
-    "objectID": "labs/lab-03.html#part-3-effect-of-boiler-pressure",
-    "href": "labs/lab-03.html#part-3-effect-of-boiler-pressure",
-    "title": "Lab 3: Power Plant Efficiency",
-    "section": "Part 3: Effect of Boiler Pressure",
-    "text": "Part 3: Effect of Boiler Pressure\nNow observe how efficiency changes with boiler pressure (3–20 MPa) at a fixed boiler temperature of 500°C.\n\npressures = np.arange(3, 21, 1)\neff_pressure = [rankine_cycle(P_boiler=P)[\"eta\"] * 100 for P in pressures]\n\nfig, ax = plt.subplots(figsize=(9, 5))\nax.plot(pressures, eff_pressure, \"bo-\", linewidth=2, markersize=6)\nax.axvline(x=10, color=\"gray\", linestyle=\"--\", alpha=0.6, label=\"Baseline (10 MPa)\")\nax.set_title(\"Effect of Boiler Pressure on Thermal Efficiency\")\nax.set_xlabel(\"Boiler Pressure (MPa)\")\nax.set_ylabel(\"Thermal Efficiency (%)\")\nax.grid(True, alpha=0.3)\nax.legend()\nfig.tight_layout()\nplt.show()"
-  },
-  {
-    "objectID": "labs/lab-03.html#questions",
-    "href": "labs/lab-03.html#questions",
-    "title": "Lab 3: Power Plant Efficiency",
-    "section": "Questions",
-    "text": "Questions\nAnswer the following in the cells provided below each question.\nQ1. What is the thermal efficiency of the baseline cycle? How does it compare to the Carnot efficiency between the same temperature limits?\n\n# Your calculation here\n\nQ2. At what boiler temperature does efficiency exceed 43%? What practical constraints limit operating at that temperature?\n\n# Your calculation here\n\nQ3. Looking at the pressure curve, does efficiency increase indefinitely with pressure? What happens to turbine exit quality at very high pressures?\n\n# Your calculation here — hint: check baseline['turbine_quality']\npressures_extended = np.arange(3, 31, 1)\nqualities = [rankine_cycle(P_boiler=P)[\"turbine_quality\"] for P in pressures_extended]\n\nfig, ax = plt.subplots(figsize=(9, 5))\nax.plot(pressures_extended, qualities, \"go-\", linewidth=2, markersize=6)\nax.axhline(y=0.88, color=\"r\", linestyle=\"--\", alpha=0.7, label=\"Minimum acceptable quality (0.88)\")\nax.set_title(\"Turbine Exit Quality vs Boiler Pressure\")\nax.set_xlabel(\"Boiler Pressure (MPa)\")\nax.set_ylabel(\"Steam Quality (x)\")\nax.grid(True, alpha=0.3)\nax.legend()\nfig.tight_layout()\nplt.show()"
-  },
-  {
-    "objectID": "labs/lab-03.html#submission",
-    "href": "labs/lab-03.html#submission",
-    "title": "Lab 3: Power Plant Efficiency",
-    "section": "Submission",
-    "text": "Submission\nSave this file with your name added to the filename: lab-01-firstname-lastname.qmd and submit the completed .qmd file."
-  },
-  {
-    "objectID": "assignments/assignment-01.html",
-    "href": "assignments/assignment-01.html",
-    "title": "Assignment 1: Rankine Cycle Analysis",
-    "section": "",
-    "text": "Complete the following simulation exercises and submit a detailed report."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About the Instructor",
-    "section": "",
-    "text": "Serhat Beyenir is an instructor in Power Engineering at BCIT, where he teaches Thermal Power Plant Simulator courses and previously taught Thermodynamics, Applied Mechanics, Propulsion Engines, and Propulsion Plant Simulator courses at BCIT Marine Engineering.\nHis interest in computing dates back to high school, when he taught himself BASIC to plot trigonometric functions on an Amstrad 64K microcomputer. He completed programming coursework at the university level but is largely self-taught in the use of Unix and Linux systems, later adopting macOS for personal projects in 2007. While teaching Power Engineering, he employed MATLAB for engineering computations and compiled his instructional materials into an open textbook, A Brief Introduction to Engineering Computation with MATLAB, published in 2011.\nIn February 2025, he attended a Python course at the West Vancouver Memorial Library and subsequently began using Python in his Marine and Power Engineering lecture materials, gradually incorporating computational examples into his teaching.\nSerhat holds a Class 1 Marine Engineer certification, a Master of Education in Distance Education, and a Bachelor of Science in Marine Engineering."
-  },
-  {
-    "objectID": "syllabus.html",
-    "href": "syllabus.html",
-    "title": "Syllabus",
-    "section": "",
-    "text": "Course Title: Thermal Power Plant Simulator\nTerm: Fall 2026\nSchedule: 4 periods per week, September to December\nCredits: [Insert credits]\nPrerequisites: Thermodynamics, Fluid Mechanics"
-  },
-  {
-    "objectID": "syllabus.html#course-information",
-    "href": "syllabus.html#course-information",
-    "title": "Syllabus",
-    "section": "",
-    "text": "Course Title: Thermal Power Plant Simulator\nTerm: Fall 2026\nSchedule: 4 periods per week, September to December\nCredits: [Insert credits]\nPrerequisites: Thermodynamics, Fluid Mechanics"
-  },
-  {
-    "objectID": "syllabus.html#learning-objectives",
-    "href": "syllabus.html#learning-objectives",
-    "title": "Syllabus",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\nStudents will be able to: 1. Simulate steady-state and transient operation of thermal power plants. 2. Analyze the performance of boilers, turbines, condensers, and feedwater systems. 3. Optimize plant efficiency and evaluate environmental performance. 4. Diagnose and troubleshoot common operational issues."
-  },
-  {
-    "objectID": "syllabus.html#assessment",
-    "href": "syllabus.html#assessment",
-    "title": "Syllabus",
-    "section": "Assessment",
-    "text": "Assessment\n\n\n\nComponent\nWeight\n\n\n\n\nLaboratory Simulations\n40%\n\n\nAssignments\n25%\n\n\nMidterm Examination\n15%\n\n\nFinal Project\n20%"
-  },
-  {
-    "objectID": "syllabus.html#policies",
-    "href": "syllabus.html#policies",
-    "title": "Syllabus",
-    "section": "Policies",
-    "text": "Policies\n\nAll simulation reports must be submitted through the course platform.\nLate submissions will be penalized by 10% per day.\nAcademic integrity is strictly enforced."
   },
   {
     "objectID": "lectures/lecture-01.html",

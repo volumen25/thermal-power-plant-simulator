@@ -4,6 +4,7 @@ title: "Course Materials"
 
 ## Lecture Notes
 
+- [Lecture 0: Python Tutorial](lectures/lecture-00.qmd)
 - [Lecture 1: Boiler Efficiency](lectures/lecture-01.qmd)
 - [Lecture 3: Introduction to Thermal Power Plants](lectures/lecture-03.qmd)
 
