@@ -1,33 +1,53 @@
 ---
-title: "Lab 1: Basic Rankine Cycle Simulation"
+title: "Lab 1: Boiler Efficiency Calculation"
 date: "2026-09-10"
 type: "Lab"
 jupyter: python3
+number-sections: false
 ---
 
 ## Objectives
 
 By the end of this lab you will be able to:
 
-- Run a basic ideal Rankine cycle simulation using steam tables
-- Identify the four state points of the cycle
-- Interpret thermal efficiency in terms of operating conditions
-- Observe how boiler pressure and temperature affect performance
+- Apply the direct method to calculate boiler efficiency from plant data
+- Calculate LHV from HFO elemental composition using the Dulong formula
+- Apply the indirect method using flue gas stack loss
+- Interpret the difference between direct and indirect efficiency results
+
+---
 
 ## Background
 
-The ideal Rankine cycle is the theoretical basis for steam power generation. It consists of four processes:
+Boiler efficiency measures how effectively the boiler converts fuel energy
+into useful steam energy. Two methods are used in practice:
 
-| Process | Device    | Description               |
-|---------|-----------|---------------------------|
-| 1 → 2   | Turbine   | Isentropic expansion      |
-| 2 → 3   | Condenser | Isothermal heat rejection |
-| 3 → 4   | Pump      | Isentropic compression    |
-| 4 → 1   | Boiler    | Isobaric heat addition    |
+**Direct method (input/output):**
+
+$$\eta = \frac{Q_{steam}}{Q_{fuel}} = \frac{\dot{m}_{steam} \times (h_{steam} - h_{fw})}{\dot{m}_{fuel} \times LHV}$$
+
+**Indirect method (loss method):**
+
+$$\eta = 1 - \frac{Q_{losses}}{Q_{fuel}}$$
+
+The indirect method accounts for individual losses — the dominant one being
+stack (flue gas) heat loss. A complete indirect analysis also includes
+radiation, convection, and unburnt carbon losses.
+
+### Measurement Boundary
+
+```
+Feedwater (T02447, 254°C) → [BOILER SYSTEM] → HP Steam (T02602, 536°C)
+                                    ↑
+                          Fuel (G01038, 52.42 ton/h)
+```
+
+The economizer is inside the boiler boundary — its heat recovery is
+credited to the boiler in both methods.
+
+---
 
 ## Setup
-
-Run the cell below to import the required libraries.
 
 ```{python}
 from iapws import IAPWS97
@@ -35,131 +55,207 @@ import numpy as np
 import matplotlib.pyplot as plt
 ```
 
-## Part 1: Baseline Cycle
+---
 
-Run the simulation with default conditions:
+## Part 1: HFO Heating Value
 
-- Boiler: 500°C, 10 MPa\
-- Condenser: 0.006 MPa (\~36°C)
+Heavy fuel oil heating value depends on its elemental composition.
+The **Dulong formula** relates LHV to HHV:
+
+$$LHV = HHV - 2442 \times (9H + W)$$
+
+Where $H$ is hydrogen mass fraction and $W$ is moisture mass fraction.
+The factor $9H$ accounts for water formed by hydrogen combustion;
+$2442$ kJ/kg is the latent heat of water vapour at 25°C.
 
 ```{python}
-def rankine_cycle(T_boiler=500, P_boiler=10, P_condenser=0.006):
-    """Ideal Rankine cycle using IAPWS-IF97 steam tables."""
-    state1 = IAPWS97(T=T_boiler + 273.15, P=P_boiler)
-    state2 = IAPWS97(P=P_condenser, s=state1.s)
-    state3 = IAPWS97(P=P_condenser, x=0)
-    state4 = IAPWS97(P=P_boiler, s=state3.s)
+# HFO elemental composition (mass fractions) — X008xx tags
+C = 84.0 / 100  # X00800 carbon
+H = 13.4 / 100  # X00801 hydrogen
+S = 0.6  / 100  # X00802 sulfur
+O = 1.5  / 100  # X00803 oxygen
+N = 0.5  / 100  # X00804 nitrogen
+W = 1.0  / 100  # X00807 moisture
 
-    w_turbine = state1.h - state2.h
-    w_pump    = state4.h - state3.h
-    q_boiler  = state1.h - state4.h
-    w_net     = w_turbine - w_pump
-    eta       = w_net / q_boiler
+HHV = 41303.16  # kJ/kg  H00810
 
-    return {
-        "T_condenser_C":    round(state3.T - 273.15, 2),
-        "h1": round(state1.h, 2),
-        "h2": round(state2.h, 2),
-        "h3": round(state3.h, 2),
-        "h4": round(state4.h, 2),
-        "w_turbine":        round(w_turbine, 2),
-        "w_pump":           round(w_pump, 2),
-        "w_net":            round(w_net, 2),
-        "q_boiler":         round(q_boiler, 2),
-        "eta":              round(eta, 4),
-        "turbine_quality":  round(state2.x, 3) if state2.x else None,
-    }
+LHV = HHV - 2442 * (9 * H + W)
 
-baseline = rankine_cycle()
-
-print(f"Condenser temperature : {baseline['T_condenser_C']} °C")
-print(f"h1 (turbine inlet)    : {baseline['h1']} kJ/kg")
-print(f"h2 (turbine exit)     : {baseline['h2']} kJ/kg")
-print(f"h3 (pump inlet)       : {baseline['h3']} kJ/kg")
-print(f"h4 (boiler inlet)     : {baseline['h4']} kJ/kg")
-print(f"Turbine work          : {baseline['w_turbine']} kJ/kg")
-print(f"Pump work             : {baseline['w_pump']} kJ/kg")
-print(f"Net work              : {baseline['w_net']} kJ/kg")
-print(f"Boiler heat input     : {baseline['q_boiler']} kJ/kg")
-print(f"Turbine exit quality  : {baseline['turbine_quality']}")
-print(f"Thermal efficiency    : {baseline['eta']:.1%}")
+print(f"HHV              : {HHV:.2f} kJ/kg")
+print(f"LHV (Dulong)     : {LHV:.2f} kJ/kg")
+print(f"HHV - LHV        : {HHV - LHV:.2f} kJ/kg")
 ```
 
-## Part 2: Effect of Boiler Temperature
-
-Observe how thermal efficiency changes as boiler temperature increases from 300°C to 600°C, keeping pressure constant at 10 MPa.
+**Q1.** Why is LHV lower than HHV? Which basis is used for boiler
+efficiency in marine and power engineering practice, and why?
 
 ```{python}
-temperatures = np.arange(300, 620, 20)
-efficiencies = [rankine_cycle(T_boiler=T)["eta"] * 100 for T in temperatures]
+# Your answer here
+```
+
+---
+
+## Part 2: Direct Method
+
+Using measured steam and feedwater enthalpies with actual fuel flow.
+
+```{python}
+# Steam side measurements
+h_steam = 3400.8    # kJ/kg  H02603  HP line steam enthalpy
+h_fw    = 1097.1    # kJ/kg  H02448  economizer water inlet enthalpy
+G_steam = 716.17 / 3.6  # kg/s  G02600  (ton/h → kg/s)
+
+# Fuel side
+G_fuel = 52.42 / 3.6    # kg/s  G01038  HFO supply flow (ton/h → kg/s)
+
+# Heat flows
+Q_steam = G_steam * (h_steam - h_fw)
+Q_fuel  = G_fuel  * LHV
+
+eta_direct = Q_steam / Q_fuel
+
+print(f"Enthalpy rise    : {h_steam - h_fw:.2f} kJ/kg")
+print(f"Heat to steam    : {Q_steam:.1f} kW")
+print(f"Fuel heat input  : {Q_fuel:.1f} kW")
+print(f"Boiler efficiency (direct): {eta_direct:.1%}")
+```
+
+**Q2.** The boiler nameplate efficiency is 90%. What does the difference
+between your result and nameplate suggest about current operating conditions?
+
+```{python}
+# Your answer here
+```
+
+---
+
+## Part 3: Indirect Method — Stack Loss
+
+The largest single boiler loss is heat carried away by flue gas.
+We calculate flue gas flow from fuel composition and excess air,
+then quantify the stack loss.
+
+### Step 1: Excess Air from O₂ Measurement
+
+$$\lambda = \frac{21}{21 - O_{2}\%}$$
+
+```{python}
+O2_fg  = 0.75   # vol%  X02419  O2 in flue gas (dry)
+T_stack = 141.57  # °C  T02114  rotary air preheater gas outlet
+T_ref   = 25.0    # °C  reference
+
+lambda_excess = 21 / (21 - O2_fg)
+excess_air_pct = (lambda_excess - 1) * 100
+
+print(f"O2 in flue gas        : {O2_fg:.2f} vol%")
+print(f"Excess air factor (λ) : {lambda_excess:.4f}")
+print(f"Excess air            : {excess_air_pct:.1f}%")
+```
+
+### Step 2: Flue Gas Flow
+
+```{python}
+# Stoichiometric air requirement (Dulong)
+air_stoich = (2.667 * C + 8 * (H - O / 8) + S) / 0.232
+air_actual = air_stoich * lambda_excess
+
+# Flue gas composition (kg/kg fuel)
+fg_CO2     = 3.667 * C
+fg_SO2     = 2.0 * S
+fg_H2O     = 9.0 * H + W
+fg_N2      = N + air_actual * 0.768
+fg_O2_exc  = air_actual * 0.232 - (2.667 * C + 8 * (H - O / 8) + S)
+
+G_fg_per_kg = fg_CO2 + fg_SO2 + fg_H2O + fg_N2 + fg_O2_exc
+G_fluegas   = G_fuel * G_fg_per_kg
+
+print(f"Stoichiometric air    : {air_stoich:.3f} kg/kg fuel")
+print(f"Actual air            : {air_actual:.3f} kg/kg fuel")
+print(f"Flue gas yield        : {G_fg_per_kg:.3f} kg/kg fuel")
+print(f"Flue gas flow         : {G_fluegas:.2f} kg/s")
+```
+
+### Step 3: Stack Heat Loss
+
+```{python}
+Cp_fg = 1.10  # kJ/kg·K — approximate mean Cp for combustion products
+
+Q_stack    = G_fluegas * Cp_fg * (T_stack - T_ref)
+eta_indirect = (Q_fuel - Q_stack) / Q_fuel
+
+print(f"Stack temperature     : {T_stack:.2f} °C")
+print(f"Stack heat loss       : {Q_stack:.1f} kW")
+print(f"Stack loss (% of LHV) : {Q_stack / Q_fuel * 100:.1f}%")
+print(f"Boiler efficiency (indirect): {eta_indirect:.1%}")
+```
+
+---
+
+## Part 4: Comparison and Sensitivity
+
+```{python}
+print(f"Direct method   : {eta_direct:.1%}")
+print(f"Indirect method : {eta_indirect:.1%}")
+print(f"Difference      : {abs(eta_indirect - eta_direct) * 100:.1f} percentage points")
+```
+
+The indirect method accounts only for stack loss. Observe how efficiency
+changes with stack temperature — a key operational parameter.
+
+```{python}
+stack_temps = np.arange(100, 400, 10)
+eta_stack = [(Q_fuel - G_fluegas * Cp_fg * (T - T_ref)) / Q_fuel * 100
+             for T in stack_temps]
 
 fig, ax = plt.subplots(figsize=(9, 5))
-ax.plot(temperatures, efficiencies, "ro-", linewidth=2, markersize=6)
-ax.axvline(x=500, color="gray", linestyle="--", alpha=0.6, label="Baseline (500°C)")
-ax.set_title("Effect of Boiler Temperature on Thermal Efficiency")
-ax.set_xlabel("Boiler Temperature (°C)")
-ax.set_ylabel("Thermal Efficiency (%)")
+ax.plot(stack_temps, eta_stack, "ro-", linewidth=2, markersize=4)
+ax.axvline(x=T_stack, color="gray", linestyle="--", alpha=0.7,
+           label=f"Current stack temp ({T_stack}°C)")
+ax.axhline(y=90, color="blue", linestyle="--", alpha=0.7,
+           label="Typical nameplate (90%)")
+ax.set_title("Effect of Stack Temperature on Boiler Efficiency")
+ax.set_xlabel("Stack Temperature (°C)")
+ax.set_ylabel("Boiler Efficiency (%)")
 ax.grid(True, alpha=0.3)
 ax.legend()
 fig.tight_layout()
 plt.show()
 ```
 
-## Part 3: Effect of Boiler Pressure
-
-Now observe how efficiency changes with boiler pressure (3–20 MPa) at a fixed boiler temperature of 500°C.
-
-```{python}
-pressures = np.arange(3, 21, 1)
-eff_pressure = [rankine_cycle(P_boiler=P)["eta"] * 100 for P in pressures]
-
-fig, ax = plt.subplots(figsize=(9, 5))
-ax.plot(pressures, eff_pressure, "bo-", linewidth=2, markersize=6)
-ax.axvline(x=10, color="gray", linestyle="--", alpha=0.6, label="Baseline (10 MPa)")
-ax.set_title("Effect of Boiler Pressure on Thermal Efficiency")
-ax.set_xlabel("Boiler Pressure (MPa)")
-ax.set_ylabel("Thermal Efficiency (%)")
-ax.grid(True, alpha=0.3)
-ax.legend()
-fig.tight_layout()
-plt.show()
-```
-
-## Questions
-
-Answer the following in the cells provided below each question.
-
-**Q1.** What is the thermal efficiency of the baseline cycle? How does it compare to the Carnot efficiency between the same temperature limits?
+**Q3.** At what stack temperature does efficiency reach 90%?
+What equipment is responsible for reducing stack temperature,
+and what limits how low it can go?
 
 ```{python}
 # Your calculation here
 ```
 
-**Q2.** At what boiler temperature does efficiency exceed 43%? What practical constraints limit operating at that temperature?
+**Q4.** The direct and indirect methods give different results.
+List at least three reasons that explain the difference.
 
 ```{python}
-# Your calculation here
+# Your answer here
 ```
 
-**Q3.** Looking at the pressure curve, does efficiency increase indefinitely with pressure? What happens to turbine exit quality at very high pressures?
+---
 
-```{python}
-# Your calculation here — hint: check baseline['turbine_quality']
-pressures_extended = np.arange(3, 31, 1)
-qualities = [rankine_cycle(P_boiler=P)["turbine_quality"] for P in pressures_extended]
+## Summary
 
-fig, ax = plt.subplots(figsize=(9, 5))
-ax.plot(pressures_extended, qualities, "go-", linewidth=2, markersize=6)
-ax.axhline(y=0.88, color="r", linestyle="--", alpha=0.7, label="Minimum acceptable quality (0.88)")
-ax.set_title("Turbine Exit Quality vs Boiler Pressure")
-ax.set_xlabel("Boiler Pressure (MPa)")
-ax.set_ylabel("Steam Quality (x)")
-ax.grid(True, alpha=0.3)
-ax.legend()
-fig.tight_layout()
-plt.show()
-```
+Complete the table below with your results:
+
+| Parameter | Value | Unit |
+|---|---|---|
+| HFO LHV | | kJ/kg |
+| Steam flow | | kg/s |
+| Fuel flow | | kg/s |
+| Heat to steam | | kW |
+| Fuel heat input | | kW |
+| Stack loss | | kW |
+| Boiler efficiency (direct) | | % |
+| Boiler efficiency (indirect) | | % |
+
+---
 
 ## Submission
 
-Save this file with your name added to the filename: `lab-01-firstname-lastname.qmd` and submit the completed `.qmd` file.
+Save as `lab-02-firstname-lastname.qmd` and submit the completed `.qmd` file.

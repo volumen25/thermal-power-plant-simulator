@@ -2,11 +2,12 @@
 title: "Course Materials"
 ---
 
-## Lecture Slides & Notes
+## Lecture Notes
 
-- [Lecture 1 – Introduction](lectures/lecture-01.qmd)
+- [Lecture 1: Boiler Efficiency](lectures/lecture-01.qmd)
+- [Lecture 3: Introduction to Thermal Power Plants](lectures/lecture-03.qmd)
 
-## Laboratory Manuals
+## Simulator Labs
 
-- [Lab 1 – Rankine Cycle](labs/lab-01.qmd)
-- [Lab 2 – Rankine Cycle](labs/lab-02.qmd)
+- [Lab 1: Boiler Efficiency Calculation](labs/lab-01.qmd)
+- [Lab 3: Power Plant Efficiency](labs/lab-03.qmd)
