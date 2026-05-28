@@ -76,11 +76,11 @@ The following table shows common f-string formatting options:
 Variables store data and are assigned values using the `=` operator.
 
 ```python
-boiler_pressure     = 158.48    # bara  — float
-steam_temperature   = 535.85    # °C    — float
-steam_flow          = 716       # ton/h — int
-fuel_type           = "HFO"     # str
-economizer_clean    = True      # bool
+boiler_pressure   = 158.48    # bara  — float
+steam_temperature = 535.85    # °C    — float
+steam_flow        = 716       # ton/h — int
+fuel_type         = "HFO"     # str
+economizer_clean  = True      # bool
 ```
 
 Python has several built-in data types:
@@ -113,19 +113,19 @@ Unit conversions are common in plant calculations. Python handles
 them cleanly with descriptive variable names:
 
 ```python
-# Flow rate conversions
-G_steam_ton_h = 716.17          # ton/h
-G_steam_kg_s  = G_steam_ton_h / 3.6   # ton/h → kg/s
+# Flow rate conversion
+G_steam_ton_h = 716.17
+G_steam_kg_s  = G_steam_ton_h / 3.6    # ton/h → kg/s
 print(f"Steam flow: {G_steam_kg_s:.4f} kg/s")
 
 # Pressure conversion
-P_bara = 158.48                  # bara
-P_MPa  = P_bara * 0.1            # bara → MPa
+P_bara = 158.48
+P_MPa  = P_bara * 0.1                  # bara → MPa
 print(f"Pressure: {P_MPa:.3f} MPa")
 
 # Temperature conversion
-T_celsius = 535.85               # °C
-T_kelvin  = T_celsius + 273.15   # °C → K
+T_celsius = 535.85
+T_kelvin  = T_celsius + 273.15         # °C → K
 print(f"Temperature: {T_kelvin:.2f} K")
 ```
 
@@ -147,8 +147,8 @@ You should see the Python prompt:
 Try a simple boiler efficiency calculation:
 
 ```python
->>> h_steam     = 3400.8    # kJ/kg
->>> h_feedwater = 1097.1    # kJ/kg
+>>> h_steam     = 3400.8          # kJ/kg
+>>> h_feedwater = 1097.1          # kJ/kg
 >>> G_steam     = 716.17 / 3.6    # kg/s
 >>> G_fuel      = 52.42  / 3.6    # kg/s
 >>> LHV         = 38333.68        # kJ/kg
@@ -206,8 +206,32 @@ Output: `Acceptable — investigate losses`
 
 ### For Loop
 
-A `for` loop iterates over a sequence. Here we calculate efficiency
-for multiple fuel types:
+A `for` loop iterates over a sequence. Here we print the main
+components of a steam cycle:
+
+```python
+components = [
+    "Boiler",
+    "Turbine",
+    "Condenser",
+    "Feed pump",
+]
+
+for component in components:
+    print(component)
+```
+
+Output:
+
+```
+Boiler
+Turbine
+Condenser
+Feed pump
+```
+
+We can also iterate over data pairs. Here we display heating values
+for three fuels used in this course:
 
 ```python
 fuels = [
@@ -216,27 +240,17 @@ fuels = [
     ("Coal",     27000.00),
 ]
 
-G_fuel  = 52.42 / 3.6      # kg/s
-Q_steam = 458289.1          # kW
-
 for name, lhv in fuels:
-    Q_fuel = G_fuel * lhv
-    eta    = Q_steam / Q_fuel
-    print(f"{name:<10}: {eta:.1%}")
+    print(f"{name:<10}: {lhv:,.2f} kJ/kg")
 ```
 
 Output:
-```
-HFO       : 82.1%
-Biofuel   : 187.5%
-Coal      : 121.7%
-```
 
-::: callout-note
-The biofuel and coal efficiencies above exceed 100% because the fuel
-flow `G_fuel` was measured during HFO operation. In Lab 1 you will
-collect the correct fuel flow for each condition from the simulator.
-:::
+```
+HFO       : 38,333.68 kJ/kg
+Biofuel   : 17,500.00 kJ/kg
+Coal      : 27,000.00 kJ/kg
+```
 
 ### While Loop
 
@@ -295,11 +309,11 @@ def boiler_efficiency(G_steam, h_steam, h_fw, G_fuel, LHV):
 
 # Call the function with HFO data
 eta = boiler_efficiency(
-    G_steam = 716.17 / 3.6,
-    h_steam = 3400.8,
-    h_fw    = 1097.1,
-    G_fuel  = 52.42 / 3.6,
-    LHV     = 38333.68,
+    G_steam=716.17 / 3.6,
+    h_steam=3400.8,
+    h_fw=1097.1,
+    G_fuel=52.42 / 3.6,
+    LHV=38333.68,
 )
 print(f"Boiler efficiency: {eta:.1%}")
 ```
@@ -322,8 +336,8 @@ def dulong_lhv(HHV, H=0.134, W=0.010):
     return HHV - 2442 * (9 * H + W)
 
 
-print(dulong_lhv(41303.16))           # HFO with defaults
-print(dulong_lhv(29500, H=0.05, W=0.08))  # Coal example
+print(dulong_lhv(41303.16))                    # HFO with defaults
+print(dulong_lhv(29500, H=0.05, W=0.08))       # Coal example
 ```
 
 ### The `lambda` Keyword
@@ -332,7 +346,7 @@ Lambda functions are compact, one-line functions useful for
 simple conversions:
 
 ```python
-bara_to_mpa = lambda p: p * 0.1
+bara_to_mpa   = lambda p: p * 0.1
 ton_h_to_kg_s = lambda g: g / 3.6
 
 print(bara_to_mpa(158.48))      # Output: 15.848
@@ -348,25 +362,19 @@ thermodynamic calculations.
 import math
 
 # Excess air from O2 measurement (Siegert method)
-O2_percent     = 0.75
-lambda_excess  = 21 / (21 - O2_percent)
-excess_air_pct = (lambda_excess - 1) * 100
+O2_percent    = 0.75
+lambda_excess = 21 / (21 - O2_percent)
+excess_air    = (lambda_excess - 1) * 100
 
 print(f"Excess air factor (λ): {lambda_excess:.4f}")
-print(f"Excess air           : {excess_air_pct:.1f}%")
+print(f"Excess air           : {excess_air:.1f}%")
 
 # Log mean temperature difference (LMTD) for heat exchangers
-dT1 = 120.0     # °C — hot end temperature difference
-dT2 = 45.0      # °C — cold end temperature difference
+dT1  = 120.0    # °C — hot end temperature difference
+dT2  = 45.0     # °C — cold end temperature difference
 LMTD = (dT1 - dT2) / math.log(dT1 / dT2)
 print(f"LMTD: {LMTD:.2f} °C")
 ```
-
-::: callout-warning
-Python's `math` module trigonometric functions expect angles in
-**radians**, not degrees. Always convert with `math.radians()` before
-using `sin`, `cos`, or `tan`.
-:::
 
 ## The `iapws` Library
 
@@ -381,19 +389,21 @@ Install it in the course environment:
 uv add iapws
 ```
 
-Given any two independent properties, `IAPWS97` returns all others:
+Given any two independent properties, `IAPWS97` returns all others.
+Note that temperature must be in **Kelvin** and pressure in **MPa**:
 
 ```python
 from iapws import IAPWS97
 
-# HP steam at turbine inlet: 535.85°C, 158.48 bara
+# HP steam: 535.85°C, 158.48 bara  — convert units before passing
 steam = IAPWS97(T=535.85 + 273.15, P=158.48 * 0.1)
 
-print(f"Temperature : {steam.T - 273.15:.2f} °C")
-print(f"Pressure    : {steam.P:.3f} MPa")
-print(f"Enthalpy    : {steam.h:.2f} kJ/kg")
-print(f"Entropy     : {steam.s:.4f} kJ/kg·K")
-print(f"Density     : {steam.rho:.3f} kg/m³")
+print(f"Temperature     : {steam.T - 273.15:.2f} °C")
+print(f"Pressure        : {steam.P:.3f} MPa")
+print(f"Enthalpy        : {steam.h:.2f} kJ/kg")
+print(f"Entropy         : {steam.s:.4f} kJ/kg·K")
+print(f"Specific volume : {steam.v:.5f} m³/kg")
+print(f"Density         : {steam.rho:.3f} kg/m³")
 ```
 
 Common property attributes:
@@ -402,15 +412,11 @@ Common property attributes:
 |---|---|---|
 | `.h` | Specific enthalpy | kJ/kg |
 | `.s` | Specific entropy | kJ/kg·K |
+| `.v` | Specific volume | m³/kg |
 | `.T` | Temperature | K |
 | `.P` | Pressure | MPa |
 | `.rho` | Density | kg/m³ |
 | `.x` | Steam quality (wet region) | — |
-
-::: callout-tip
-`IAPWS97` always takes temperature in **Kelvin** and pressure in **MPa**.
-Always convert before passing simulator tag values.
-:::
 
 For saturated conditions, use the quality parameter `x`:
 
@@ -468,6 +474,48 @@ Fuel heat input  : 558181.0 kW
 Boiler efficiency: 82.1%
 ```
 
+## Development Tools
+
+This course uses three tools to manage the Python environment and
+maintain code quality. Run them from the terminal in your project folder.
+
+### uv — Environment and Package Management
+
+[uv](https://github.com/astral-sh/uv) installs Python packages and
+manages the project environment.
+
+```bash
+uv sync                       # install all course dependencies
+uv add iapws                  # add a new package
+uv run python script.py       # run a script in the project environment
+uv run quarto preview         # preview the course website
+uv run quarto render          # render the full site
+```
+
+### ruff — Linter
+
+[Ruff](https://docs.astral.sh/ruff/) checks your code for errors,
+unused imports, and style issues before you run it.
+
+```bash
+uv run ruff check .           # check all files in the project
+uv run ruff check script.py   # check a single file
+```
+
+### black — Formatter
+
+[Black](https://black.readthedocs.io/) automatically reformats your
+code to a consistent style.
+
+```bash
+uv run black .                # format all files in the project
+uv run black script.py        # format a single file
+```
+
+::: callout-tip
+Run `ruff` and `black` before submitting any script or lab file.
+:::
+
 ## Python Style Guide
 
 > Code is read far more often than it is written. — Guido van Rossum,
@@ -481,15 +529,6 @@ Follow [PEP 8](https://peps.python.org/pep-0008/) as the primary style guide:
 - Keep lines under 88 characters
 - Two blank lines between top-level functions
 
-This course uses [Black](https://black.readthedocs.io/) for automatic
-formatting and [Ruff](https://docs.astral.sh/ruff/) for linting. Run
-them before submitting any script:
-
-```bash
-uv run black .
-uv run ruff check .
-```
-
 ## Summary
 
 You have covered the Python basics needed for this course:
@@ -502,6 +541,7 @@ You have covered the Python basics needed for this course:
 - The `math` module
 - The `iapws` library for steam properties
 - Writing and running `.py` scripts with `uv`
+- Development tools: `uv`, `ruff`, and `black`
 
 In Lecture 1 we build on these foundations to calculate boiler
 thermal efficiency from real simulator data.
