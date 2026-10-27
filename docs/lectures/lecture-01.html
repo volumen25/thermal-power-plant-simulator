@@ -2,21 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2027-01-04">
+<meta name="dcterms.date" content="2027-01-06">
 
 <title>Lecture 1: Boiler Efficiency – Thermal Power Plant Simulator</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -94,10 +97,10 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8c38fd85d21bfe44b50360969156fb14.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-6191c8c4c757b97205a8995aa6c30869.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -128,7 +131,7 @@ div.csl-indent {
 <style>html{ scroll-behavior: smooth; }</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -259,7 +262,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 4, 2027</p>
+      <p class="date">January 6, 2027</p>
     </div>
   </div>
   
@@ -355,7 +358,7 @@ Note
 <li><span class="math inline">\(2442\)</span> kJ/kg = latent heat of water vapour at 25°C</li>
 <li><span class="math inline">\(9H\)</span> = mass of water formed per kg fuel from hydrogen combustion</li>
 </ul>
-<div id="aa1bef4a" class="cell" data-execution_count="1">
+<div id="83570c62" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># HFO elemental composition (mass fractions) — X008xx tags</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> <span class="fl">84.0</span> <span class="op">/</span> <span class="dv">100</span>   <span class="co"># X00800 carbon</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> <span class="fl">13.4</span> <span class="op">/</span> <span class="dv">100</span>   <span class="co"># X00801 hydrogen</span></span>
@@ -385,7 +388,7 @@ Hydrogen content : 13.4% — drives the HHV/LHV gap</code></pre>
 <section id="steam-properties-and-enthalpy" class="level2">
 <h2 class="anchored" data-anchor-id="steam-properties-and-enthalpy">5. Steam Properties and Enthalpy</h2>
 <p>Accurate enthalpy values are essential for boiler efficiency calculations. We use the IAPWS-IF97 standard via the <code>iapws</code> library.</p>
-<div id="4e4f49e4" class="cell" data-execution_count="2">
+<div id="371ab7d2" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> iapws <span class="im">import</span> IAPWS97</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Boiler operating conditions from simulator</span></span>
@@ -425,7 +428,7 @@ Enthalpy rise : 2294.63 kJ/kg</code></pre>
 <section id="worked-example-hfo-at-230-mw" class="level2">
 <h2 class="anchored" data-anchor-id="worked-example-hfo-at-230-mw">6. Worked Example — HFO at 230 MW</h2>
 <p>Using simulator data from the 230 MW HFO operating condition:</p>
-<div id="76144f94" class="cell" data-execution_count="3">
+<div id="fb2e1d7b" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulator tag values</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>h_steam <span class="op">=</span> <span class="fl">3400.8</span>    <span class="co"># kJ/kg  H02603  HP line steam enthalpy</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>h_fw    <span class="op">=</span> <span class="fl">1097.1</span>    <span class="co"># kJ/kg  H02448  economizer water inlet enthalpy</span></span>
@@ -508,7 +511,7 @@ Boiler efficiency: 82.1%</code></pre>
 <section id="soot-fouling" class="level3">
 <h3 class="anchored" data-anchor-id="soot-fouling">Soot Fouling</h3>
 <p>Soot deposits on heat transfer surfaces act as insulation, reducing heat transfer from flue gas to steam. This raises flue gas outlet temperature and stack losses, directly reducing efficiency.</p>
-<div id="948c3b76" class="cell" data-execution_count="4">
+<div id="88b2e009" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1049,7 +1052,7 @@ Wylen, G. J. V., &amp; Sonntag, R. E. (1986). <em>Fundamentals of classical ther
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p>Built with <a href="https://quarto.org">Quarto 1.9.38</a></p>
+<p>Built with <a href="https://quarto.org">Quarto 1.10.19</a></p>
 </div>
   </div>
 </footer>

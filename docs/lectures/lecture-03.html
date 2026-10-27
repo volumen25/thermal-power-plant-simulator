@@ -2,21 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2027-01-06">
+<meta name="dcterms.date" content="2027-01-09">
 
 <title>Lecture 3: Introduction to Thermal Power Plants – Thermal Power Plant Simulator</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -74,10 +77,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8c38fd85d21bfe44b50360969156fb14.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-6191c8c4c757b97205a8995aa6c30869.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -108,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <style>html{ scroll-behavior: smooth; }</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -239,7 +242,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 6, 2027</p>
+      <p class="date">January 9, 2027</p>
     </div>
   </div>
   
@@ -380,7 +383,7 @@ Compressed liquid is heated at constant pressure through the boiler until it rea
 <h2 class="anchored" data-anchor-id="steam-properties-and-the-iapws-if97-standard">4. Steam Properties and the IAPWS-IF97 Standard</h2>
 <p>To evaluate enthalpies at each state point we need accurate steam property data. The International Association for the Properties of Water and Steam publishes the IF97 formulation, which is the industry standard for power plant calculations.</p>
 <p>In this course we use the <code>iapws</code> Python library, which implements IF97.</p>
-<div id="e4a8af4c" class="cell" data-execution_count="1">
+<div id="c7235875" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> iapws <span class="im">import</span> IAPWS97</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Superheated steam at turbine inlet: 500°C, 10 MPa</span></span>
@@ -409,7 +412,7 @@ Specific vol : 0.0328 m³/kg</code></pre>
 <li>Boiler: 500°C, 10 MPa</li>
 <li>Condenser: 0.006 MPa (~36°C saturation temperature)</li>
 </ul>
-<div id="4d736020" class="cell" data-execution_count="2">
+<div id="5c4be384" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># State 1: Turbine inlet</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>state1 <span class="op">=</span> IAPWS97(T<span class="op">=</span><span class="dv">500</span> <span class="op">+</span> <span class="fl">273.15</span>, P<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -462,7 +465,7 @@ Thermal eff.   : 41.5%</code></pre>
 <p><strong>Boiler temperature</strong> — Higher turbine inlet temperature increases <span class="math inline">\(w_{turbine}\)</span> without proportionally increasing <span class="math inline">\(q_{boiler}\)</span>, raising efficiency. Limited by material constraints (typically 600–620°C for modern steels).</p>
 <p><strong>Boiler pressure</strong> — Higher pressure raises the mean temperature of heat addition, improving efficiency. Limited by turbine exit steam quality — excessive moisture damages turbine blades.</p>
 <p><strong>Condenser pressure</strong> — Lower condenser pressure (lower condensing temperature) reduces heat rejection and increases <span class="math inline">\(w_{net}\)</span>. Limited by cooling water temperature and vacuum system capability.</p>
-<div id="40f02ba6" class="cell" data-execution_count="3">
+<div id="5498b8ba" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -503,7 +506,7 @@ Thermal eff.   : 41.5%</code></pre>
 <p>Steam quality <span class="math inline">\(x\)</span> represents the fraction of the mixture that is vapour:</p>
 <p><span class="math display">\[x = \frac{m_{vapour}}{m_{total}} \quad (0 \leq x \leq 1)\]</span></p>
 <p>At <span class="math inline">\(x = 0\)</span> we have saturated liquid; at <span class="math inline">\(x = 1\)</span> saturated vapour. Values below <strong>0.88</strong> are generally unacceptable in practice — liquid droplets erode turbine blades, reducing lifespan and efficiency.</p>
-<div id="9c192b6a" class="cell" data-execution_count="4">
+<div id="35a8da51" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Turbine exit quality (baseline): </span><span class="sc">{</span>state2<span class="sc">.</span>x<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> state2.x <span class="op">&lt;</span> <span class="fl">0.88</span>:</span>
@@ -964,7 +967,7 @@ WARNING: Quality below 0.88 — reheat cycle recommended</code></pre>
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p>Built with <a href="https://quarto.org">Quarto 1.9.38</a></p>
+<p>Built with <a href="https://quarto.org">Quarto 1.10.19</a></p>
 </div>
   </div>
 </footer>
